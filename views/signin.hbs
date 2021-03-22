@@ -1,0 +1,62 @@
+<div class="row mt-5">
+  <div class="col-md-4 m-auto"></div>
+
+  <div class="col-md-4 m-auto">
+    <div class="card card-body">
+
+      <h1 class="text-center mt-3">Sign in</h1>
+
+      <!-- Flash message：提示 User。-->
+      <!--"message"：指render -> partials 資料夾內的 message.hbs。-->
+      <!-- Handlebars 固定寫法-"大於符號 >"：Handlebars 渲染 partials 資料夾內，符合名稱的 template，可把樣板封裝成可重覆運用的模組：message.hbs。 -->
+      <!-- message -->
+
+      <form action="/signin" method="POST">
+        <!-- <label> for = <input> id：點擊<label>，對焦顯示<input> -->
+        <div class="form-group">
+          <!-- Email -->
+          <div class="form-label-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email">
+          </div>
+          </br>
+
+          <!-- Password -->
+          <div class="form-label-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password">
+          </div>
+          </br>
+
+          <!-- Log-in Button -->
+          <button type="submit" class="btn btn-primary btn-block border-0">Log in</button>
+          </br>
+
+          <!-- Facebook 驗證按鈕 -->
+          <a href="/auth/facebook" class="btn btn-info btn-block border-0" style="background-color:#3B5998" active>
+            <i class="fab fa-facebook-square"></i>
+            Log in with Facebook
+          </a>
+          </br>
+
+          <!-- Google 驗證按鈕 -->
+          <a href="/auth/google" class="btn btn-info btn-block border-0" style="background-color:#FF3E30" active>
+            <i class="fab fa-google"></i>
+            Log in with Google
+          </a>
+        </div>
+
+      </form>
+
+      <!-- Register -->
+      <div class="text-center mb-4">
+        <p class="lead mt-4">
+          Get Started ?
+          <a href="/signup"> Sign up </a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4 m-auto"></div>
+</div>

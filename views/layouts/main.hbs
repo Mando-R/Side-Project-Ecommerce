@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap"
+    type="text/css" as="style" onload="this.rel='stylesheet'">
+  <link
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic&amp;display=swap"
+    type="text/css" as="style" onload="this.rel='stylesheet'">
+  <link rel="stylesheet" media="all"
+    href="https://cdn.shoplineapp.com/assets/common-f47625baea59b7f28766c213f44af5679a3f7198f77cf8bb89041274db97940a.css">
+  <link rel="stylesheet" media="all"
+    href="https://cdn.shoplineapp.com/assets/application-806a9a60aff1fccd9921cbf4430e51167960be33feb8015bd4b9389801f30529.css">
+  <link rel="stylesheet" media="screen"
+    href="https://cdn.shoplineapp.com/assets/themes/rebel-9fc8975ae39cfbf17a4e7dd5722dd6e151a007bed97f199f13e727169573cf5e.css">
+  <style>
+    :root {}
+  </style>
+
+  <!-- GLOBAL CONTENT FOR HTML HEAD START-->
+  <link rel="stylesheet" media="screen"
+    href="https://cdn.shoplineapp.com/assets/themes/rebel.black-9ce4b940a1a375a6e5cd6cda5790dcd25537f643e11807ebd93c658ece0549d5.css">
+
+</head>
+
+<body class="home index mobile-revamp-navigation  ng-scope" ng-controller="MainController"
+  data-new-gr-c-s-check-loaded="14.1000.0" data-gr-ext-installed="">
+
+  <div id="left-panel" style="display:none" class="panel-mobile sidr left">
+    <div class="side-panel-search hidden-xs">
+      <form ng-controller="ProductsSearchController" ng-submit="search(searchQuery, $event)" action="/products"
+        class="ng-pristine ng-valid ng-scope ng-valid-maxlength">
+        <button><span class="fa fa-search"></span></button>
+        <input name="query" ng-model="searchQuery" placeholder="Search Products" maxlength="100"
+          class="ng-pristine ng-untouched ng-valid ng-empty ng-valid-maxlength">
+        <span class="fa fa-times" ng-click="clearSearch()"></span>
+      </form>
+    </div>
+
+    <div class="clear"></div>
+
+    <div class="clear"></div>
+    <div ng-show="!isUserLoggedIn" class="hello ng-hide"></div>
+    <div class="clear"></div>
+
+    <div class="visible-xs">
+      <div class="section-header">
+        Navigation
+      </div>
+      <ul class="categories-mobile-list">
+        <li>
+          <a href="/pages/aboutus" ng-non-bindable="">食我-About Us</a>
+          <button class="btn btn-clear btn-category-collapse pull-right"
+            ng-click="isExpanded['5b7d3b2666b509001797dee9'] = !isExpanded['5b7d3b2666b509001797dee9']">
+            <i class="fa fa-angle-down ng-scope"
+              ng-if="isExpanded['5b7d3b2666b509001797dee9'] ? !defaultMobileCollapse : defaultMobileCollapse"></i>
+
+          </button>
+          <ul class="inner-list collapse"
+            uib-collapse="isExpanded['5b7d3b2666b509001797dee9'] ? !defaultMobileCollapse : defaultMobileCollapse"
+            style="height: 0px;">
+            <li>
+              <a href="/pages/brandstory" ng-non-bindable="">品牌故事Brand Story
+              </a>
+            </li>
+            <li>
+              <a href="/pages/shoppingprocess" ng-non-bindable="">購物流程Shopping Process
+              </a>
+            </li>
+            <li>
+              <a href="/pages/%E6%96%B0%E7%9A%84%E5%88%86%E9%A0%81-13" ng-non-bindable="">Member
+              </a>
+            </li>
+            <li>
+              <a href="/pages/qa" ng-non-bindable="">常見問答Q&amp;A
+              </a>
+            </li>
+            <li>
+              <a href="/pages/conctactus" ng-non-bindable="">聯絡我們Contact Us
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="/pages/noodles" ng-non-bindable="">食麵-Noodles</a>
+          <button class="btn btn-clear btn-category-collapse pull-right"
+            ng-click="isExpanded['5b7d3b40f1337e520357bc98'] = !isExpanded['5b7d3b40f1337e520357bc98']">
+            <i class="fa fa-angle-down ng-scope"
+              ng-if="isExpanded['5b7d3b40f1337e520357bc98'] ? !defaultMobileCollapse : defaultMobileCollapse"></i>
+          </button>
+          <ul class="inner-list collapse"
+            uib-collapse="isExpanded['5b7d3b40f1337e520357bc98'] ? !defaultMobileCollapse : defaultMobileCollapse"
+            style="height: 0px;">
+            <li>
+              <a href="/pages/noodleseries" ng-non-bindable="">Noodle Series
+              </a>
+            </li>
+            <li>
+              <a href="/pages/giftbox" ng-non-bindable="">Gift Box
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="/pages/event" ng-non-bindable="">食事-Event</a>
+        </li>
+        <li>
+          <a href="/pages/goodsense" ng-non-bindable="">食品味-Good Sense</a>
+        </li>
+        <li>
+          <a href="/pages/videos" ng-non-bindable="">食影音-Videos</a>
+        </li>
+        <li>
+          <ul class="inner-list collapse"
+            uib-collapse="isExpanded['5c626565606407000fb1fdef'] ? !defaultMobileCollapse : defaultMobileCollapse"
+            style="height: 0px;">
+
+            <li>
+              <a href="/pages/overseas-shopping-1" ng-non-bindable="">Others
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <div class="clear"></div>
+    <div ng-hide="defaultMobileCategoriesRemoved">
+      <div class="visible-sm visible-xs">
+        <div class="section-header">
+          Categories
+        </div>
+        <ul class="categories-mobile-list">
+          <li class=" text-secondary-color">
+            <a href="/categories/chia-yi-shi-ri-%E6%96%B0%E5%93%81%E4%B8%8A%E5%B8%82" ng-non-bindable="">
+              CHIA YI SHI RI / 新品上市
+            </a>
+          </li>
+          <li class=" text-secondary-color">
+            <a href="/categories/chia-yi-shi-ri-%E7%B2%BE%E9%81%B8%E5%95%86%E5%93%81" ng-non-bindable="">
+              CHIA YI SHI RI / 精選商品
+            </a>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+
+    <div class="other-setting-list visible-xs">
+      <div class="section-header">
+        Other Settings
+      </div>
+      <ul>
+        <li>
+          <div class="menu-button message-button" ng-hide="featureService.hasBetaFeature('hide_message')"
+            ng-click="showMessageForm()" ng-class="{'ie-hack':!mainConfig.themeSettings.is_multicurrency_enabled}">
+            <span class="menu-words"><span class="fa fa-comment"></span>MESSAGE</span>
+          </div>
+        </li>
+        <li>
+          <div class="dropdown mobile-language-btn"
+            ng-class="{'ie-hack':!mainConfig.themeSettings.is_multicurrency_enabled}">
+            <div class="menu-button">
+              <span class="menu-words">
+                <svg class="fa fa-v5-globe">
+                  <use xlink:href="#fa-v5-globe"></use>
+                </svg>
+                English</span>
+
+            </div>
+          </div>
+        </li>
+        <li>
+
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!--left-panel-->
+
+  <div id="cart-panel" style="display:none" class="panel-mobile sidr left">
+    <!-- cart Start -->
+    <div ng-controller="CartsController" class="ng-scope">
+      <div class="cart-header">
+        Shopping Cart
+      </div>
+      <!-- cart items start-->
+      <div class="clear"></div>
+      <div ng-show="currentCart.isCartEmpty()" class="ng-hide">
+        <div style="display:block;padding:15px">
+          Your Shopping Cart is empty.
+        </div>
+      </div>
+      <div ng-hide="currentCart.isCartEmpty()" class="">
+        <div id="" style="" class="cart-items">
+          <!-- ngRepeat: item in currentCart.getItems -->
+          <div class="clear"></div>
+        </div>
+        <!--cart-items-->
+        <!-- cart items end -->
+        <div class="clear"></div>
+        <div class="cart-chkt-btn-cont">
+          <button id="btn-checkout" class="cart-chkt-btn ladda-button" data-style="slide-down"
+            ladda="checkoutButtonLoading" ng-click="onCheckoutClicked($event)">
+            Checkout
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="side-panel-search search-panel-mobile">
+    <form ng-controller="ProductsSearchController" ng-submit="search(searchQuery, $event); $event.preventDefault();"
+      action="#/search/" class="ng-pristine ng-valid ng-scope">
+      <button class="mobile-search-btn"><span class="fa fa-search"></span></button>
+      <input type="search" name="searchQuery" ng-model="searchQuery" placeholder="Search Products"
+        class="ng-pristine ng-untouched ng-valid ng-empty">
+      <span class="fa fa-times ng-hide" ng-class="{ 'has-search-query': searchQuery }" ng-show="searchQuery.length > 0"
+        ng-click="clearSearch()"></span>
+    </form>
+    <div class="search-mask"></div>
+  </div>
+
+  <div id="fixed-menu-container" class="mobile-revamp-navigation ">
+    <div class="fixed-menu-wrapper">
+      <!-- ngIf: isUserLoggedIn -->
+      <a ng-href="/users/6047a36841d72f000c233691/edit"
+        class="menu-button               member-myaccount-button ng-scope" ng-if="isUserLoggedIn" href="/logout">
+        <span class="fa fa-user-circle"> </span>
+        <span class="menu-words" style="padding-left:6px;">
+          Log out
+        </span>
+      </a><!-- end ngIf: isUserLoggedIn -->
+
+      <a class="left-panel-button menu-button visible-xs visible-sm
+        " href="#left-panel">
+        <span class="fa fa-bars"> </span>
+        <span class="menu-words" style="padding-left:6px;">
+          MENU
+        </span>
+      </a>
+
+      <a class="visible-xs m-search-button menu-button  ">
+        <span class="fa fa-search"></span>
+      </a>
+
+      <!-- mobile logo -->
+      <div class="mobile-logo">
+        <a href="https://www.chiaselect.com/" class="sl-lazy-image"
+          style="background-image:url(https://shoplineimg.com/5b4461529a76f081a2000629/5b7d37e6376ed50014514b38/x200.webp?source_format=png)"
+          data-size="x200"></a>
+      </div>
+
+      <!-- ngIf: isUserLoggedIn -->
+      <a ng-href="/users/6047a36841d72f000c233691/edit"
+        class="menu-button               member-myaccount-button ng-scope" ng-if="isUserLoggedIn"
+        href="/users/6047a36841d72f000c233691/edit">
+        <span class="fa fa-user-circle"> </span>
+        <span class="menu-words" style="padding-left:6px;">
+          ACCOUNT
+        </span>
+      </a><!-- end ngIf: isUserLoggedIn -->
+
+      <a class="cart-panel-button menu-button " id="" href="#cart-panel">
+        <span class="fa fa-shopping-cart"> </span>
+        <span class="menu-words">CART</span>
+        <span class="cart-count ng-binding" ng-show="currentCart.getItemCount()>0">
+          <span class="hidden-xs">(</span>2<span class="hidden-xs">)</span>
+        </span>
+      </a>
+
+      <div class="menu-button search-button ">
+        <form ng-controller="ProductsSearchController" ng-submit="search(searchQuery, $event)" action="/products"
+          style="margin-bottom: 0" class="ng-pristine ng-valid ng-scope ng-valid-maxlength">
+          <input name="query" ng-model="searchQuery" placeholder="Search Products" maxlength="100"
+            class="ng-pristine ng-untouched ng-valid ng-empty ng-valid-maxlength">
+          <button><span class="fa fa-search"></span></button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="body-wrapper">
+    <div class="body-content mobile-revamp-navigation">
+      <!-- navigation -->
+      <nav class="main-navigation">
+
+        <!-- ngIf: showMissingSessionKeyWarning -->
+
+        <div class="navbar-wrapper ">
+          <div class="navbar hidden-xs" role="navigation">
+            <div class="navbar-header-wrapper">
+              <div class="container">
+                <div class="navbar-header">
+                  <a href="https://www.chiaselect.com/">
+                    <img
+                      src="https://shoplineimg.com/5b4461529a76f081a2000629/5b7d37e6376ed50014514b38/x140.webp?source_format=png"
+                      class="logo-image sl-lazy-image" data-resizing-segment="140">
+                  </a>
+                </div>
+              </div>
+              <!--container-->
+            </div>
+            <div class="navbar-menu-wrapper">
+              <div class="container">
+                <div class="navbar-menu hidden-xs">
+                  <ul class="text-primary-color">
+                    <!-- Has dropdown links -->
+                    <li class="nav-dropdown" link-highlight="/pages/aboutus">
+                      <a class="nav-dropdown-toggle" link-highlight="/pages/aboutus" href="/pages/aboutus" target=""
+                        ng-non-bindable="">食我-About Us <span class="caret"></span></a>
+                      <ul class="nav-dropdown-menu">
+                        <li link-highlight="/pages/brandstory">
+                          <a link-highlight="/pages/brandstory" href="/pages/brandstory" target=""
+                            ng-non-bindable="">品牌故事Brand Story</a>
+                        </li>
+                        <li link-highlight="/pages/shoppingprocess">
+                          <a link-highlight="/pages/shoppingprocess" href="/pages/shoppingprocess" target=""
+                            ng-non-bindable="">購物流程Shopping Process</a>
+                        </li>
+                        <li link-highlight="/pages/%E6%96%B0%E7%9A%84%E5%88%86%E9%A0%81-13">
+                          <a link-highlight="/pages/%E6%96%B0%E7%9A%84%E5%88%86%E9%A0%81-13"
+                            href="/pages/%E6%96%B0%E7%9A%84%E5%88%86%E9%A0%81-13" target=""
+                            ng-non-bindable="">Member</a>
+                        </li>
+                        <li link-highlight="/pages/qa">
+                          <a link-highlight="/pages/qa" href="/pages/qa" target="" ng-non-bindable="">常見問答Q&amp;A</a>
+                        </li>
+                        <li link-highlight="/pages/conctactus">
+                          <a link-highlight="/pages/conctactus" href="/pages/conctactus" target=""
+                            ng-non-bindable="">聯絡我們Contact Us</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <!-- Has dropdown links -->
+                    <li class="nav-dropdown" link-highlight="/pages/noodles">
+                      <a class="nav-dropdown-toggle" link-highlight="/pages/noodles" href="/pages/noodles" target=""
+                        ng-non-bindable="">食麵-Noodles <span class="caret"></span></a>
+                      <ul class="nav-dropdown-menu">
+                        <li link-highlight="/pages/noodleseries">
+                          <a link-highlight="/pages/noodleseries" href="/pages/noodleseries" target=""
+                            ng-non-bindable="">Noodle Series</a>
+                        </li>
+                        <li link-highlight="/pages/giftbox">
+                          <a link-highlight="/pages/giftbox" href="/pages/giftbox" target="" ng-non-bindable="">Gift
+                            Box</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <!-- Has dropdown links -->
+                    <!-- doesn't have dropdown links -->
+                    <li link-highlight="/pages/event">
+                      <a link-highlight="/pages/event" href="/pages/event" target="" ng-non-bindable="">食事-Event</a>
+                    </li>
+                    <!-- Has dropdown links -->
+                    <!-- doesn't have dropdown links -->
+                    <li link-highlight="/pages/goodsense">
+                      <a link-highlight="/pages/goodsense" href="/pages/goodsense" target="" ng-non-bindable="">食品味-Good
+                        Sense</a>
+                    </li>
+                    <!-- Has dropdown links -->
+                    <!-- doesn't have dropdown links -->
+                    <li link-highlight="/pages/videos">
+                      <a link-highlight="/pages/videos" href="/pages/videos" target="" ng-non-bindable="">食影音-Videos</a>
+                    </li>
+
+                  </ul>
+                </div>
+              </div>
+              <!--container-->
+            </div>
+          </div>
+          <!--navbar-->
+        </div>
+        <!--navbar-wrapper-->
+      </nav>
+      <!-- navigation end -->
+
+      <!-- main Content -->
+      <div class="yield-wrapper">
+        <div class="custom-page ng-isolate-scope" ga-page-view="">
+          <div class="container global-primary container-full-width padding-v-none">
+            <div class="container-md-height"
+              style="height: 100%; table-layout: fixed; width: 100%; margin-bottom: 2%; ">
+              <!-- height and width must be difined for td to size correctly -->
+              <div class="row row-md-height" style="height: 100%;">
+                <!-- Rendering page grid items -->
+                <div id="page-item-5b6d78449e7fc67e9637f6cf" class="item grid-image-item
+              col-xs-12
+              col-md-12
+              col-md-height
+              padding-h-none" style="vertical-align: top; height: 100%;">
+                  <div style="height: 100%;">
+                    <div class="box-info box-info-width-full" style="padding:0;">
+
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <!-- End of rendering page grid items -->
+            </div> <!-- End of row -->
+          </div> <!-- End of container-md-height -->
+        </div> <!-- End of container -->
+
+        <div class="container global-primary d-flex justify-content-around ">
+          <div class="container-md-height" style="height: 100%; table-layout: fixed; width: 100%; margin-bottom: 2%; ">
+            <!-- height and width must be difined for td to size correctly -->
+            <div class="row row-md-height" style="height: 100%;">
+              <!-- Rendering page grid items -->
+              <div class="item grid-image-item
+              col-xs-12
+              col-md-12
+              col-md-height
+              " style="vertical-align: top; height: 100%;">
+                <div style="height: 100%;">
+                  <div class="d-flex justify-content-center" style="">
+                    <!-- Flash -->
+                    {{#if success_messages}}
+                    <div class="alert alert-success text-center" role="alert" style="margin: 30px 0 ;">
+                      {{success_messages}}
+                    </div>
+                    {{/if}}
+                    {{#if error_messages}}
+                    <div class="alert alert-danger text-center" role="alert" style="margin: 30px 0 ;">
+                      {{error_messages}}
+                    </div>
+                    {{/if}}
+
+                    {{{body}}}
+                    <!-- 新品上市 -->
+                    <div class="editor-boxify-image-wrapper boxify-image-wrapper image-container margin-bottomless">
+                      <!-- render -> Handlebars -->
+                      <!-- 1. 前台：restaurants.handlebars -->
+                      <!-- 2. 後台：admin/restaurants.handlebars -->
+
+                      <!-- 新品上市圖片 -->
+                      <img class="sl-lazy-image"
+                        src="https://shoplineimg.com/5b4461529a76f081a2000629/5d67af134bdc78003ec737ea/1200x.webp?source_format=jpg"
+                        alt="" data-size="1200x">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="container global-primary  ">
+                  <div class="container-md-height"
+                    style="height: 100%; table-layout: fixed; width: 100%; margin-bottom: 2%; ">
+                    <!-- height and width must be difined for td to size correctly -->
+                    <div class="row row-md-height" style="height: 100%;">
+
+                    </div>
+
+                  </div>
+                  <!--yield-wrapper-->
+                  <!-- main Content end-->
+                </div><!-- body-content-->
+                <!---footer -->
+
+                <!---footer end-->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+<div class="Footer-grids">
+  <div class="container global-primary  ">
+    <div class="container-md-height" style="height: 100%; table-layout: fixed; width: 100%;">
+      <!-- height and width must be difined for td to size correctly -->
+      <div class="row row-md-height" style="height: 100%;">
+
+        <div id="Footer">
+          <div class="Footer-grids mar-b-32">
+            <div class="container global-primary">
+              <div class="container-md-height" style="height: 100%; table-layout: fixed; width: 100%;">
+                <!-- height and width must be difined for td to size correctly -->
+                <div class="row row-md-height" style="height: 100%;">
+                  <div id="grid-item-5d148f5921101200268abeb6" class="item col-xs-12 
+              col-md-12
+              col-md-height
+              " style="vertical-align: top; height: 100%;">
+                    <div style="height: 100%;">
+                      <div class="box-info " style="">
+
+                        <div class="description" ng-non-bindable="">
+                          <div class="grid__item">
+                            <h4 class="o-footer__heading">了解更多</h4>
+
+                            <ul class="o-footer__list">
+                              <li class="o-footer__item"><a class="o-footer__link" href="/pages/about-us">品牌故事</a></li>
+                              <li class="o-footer__item"><a class="o-footer__link"
+                                  href="/pages/clean-beliefs">純淨保養主張</a></li>
+                              <li class="o-footer__item"><a class="o-footer__link" href="/pages/bcorp">B 型企業</a></li>
+                              <li class="o-footer__item"><a class="o-footer__link"
+                                  href="/pages/benefit-report">公益報告書</a></li>
+                              <li class="o-footer__item"><a class="o-footer__link" href="/pages/press">媒體報導</a></li>
+                              <li class="o-footer__item"><a class="o-footer__link"
+                                  href="/pages/greenvines-products-review">產品評價</a></li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="grid-item-5d148f5921101200268abeb7" class="item col-xs-12 
+              col-md-12
+              col-md-height
+              " style="vertical-align: top; height: 100%;">
+                    <div style="height: 100%;">
+                      <div class="box-info " style="">
+
+                        <div class="description" ng-non-bindable="">
+                          <div class="grid__item">
+                            <h4 class="o-footer__heading">&nbsp;</h4>
+
+                            <ul class="o-footer__list">
+                              <li class="o-footer__item"><a class="o-footer__link" href="/pages/the-clean-way">純淨旅程
+                                  會員招募</a></li>
+                              <li class="o-footer__item"><a class="o-footer__link"
+                                  href="https://blog.greenvines.com.tw/">純淨生活提案 Blog</a></li>
+                              <li class="o-footer__item"><a class="o-footer__link"
+                                  href="https://www.greenvines.com.tw/pages/unnecessary-list">非必要成分清單</a></li>
+                              <li class="o-footer__item"><a class="o-footer__link"
+                                  href="https://www.greenvines.com.tw/pages/ingredients-glossary">成分說明書</a></li>
+                              <li class="o-footer__item"><a class="o-footer__link"
+                                  href="https://sprouts.greenvines.com.tw">生鮮系列</a></li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="grid-item-5d148f5921101200268abeb8" class="item col-xs-12 
+              col-md-12
+              col-md-height
+              " style="vertical-align: top; height: 100%;">
+                    <div style="height: 100%;">
+                      <div class="box-info " style="">
+
+                        <div class="description" ng-non-bindable="">
+                          <div class="grid__item">
+                            <h4 class="o-footer__heading">客戶服務</h4>
+
+                            <ul class="o-footer__list">
+                              <li class="o-footer__item"><a class="o-footer__link" href="/pages/where-to-buy">銷售據點</a>
+                              </li>
+                              <li class="o-footer__item"><a class="o-footer__link"
+                                  href="/pages/customer-service">客戶服務</a></li>
+                              <li class="o-footer__item"><a class="o-footer__link" href="/pages/shopping-guide">購物須知</a>
+                              </li>
+                              <li class="o-footer__item"><a class="o-footer__link"
+                                  href="https://www.greenvines.com.tw/pages/shopping-guide#oversea">海外配送</a></li>
+                              <li class="o-footer__item"><a class="o-footer__link"
+                                  href="https://support.greenvines.com.tw/s/?language=zh_TW">常見問答</a></li>
+                              <li class="o-footer__item"><a class="o-footer__link" href="/pages/gifts">企業採購</a></li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="grid-item-5d148f5921101200268abeb9" class="item col-xs-12 
+              col-md-12
+              col-md-height
+              " style="vertical-align: top; height: 100%;">
+                    <div style="height: 100%;">
+                      <div class="box-info " style="">
+
+                        <div class="description" ng-non-bindable="">
+                          <div class="grid__item">
+                            <address class="o-footer__contact">
+                              <div class="o-footer__time">
+                                <p class="o-footer__paragraph">週一至週五<br>
+                                  9:00 - 12:30｜14:00 - 18:30</p>
+                              </div>
+
+                              <ul>
+                                <li class="o-footer__info">電子信箱：<a class="o-footer__link"
+                                    href="mailto:info@greenvines.com.tw" target="_blank">info@greenvines.com.tw</a></li>
+                                <li class="o-footer__info">客服電話：0800-076-688</li>
+                                <li class="o-footer__info"><a class="o-footer__link" href="https://lin.ee/wuhrbcC"
+                                    target="_blank">LINE 一對一客服</a></li>
+                                <li class="o-footer__info"><a class="o-footer__link"
+                                    href="https://support.greenvines.com.tw/s/?language=zh_TW" target="_blank">常見問題</a>
+                                </li>
+                              </ul>
+                            </address>
+
+                            <ul class="m-social-list">
+                              <li class="m-social-list__item"><a class="a-s-circle-btn"
+                                  href="https://www.facebook.com/greenvines.tw"><img
+                                    src="https://gvcdn.s3.amazonaws.com/shopline/images/footer/ico-footer-fb.png"></a>
+                              </li>
+                              <li class="m-social-list__item"><a class="a-s-circle-btn"
+                                  href="https://www.instagram.com/greenvines_official/?hl=en"><img alt=""
+                                    src="https://gvcdn.s3.amazonaws.com/shopline/images/footer/ico-ig.png"> </a></li>
+                              <li class="m-social-list__item"><a class="a-s-circle-btn" href="https://lin.ee/wuhrbcC"
+                                  target="_blank"><img alt=""
+                                    src="https://gvcdn.s3.amazonaws.com/shopline/images/footer/ico-line.png"> </a></li>
+                              <li class="m-social-list__item"><a class="a-s-circle-btn"
+                                  href="https://www.youtube.com/user/GreenvinesTW"><img alt=""
+                                    src="https://gvcdn.s3.amazonaws.com/shopline/images/footer/ico-youtube.png"> </a>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="Footer-grids">
+            <div class="o-footer__top">
+              <div class="container">
+                <form id="itForm" name="iterable_optin"
+                  action="//links.iterable.com/lists/publicAddSubscriberForm?publicIdString=40101e6c-1011-4c3a-a5d7-deb53561937e"
+                  method="POST" class="email ng-pristine ng-valid">
+                  <div class="col-sm-1"><label class="o-footer__heading">訂閱電子報</label></div>
+                  <div class="col-sm-3">
+                    <input class="required email input" type="text" name="email" size="22"
+                      onfocus="if(this.value===this.defaultValue){this.value='';}"
+                      onblur="if(this.value===''){this.value=this.defaultValue;}" value="您的電子郵件地址">
+                  </div>
+                  <div class="col-sm-3">
+                    <input class="required name input" type="text" name="nickname" size="22"
+                      onfocus="if(this.value===this.defaultValue){this.value='';}"
+                      onblur="if(this.value===''){this.value=this.defaultValue;}" value="希望綠藤怎麼稱呼您">
+                  </div>
+                  <div class="col-sm-3" style="display:none;">
+                    <input class="required name input" type="text" name="signupSourceTag" size="22"
+                      onfocus="if(this.value===this.defaultValue){this.value='';}"
+                      onblur="if(this.value===''){this.value=this.defaultValue;}" value="Taiwan">
+                  </div>
+                  <div class="col-sm-1">
+                    <input class="button a-fill-btn m-inline-form__submit" type="submit" value="送出">
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <div class="o-footer__btm">
+            <p class="o-footer__copyright">
+              © 2021 綠藤生機 Greenvines
+            </p>
+            <div class="o-footer__btm-links">
+              <a href="/about/terms" class="o-footer__link">服務條款</a> |
+              <a href="/pages/privacy-policy" class="o-footer__link">隱私權政策</a>
+              <a style="margin-left:20px;" class="o-footer__link">#KnowMoreGreenvines</a>
+            </div>
+            <div class="o-footer_location">
+              <div class="location">
+                <span>Your Location:</span>
+                <select id="footer-location" class="a-input-form__select">
+                  <option value="http://www.greenvines.com.tw/">Taiwan</option>
+                  <option value="http://www.greenvines.com.tw/">Hong Kong &amp; Macau</option>
+                  <option value="https://www.hawooo.com/user/brands.aspx?bid=467">Malaysia</option>
+                  <option value="http://greenvines.com/">International</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+</html>
