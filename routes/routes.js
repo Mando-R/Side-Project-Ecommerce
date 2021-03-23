@@ -12,14 +12,6 @@ const adminController = require("../controllers/adminController.js")
 const userController = require("../controllers/userController.js")
 const categoryController = require("../controllers/categoryController.js")
 
-
-// multer 套件(image)：上傳[temp 資料夾] vs. 使用[upload 資料夾]
-// (1) 分開 上傳[temp 資料夾] vs. 使用[upload 資料夾] 邏輯，成功上傳 -> 才使用。
-// (2) 上傳到 temp 過程可能錯誤，所以「上傳失敗」暫存檔留在 temp 資料夾內，需定時清空，但 upload 資料夾內必是對外使用的檔案。
-// (3) 可順便自定義檔名(基礎的 multer 沒有自定義檔名的功能)
-const multer = require("multer")
-const upload = multer({ dest: "temp/" })
-
 // isAdmin 權限驗證(User Model)
 // 1. isAdmin 前台：authenticated
 const authenticated = (req, res, next) => {
@@ -49,7 +41,6 @@ const authenticatedAdmin = (req, res, next) => {
   }
   // (2) 若 User 未登入，則導回 Sign-in 頁。
   res.redirect("/signin")
-
 }
 
 // 前台
@@ -61,9 +52,7 @@ router.get("/", authenticated, (req, res) => {
 // [Read]瀏覽 全部 餐廳
 router.get("/products", authenticated, productController.getProducts)
 
-
-
-
+// 後台
 // 2. 後台：adminController ＋ authenticatedAdmin
 router.get("/admin", authenticatedAdmin, (req, res) => {
   res.redirect("/admin/products")
@@ -71,7 +60,9 @@ router.get("/admin", authenticatedAdmin, (req, res) => {
 
 router.get("/admin/products", authenticatedAdmin, adminController.getProducts)
 
-
+// [Create]新增一筆餐廳資料
+// upload.single("image")：multer 只要碰到 req 內有圖片檔，就自動複製檔案至 temp 資料夾內。
+router.get("/admin/products/create", authenticatedAdmin, adminController.createProduct)
 
 // 3. Sign-up [User 註冊流程]
 router.get("/signup", userController.signUpPage)

@@ -16,23 +16,6 @@ module.exports = (sequelize, DataTypes) => {
         foreighKey: "User_Id",
         as: "userFindProduct"
       })
-
-      // 3. Self-referential Relationships / Self Joins
-      // Followship：User [M] <-> [M] User
-      // 注意：User 相關 Passport 套件，所以 Passport.js 新增{model}設定。
-      User.belongsToMany(User, {
-        through: models.Followship,
-        foreignKey: "followingId",
-        // 追蹤者
-        as: "Followers"
-      })
-
-      User.belongsToMany(User, {
-        through: models.Followship,
-        foreignKey: "followerId",
-        // 被追蹤者
-        as: "Followings"
-      })
     }
   };
   User.init({

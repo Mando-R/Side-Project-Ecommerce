@@ -5,14 +5,14 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class OrderItem extends Model {
     static associate(models) {
-
+      // define association here
     }
   };
   OrderItem.init({
     price: DataTypes.INTEGER,
     quantity: DataTypes.INTEGER,
-    Order_Id: DataTypes.INTEGER,
-    Product_Id: DataTypes.INTEGER
+    OrderId: DataTypes.INTEGER,
+    ProductId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'OrderItem',

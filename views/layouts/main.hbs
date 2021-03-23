@@ -228,22 +228,6 @@
 
   <div id="fixed-menu-container" class="mobile-revamp-navigation ">
     <div class="fixed-menu-wrapper">
-      <!-- ngIf: isUserLoggedIn -->
-      <a ng-href="/users/6047a36841d72f000c233691/edit"
-        class="menu-button               member-myaccount-button ng-scope" ng-if="isUserLoggedIn" href="/logout">
-        <span class="fa fa-user-circle"> </span>
-        <span class="menu-words" style="padding-left:6px;">
-          Log out
-        </span>
-      </a><!-- end ngIf: isUserLoggedIn -->
-
-      <a class="left-panel-button menu-button visible-xs visible-sm
-        " href="#left-panel">
-        <span class="fa fa-bars"> </span>
-        <span class="menu-words" style="padding-left:6px;">
-          MENU
-        </span>
-      </a>
 
       <a class="visible-xs m-search-button menu-button  ">
         <span class="fa fa-search"></span>
@@ -256,7 +240,25 @@
           data-size="x200"></a>
       </div>
 
-      <!-- ngIf: isUserLoggedIn -->
+      <!-- Admin -->
+      <a ng-href="/users/6047a36841d72f000c233691/edit" class="menu-button member-myaccount-button ng-scope"
+        ng-if="isUserLoggedIn" href="/admin">
+        <span class="fa fa-user-circle"> </span>
+        <span class="menu-words" style="padding-left:6px;">
+          Admin
+        </span>
+      </a>
+
+      <!-- Log-out -->
+      <a ng-href="/users/6047a36841d72f000c233691/edit" class="menu-button member-myaccount-button ng-scope"
+        ng-if="isUserLoggedIn" href="/logout">
+        <span class="fa fa-user-circle"> </span>
+        <span class="menu-words" style="padding-left:6px;">
+          Log out
+        </span>
+      </a>
+
+      <!-- Account -->
       <a ng-href="/users/6047a36841d72f000c233691/edit"
         class="menu-button               member-myaccount-button ng-scope" ng-if="isUserLoggedIn"
         href="/users/6047a36841d72f000c233691/edit">
@@ -264,7 +266,7 @@
         <span class="menu-words" style="padding-left:6px;">
           ACCOUNT
         </span>
-      </a><!-- end ngIf: isUserLoggedIn -->
+      </a>
 
       <a class="cart-panel-button menu-button " id="" href="#cart-panel">
         <span class="fa fa-shopping-cart"> </span>

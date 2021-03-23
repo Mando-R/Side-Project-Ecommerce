@@ -1,20 +1,30 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('CartItems', {
+    await queryInterface.createTable('Products', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      name: {
+        type: Sequelize.STRING
+      },
+      price: {
+        type: Sequelize.INTEGER
+      },
+      description: {
+        type: Sequelize.TEXT
+      },
+      image: {
+        type: Sequelize.STRING
+      },
       quantity: {
         type: Sequelize.INTEGER
       },
-      Cart_Id: {
-        type: Sequelize.INTEGER
-      },
-      Product_Id: {
+      // 注意：Sequelize預設 Model name(大寫開頭)+Id
+      CategoryId: {
         type: Sequelize.INTEGER
       },
       createdAt: {
@@ -28,6 +38,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('CartItems');
+    await queryInterface.dropTable('Products');
   }
 };

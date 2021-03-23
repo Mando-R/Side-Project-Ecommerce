@@ -25,6 +25,9 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "Product_Id",
         as: "productFindUser"
       })
+
+      // Product [M] -> [1] Category
+      Product.belongsTo(models.Category)
     }
   };
   Product.init({
@@ -32,7 +35,8 @@ module.exports = (sequelize, DataTypes) => {
     price: DataTypes.INTEGER,
     description: DataTypes.TEXT,
     image: DataTypes.STRING,
-    Category_Id: DataTypes.INTEGER
+    quantity: DataTypes.INTEGER,
+    CategoryId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Product',

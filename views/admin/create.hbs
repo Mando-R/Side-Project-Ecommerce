@@ -1,0 +1,85 @@
+{{!--
+<!-- Update：編輯一筆餐廳資料 -->
+{{#if product}}
+<form action="/admin/products/{{product.id}}?_method=PUT" method="POST" enctype="multipart/form-data">
+
+  <!-- Create：新增一筆餐廳資料 -->
+  {{else}}
+  <form action="/admin/products" method="POST" enctype="multipart/form-data">
+
+    {{/if}}
+    <br />
+    <!-- 在每個 <input> 加上 value="{{restaurant.name}}"：若 <input> 寫入 value 屬性，等於指定預設的輸入。
+    1. "Update"：restaurant 變數存在，所以取得 value 內容
+    2. "Create"：restaurant 變數不存在，value = null。 -->
+
+    <!-- Category -->
+    <div class="form-group">
+      <label for="categoryId">Category</label>
+
+      <select class="form-control" id="categoryId" name="categoryId">
+
+        {{#each categories}}
+        <!-- 注意：if/else 的 helper，放在 <option> 內 -->
+        <!-- 
+        1. this.id：表示在 #each categories 裡迭代的分類 id；
+        2. ../restaurant.CategoryId：../ 指回到上一層 categories。直接從 controller 傳入，代表根據網址 :id 取到的餐廳資料。 
+        -->
+        <option value="{{this.id}}" {{#ifCond this.id ../restaurant.Category_Id}} selected {{/ifCond}}>
+
+          <!-- >如果忘記加入 ../，由於在 #each categories 的語境下，會以為你在呼叫this.restaurant，會變成去 categories 迭代到的項目裡尋找一個叫做 restaurant 的屬性，結果會找不到東西。 -->
+
+          {{this.name}}
+
+        </option>
+        {{/each}}
+
+      </select>
+
+    </div> --}}
+
+    <form action="/admin/restaurants" method="POST">
+      <!-- Name -->
+      <div class="form-group">
+        <label for="name">Name</label>
+
+        <input type="text" class="form-control" name="name" id="name" placeholder="Enter name" value="{{product.name}}">
+      </div>
+
+      <!-- Description -->
+      <div class="form-group">
+        <label for="description">Description</label>
+
+        <!-- 注意：restaurant.description 位置放中間 -->
+        <textarea class="form-control" id="description" name="description" rows="3">{{product.description}}</textarea>
+      </div>
+
+      <!-- Price -->
+      <div class="form-group">
+        <label for="price">Price</label>
+
+        <input type="text" class="form-control" name="price" id="price" placeholder="Enter Price"
+          value="{{product.price}}">
+      </div>
+
+      <!-- Quantity -->
+      <div class="form-group">
+        <label for="quantity">QTY</label>
+
+        <input type="text" class="form-control" name="quantity" id="quantity" placeholder="Enter Quantity"
+          value="{{product.quantity}}">
+      </div>
+
+      <!-- Image：multer 套件 上傳 image -->
+      <div class="form-group">
+        <label for="image">Image</label>
+
+        <input type="file" class="form-control-file" id="image" name="image">
+      </div>
+
+      <!-- Submit 按鈕 -->
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    {{!--
+  </form> --}}

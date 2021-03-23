@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "Order_Id",
         as: "orderFindProduct"
       })
+
     }
   };
   Order.init({
@@ -28,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
     payment_method: DataTypes.STRING,
     payment_status: DataTypes.STRING,
     shipping_status: DataTypes.STRING,
-    User_Id: DataTypes.INTEGER
+    UserId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Order',

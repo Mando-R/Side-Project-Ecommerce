@@ -1,27 +1,36 @@
 // 引入 Model
 const db = require("../models")
-const { User } = db
+const { User, Product, Category } = db
 
 const adminController = {
   // [Read] All Products：
   getProducts: (req, res) => {
-    // return Product.findAll({
-    //   raw: true,
-    //   nest: true,
-    //   include: [{ model: Category }]
-    // })
-    //   .then(products => {
-    //     // console.log(restaurants)
-    //     // adminController.js 和 admin[Folder] 同一層
-    //     return res.render("admin/products", { products: products })
-    //   })
+    return Product.findAll({
+      raw: true,
+      nest: true,
+      include: [{ model: Category }]
+    })
+      .then(products => {
+        // console.log(restaurants)
+        // adminController.js 和 admin[Folder] 同一層
+        return res.render("admin/products.hbs", { products: products })
+      })
+    // return res.render("admin/products.hbs")
 
-    return res.render("admin/products.hbs")
   },
 
   // [Create]新增一筆餐廳資料(1)：render -> create 頁面 [顯示頁面，非功能(POST動作)]
   createProduct: (req, res) => {
-
+    // Category.findAll({
+    //   raw: true,
+    //   nest: true
+    // })
+    //   .then(categories => {
+    //     return res.render("admin/create.hbs", {
+    //       categories: categories
+    //     })
+    //   })
+    return res.render("admin/create.hbs")
   },
 
   // [Create]新增一筆餐廳資料(2)：create 功能 [POST]
@@ -57,5 +66,6 @@ const adminController = {
 
   }
 }
+
 
 module.exports = adminController

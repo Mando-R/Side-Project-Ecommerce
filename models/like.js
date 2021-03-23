@@ -5,12 +5,12 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class Like extends Model {
     static associate(models) {
-
+      // define association here
     }
   };
   Like.init({
-    User_Id: DataTypes.INTEGER,
-    Product_Id: DataTypes.INTEGER
+    UserId: DataTypes.INTEGER,
+    ProductId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Like',
