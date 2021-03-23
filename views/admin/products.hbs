@@ -1,0 +1,92 @@
+<div class="right content-page" ng-class="{'mobile-content':navOpen}">
+  <div class="body content rows scroll-y" ui-scrollfix-target="">
+    <div class="ng-view-wraper ng-scope"
+      ng-class="{'trial-plan-info': mainConfig.currentSubscription &amp;&amp; isTrialPlan &amp;&amp; remainingDays > 0 &amp;&amp; !isCounterHidden &amp;&amp; !mainConfig.merchantData.has_basket_bill,
+                        'paid-plan-info': mainConfig.currentSubscription &amp;&amp; !mainConfig.currentSubscription.is_recurring &amp;&amp; isPaidPlan &amp;&amp; remainingDays > 0 &amp;&amp; remainingDays < 31 &amp;&amp; !isCounterHidden &amp;&amp; !mainConfig.merchantData.has_basket_bill|| mainConfig.isShowBasketExpireReminder}"
+      ng-view="" style="">
+      <script type="text/ng-template" id="faq-products-bulk" class="ng-scope">
+	<span style="font-size: 14px; line-height: 20px; color: #000;">
+    <li ng-bind-html="'feature.faq.products.product_form' | translate"></li>
+    <li ng-if="!isPosOnly" ng-bind-html="'feature.faq.products.bulk_publish' | translate"></li>
+    <li ng-if="!isImportV2" ng-bind-html="'feature.faq.products.bulk_upload' | translate"></li>
+    <li ng-if="isImportV2" ng-bind-html="'feature.faq.products.bulk_upload_v2' | translate"></li>
+    <li ng-bind-html="'feature.faq.products.instagram_upload' | translate"></li>
+	</span>
+</script>
+      <div ng-controller="ProductsController" class="ng-scope">
+        <!-- Page header -->
+        <div class="page-heading animated fadeInDownBig">
+
+        </div>
+
+        <div class="row" ng-show="!loadingItems">
+          <div class="col-sm-12">
+            <!-- Begin sortable table hover -->
+
+            <div class="box-info full">
+              <div class="box-header">
+
+
+                <div class="clear"></div>
+                <div class="well well-sm ng-hide" style="border-radius:0px; margin-left: 15px; margin-right: 15px;"
+                  ng-show="searchParams.tags">
+                  <!-- ngIf: searchParams.tags -->
+                </div> <!-- end tags -->
+
+                <div class="clear"></div>
+                <!-- ngIf: showingPanel.name=='category' -->
+
+                <!-- ngIf: showingPanel.name == 'payment' -->
+                <!-- ngIf: showingPanel.name ==  'delivery' -->
+                <!-- Excluded delivery options end -->
+              </div>
+              <!--box-header-->
+
+
+              <div ng-show="!products.length &amp;&amp; scope == 'all'" class="text-center empty-message ng-binding"
+                style="">
+                XXXXXX
+              </div>
+
+              <div ng-show="products" class="products-list-table-scroll" style="">
+                <table class="table table-hover table-narrow-title products-list-table" style="font-size: 14px;">
+                  <thead>
+                    <tr style="font-size: 18px;">
+
+                      <th style="width: 10%" class="ng-binding text-center ">Image</th>
+                      <th style="width: 10%" class="ng-binding text-center">Name</th>
+                      <th style="width: 10%" class="ng-binding text-center">Category</th>
+                      <th style="width: 15%" class="ng-binding text-center">Description</th>
+                      <th style="width: 10%" class="ng-binding text-center">Price <br>(TWD/元)</br></th>
+                      <th style="width: 10%" class="ng-binding text-center">QTY</th>
+                      <th style="width: 10%" class="ng-binding text-center">createdAt</th>
+                      <th style="width: 10%" class="ng-binding text-center">updatedAt</th>
+                      <th class="bulk-edit-button-box"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- ngRepeat: product in products -->
+                  </tbody>
+                </table>
+              </div><!-- End div .table-responsive -->
+            </div><!-- End div .box-info .full -->
+            <!-- End sortable table hover -->
+
+            <div class="text-center" ng-show="true">
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+        < !--Footer -->
+    <footer class="admin-footer-wrapper">
+
+    </footer>
+    <!--End Footer-- >
+  </div >
+        <div class="nav-overlay ng-hide" style="" ng-click="hideSidebar()" ng-show="navOpen"></div>
+</div >
