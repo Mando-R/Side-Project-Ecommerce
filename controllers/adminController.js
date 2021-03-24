@@ -19,7 +19,7 @@ const adminController = {
 
   },
 
-  // [Create]新增一筆餐廳資料(1)：render -> create 頁面 [顯示頁面，非功能(POST動作)]
+  // [Create] Single Product (1)：render -> create 頁面 [顯示頁面，非功能(POST動作)]
   createProduct: (req, res) => {
     // Category.findAll({
     //   raw: true,
@@ -33,7 +33,7 @@ const adminController = {
     return res.render("admin/create.hbs")
   },
 
-  // [Create]新增一筆餐廳資料(2)：create 功能 [POST]
+  // [Create] Single Product (2)：create 功能 [POST]
   postProduct: (req, res) => {
     if (!req.body.name) {
       req.flash("error_messages", `Name didn't exist`)
@@ -100,14 +100,85 @@ const adminController = {
       })
   },
 
-  // [Update]編輯一筆餐廳資料(1)：render -> create 頁面
+  // [Edit/Update] Single Product (1)：view 和 create 共用
   editProduct: (req, res) => {
+    console.log("req.params.id", req.params.id)
 
+    return Product.findByPk(req.params.id, {
+      // raw: true,
+      // nest: true
+    })
+      .then(product => {
+        console.log("product", product)
+
+        return res.render("admin/create.hbs", { product: product.toJSON() })
+      })
+
+    // Category.findAll({
+    //   raw: true,
+    //   nest: true
+    // })
+    //   .then(categories => {
+    //     return Product.findByPk(req.params.id)
+    //       .then(product => {
+    //         // 注意：render -> admin/create 頁面。
+    //         // [Update]和[Create]表單類似，所以在[Create]表單做一點修改，之後只需維護一個表單！
+    //         return res.render("admin/create.hbs", {
+    //           categories: categories,
+    //           product: product.toJSON()
+    //         })
+    //       })
+    //   })
   },
 
-  // [Update／PUT]編輯一筆餐廳資料(2)：Update 功能 [PUT]
+  // [Edit/Update] Single Product (2)
+  // upload.single("image")：multer 只要 req 內有圖片檔，就自動複製檔案至 temp 資料夾內。
   putProduct: (req, res) => {
+    if (!req.body.name) {
+      req.flash(`error_messages`, `Name didn't exist`)
+      return res.redirect("back")
+    }
 
+    const { file } = req
+    if (file) {
+      imgur.setClientID(IMGUR_CLIENT_ID);
+      imgur.upload(file.path, (err, img) => {
+        return Product.findByPk(req.params.id)
+          .then(product => {
+            product.update({
+              name: req.body.name,
+              description: req.body.description,
+              price: req.body.price,
+              quantity: req.body.quantity,
+              image: file ? img.data.link : product.image,
+              CategoryId: req.body.CategoryId
+            })
+              .then(product => {
+                req.flash(`success_messages`, `product was successfully updated`)
+                res.redirect("/admin/products")
+              })
+          })
+      })
+    }
+    else {
+      return Product.findByPk(req.params.id)
+        .then(product => {
+          // restaurant.update：Update 資料
+          product.update({
+            name: req.body.name,
+            description: req.body.description,
+            price: req.body.price,
+            quantity: req.body.quantity,
+            image: file ? img.data.link : product.image,
+            CategoryId: req.body.CategoryId
+          })
+            .then(product => {
+              req.flash(`success_messages`, `product was successfully updated`)
+
+              res.redirect("/admin/products")
+            })
+        })
+    }
   },
 
   // [Delete]刪除一筆餐廳資料：
