@@ -89,6 +89,9 @@ router.get("/admin/products/:id/edit", authenticatedAdmin, adminController.editP
 // upload.single("image")：multer 只要 req 內有圖片檔，就自動複製檔案至 temp 資料夾內。
 router.put("/admin/products/:id", authenticatedAdmin, upload.single("image"), adminController.putProduct)
 
+// [Delete] Single Product
+router.delete("/admin/products/:id", authenticatedAdmin, adminController.deleteProduct)
+
 // -------------------- 登入機制 ---------------------
 
 // 3. Sign-up [User 註冊流程]

@@ -64,9 +64,9 @@ const adminController = {
           CategoryId: req.body.CategoryId
         })
           .then(product => {
-            req.flash('success_messages', 'product was successfully created')
+            req.flash("success_messages", `Product [ ${product.name} ] was successfully created`)
 
-            return res.redirect('/admin/products')
+            return res.redirect("/admin/products")
           })
       })
     }
@@ -81,9 +81,9 @@ const adminController = {
         CategoryId: req.body.CategoryId
       })
         .then(product => {
-          req.flash('success_messages', 'product was successfully created')
+          req.flash("success_messages", `Product [ ${product.name} ] was successfully created`)
           // 重新導回後台首頁，立即看到新增後的結果。
-          return res.redirect('/admin/products')
+          return res.redirect("/admin/products")
         })
     }
   },
@@ -135,7 +135,7 @@ const adminController = {
   // upload.single("image")：multer 只要 req 內有圖片檔，就自動複製檔案至 temp 資料夾內。
   putProduct: (req, res) => {
     if (!req.body.name) {
-      req.flash(`error_messages`, `Name didn't exist`)
+      req.flash("error_messages", `Name didn't exist`)
       return res.redirect("back")
     }
 
@@ -154,7 +154,8 @@ const adminController = {
               CategoryId: req.body.CategoryId
             })
               .then(product => {
-                req.flash(`success_messages`, `product was successfully updated`)
+                req.flash("success_messages", `Product [ ${product.name} ] was successfully updated`)
+
                 res.redirect("/admin/products")
               })
           })
@@ -173,7 +174,7 @@ const adminController = {
             CategoryId: req.body.CategoryId
           })
             .then(product => {
-              req.flash(`success_messages`, `product was successfully updated`)
+              req.flash("success_messages", `Product [ ${product.name} ] was successfully updated`)
 
               res.redirect("/admin/products")
             })
@@ -183,7 +184,15 @@ const adminController = {
 
   // [Delete]刪除一筆餐廳資料：
   deleteProduct: (req, res) => {
-
+    return Product.findByPk(req.params.id)
+      .then(product => {
+        // restaurant.destroy()：刪除
+        product.destroy()
+          .then(product => {
+            req.flash("success_messages", `Product [ ${product.name} ] was successfully deleted`)
+            res.redirect("/admin/products")
+          })
+      })
   },
   // Authority 設定(1)：set as user/admin
   getUser: (req, res) => {
