@@ -20,11 +20,10 @@ const adminController = {
       include: [{ model: Category }]
     })
       .then(products => {
-        // console.log(restaurants)
+        // console.log(products)
         // adminController.js 和 admin[Folder] 同一層
         return res.render("admin/products.hbs", { products: products })
       })
-    // return res.render("admin/products.hbs")
   },
 
   // [Create] Single Product (1)：render -> create 頁面 [顯示頁面，非功能(POST動作)]
