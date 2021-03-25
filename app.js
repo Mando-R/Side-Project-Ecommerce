@@ -8,7 +8,9 @@ const methodOverride = require("method-override")
 
 const app = express()
 const port = process.env.PORT || 3000
-// 若現在環境 process.env.NODE_ENV 非 "production"，則使用 dotenv 資訊。注意：加在 Passport 之前。
+
+// 引入 .env 檔案
+// 若現在環境 process.env.NODE_ENV 非 "production"，則使用 dotenv 資訊。注意：順序在 Passport 之前。
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config()
 }

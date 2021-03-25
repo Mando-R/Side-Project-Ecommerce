@@ -6,6 +6,11 @@ const { User, Product, Category } = db
 const fs = require("fs")
 const { userInfo } = require("os")
 
+// 引入 imgur 套件：整合第三方 Imgur API
+const imgur = require("imgur-node-api")
+const IMGUR_CLIENT_ID = process.env.IMGUR_CLIENT_ID  // Client ID -> .env(隱藏敏感資訊)
+
+
 const adminController = {
   // [Read] All Products：
   getProducts: (req, res) => {
@@ -44,59 +49,58 @@ const adminController = {
       // POST 動作結束後，若未填 name，則導回原 create 頁面("admin/create")。
       return res.redirect("back")
     }
+    // // destructuring(解構賦值)：const file = req.file
+    // const { file } = req
+    // // 1. 若有圖片：
+    // if (file) {
+    //   // 2. fs(file system)[node.js 內建讀檔 模組]：讀取 [temp 資料夾]內 圖片
+    //   fs.readFile(file.path, (err, data) => {
+    //     if (err) console.log("Error: ", err)
+    //     // 3. 寫入正式 [upload 資料夾]
+    //     fs.writeFile(`upload/${file.originalname}`, data, () => {
+    //       // 4. 將 "檔案路徑" 寫入 product.image。
+    //       return Product.create({
+    //         name: req.body.name,
+    //         description: req.body.description,
+    //         price: req.body.price,
+    //         quantity: req.body.quantity,
+    //         image: file ? `/upload/${file.originalname}` : null,
+    //         CategoryId: req.body.CategoryId
+    //       })
+    //         .then(product => {
+    //           req.flash("success_messages", `Product [ ${product.name} ] was successfully created`)
+
+    //           return res.redirect("/admin/products")
+    //         })
+    //     })
+    //   })
 
     // destructuring(解構賦值)：const file = req.file
     const { file } = req
     // 1. 若有圖片：
     if (file) {
-      // 2. fs(file system)[node.js 內建讀檔 模組]：讀取 [temp 資料夾]內 圖片
-      fs.readFile(file.path, (err, data) => {
-        if (err) console.log("Error: ", err)
-        // 3. 寫入正式 [upload 資料夾]
-        fs.writeFile(`upload/${file.originalname}`, data, () => {
-          // 4. 將 "檔案路徑" 寫入 product.image。
-          return Product.create({
-            name: req.body.name,
-            description: req.body.description,
-            price: req.body.price,
-            quantity: req.body.quantity,
-            image: file ? `/upload/${file.originalname}` : null,
-            CategoryId: req.body.CategoryId
-          })
-            .then(product => {
-              req.flash("success_messages", `Product [ ${product.name} ] was successfully created`)
-
-              return res.redirect("/admin/products")
-            })
+      // 2. 呼叫 imgur  API
+      imgur.setClientID(IMGUR_CLIENT_ID);
+      // 3. 圖片直接從暫存資料夾上傳上去，
+      // .upload(file.path,...)：上傳至 file.path(指令位置)。
+      // img：上傳完的圖片。
+      imgur.upload(file.path, (err, img) => {
+        // 4. 把這個網址放到資料庫裡。
+        return Product.create({
+          name: req.body.name,
+          description: req.body.description,
+          price: req.body.price,
+          quantity: req.body.quantity,
+          // img.fata.link：取得上傳圖片後的 URL。上傳成功後 http://img.data.link/ 會是剛剛上傳後拿到的圖片網址。
+          image: file ? img.data.link : null,
+          CategoryId: req.body.CategoryId
         })
+          .then(product => {
+            req.flash("success_messages", `Product [ ${product.name} ] was successfully created`)
+
+            return res.redirect("/admin/products")
+          })
       })
-
-      // // destructuring(解構賦值)：const file = req.file
-      // const { file } = req
-      // // 1. 若有圖片：
-      // if (file) {
-      //   // 2. 呼叫 imgur  API
-      //   imgur.setClientID(IMGUR_CLIENT_ID);
-      //   // 3. 圖片直接從暫存資料夾上傳上去，
-      //   // .upload(file.path,...)：上傳至 file.path(指令位置)。
-      //   // img：上傳完的圖片。
-      //   imgur.upload(file.path, (err, img) => {
-      //     // 4. 把這個網址放到資料庫裡。
-      //     return Product.create({
-      //       name: req.body.name,
-      //       description: req.body.description,
-      //       price: req.body.price,
-      //       quantity: req.body.quantity,
-      //       // img.fata.link：取得上傳圖片後的 URL。上傳成功後 http://img.data.link/ 會是剛剛上傳後拿到的圖片網址。
-      //       image: file ? img.data.link : null,
-      //       CategoryId: req.body.CategoryId
-      //     })
-      //       .then(product => {
-      //         req.flash("success_messages", `Product [ ${product.name} ] was successfully created`)
-
-      //         return res.redirect("/admin/products")
-      //       })
-      //   })
     } else {
       // Product Model 建立一個新 product，並將表單傳來的資料(req.body.XXX)填入新的 product
       return Product.create({
@@ -165,50 +169,49 @@ const adminController = {
       req.flash("error_messages", `Name didn't exist`)
       return res.redirect("back")
     }
+    // const { file } = req
+    // if (file) {
+    //   fs.readFile(file.path, (err, data) => {
+    //     if (err) console.log('Error: ', err)
 
+    //     fs.writeFile(`upload/${file.originalname}`, data, () => {
+    //       return Product.findByPk(req.params.id)
+    //         .then(product => {
+    //           product.update({
+    //             name: req.body.name,
+    //             description: req.body.description,
+    //             price: req.body.price,
+    //             quantity: req.body.quantity,
+    //             image: file ? `/upload/${file.originalname}` : product.image,
+    //             CategoryId: req.body.CategoryId
+    //           })
+    //         })
+    //         .then(product => {
+    //           // req.flash("success_messages", `Product [ ${product.name} ] was successfully updated`)
+    //           req.flash("success_messages", `Product was successfully updated`)
+
+    //           res.redirect("/admin/products")
+    //         })
     const { file } = req
     if (file) {
-      fs.readFile(file.path, (err, data) => {
-        if (err) console.log('Error: ', err)
+      imgur.setClientID(IMGUR_CLIENT_ID);
+      imgur.upload(file.path, (err, img) => {
+        return Product.findByPk(req.params.id)
+          .then(product => {
+            product.update({
+              name: req.body.name,
+              description: req.body.description,
+              price: req.body.price,
+              quantity: req.body.quantity,
+              image: file ? img.data.link : product.image,
+              CategoryId: req.body.CategoryId
+            })
+              .then(product => {
+                req.flash("success_messages", `Product [ ${product.name} ] was successfully updated`)
 
-        fs.writeFile(`upload/${file.originalname}`, data, () => {
-          return Product.findByPk(req.params.id)
-            .then(product => {
-              product.update({
-                name: req.body.name,
-                description: req.body.description,
-                price: req.body.price,
-                quantity: req.body.quantity,
-                image: file ? `/upload/${file.originalname}` : product.image,
-                CategoryId: req.body.CategoryId
+                res.redirect("/admin/products")
               })
-            })
-            .then(product => {
-              // req.flash("success_messages", `Product [ ${product.name} ] was successfully updated`)
-              req.flash("success_messages", `Product was successfully updated`)
-
-              res.redirect("/admin/products")
-            })
-          // const { file } = req
-          // if (file) {
-          //   imgur.setClientID(IMGUR_CLIENT_ID);
-          //   imgur.upload(file.path, (err, img) => {
-          //     return Product.findByPk(req.params.id)
-          //       .then(product => {
-          //         product.update({
-          //           name: req.body.name,
-          //           description: req.body.description,
-          //           price: req.body.price,
-          //           quantity: req.body.quantity,
-          //           image: file ? img.data.link : product.image,
-          //           CategoryId: req.body.CategoryId
-          //         })
-          // .then(product => {
-          //   req.flash("success_messages", `Product [ ${product.name} ] was successfully updated`)
-
-          //   res.redirect("/admin/products")
-          // })
-        })
+          })
       })
     } else {
       return Product.findByPk(req.params.id)
@@ -218,8 +221,8 @@ const adminController = {
             description: req.body.description,
             price: req.body.price,
             quantity: req.body.quantity,
-            // image: file ? img.data.link : product.image,
-            image: product.image,
+            // image: product.image,
+            image: file ? img.data.link : product.image,
             CategoryId: req.body.CategoryId
           })
             .then(product => {
