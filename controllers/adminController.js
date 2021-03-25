@@ -28,16 +28,15 @@ const adminController = {
 
   // [Create] Single Product (1)：render -> create 頁面 [顯示頁面，非功能(POST動作)]
   createProduct: (req, res) => {
-    // Category.findAll({
-    //   raw: true,
-    //   nest: true
-    // })
-    //   .then(categories => {
-    //     return res.render("admin/create.hbs", {
-    //       categories: categories
-    //     })
-    //   })
-    return res.render("admin/create.hbs")
+    Category.findAll({
+      raw: true,
+      nest: true
+    })
+      .then(categories => {
+        return res.render("admin/create.hbs", {
+          categories: categories
+        })
+      })
   },
 
   // [Create] Single Product (2)：create 功能 [POST]
@@ -92,6 +91,7 @@ const adminController = {
           quantity: req.body.quantity,
           // img.fata.link：取得上傳圖片後的 URL。上傳成功後 http://img.data.link/ 會是剛剛上傳後拿到的圖片網址。
           image: file ? img.data.link : null,
+
           CategoryId: req.body.CategoryId
         })
           .then(product => {
@@ -108,6 +108,7 @@ const adminController = {
         price: req.body.price,
         quantity: req.body.quantity,
         image: null,
+
         CategoryId: req.body.CategoryId
       })
         .then(product => {
@@ -130,35 +131,24 @@ const adminController = {
       })
   },
 
-  // [Edit/Update] Single Product (1)：view 和 create 共用
+  // [Edit/Update] Single Product (1)：
+  // 注意：Edit & Create 共用 view，方便維護。
   editProduct: (req, res) => {
     console.log("req.params.id", req.params.id)
-
-    return Product.findByPk(req.params.id, {
-      // raw: true,
-      // nest: true
+    Category.findAll({
+      raw: true,
+      nest: true
     })
-      .then(product => {
-        console.log("product", product)
+      .then(categories => {
+        return Product.findByPk(req.params.id)
 
-        return res.render("admin/create.hbs", { product: product.toJSON() })
+          .then(product => {
+            return res.render("admin/create.hbs", {
+              categories: categories,
+              product: product.toJSON()
+            })
+          })
       })
-
-    // Category.findAll({
-    //   raw: true,
-    //   nest: true
-    // })
-    //   .then(categories => {
-    //     return Product.findByPk(req.params.id)
-    //       .then(product => {
-    //         // 注意：render -> admin/create 頁面。
-    //         // [Update]和[Create]表單類似，所以在[Create]表單做一點修改，之後只需維護一個表單！
-    //         return res.render("admin/create.hbs", {
-    //           categories: categories,
-    //           product: product.toJSON()
-    //         })
-    //       })
-    //   })
   },
 
   // [Edit/Update] Single Product (2)
@@ -203,6 +193,7 @@ const adminController = {
               price: req.body.price,
               quantity: req.body.quantity,
               image: file ? img.data.link : product.image,
+
               CategoryId: req.body.CategoryId
             })
               .then(product => {
@@ -222,6 +213,7 @@ const adminController = {
             quantity: req.body.quantity,
             // image: product.image,
             image: file ? img.data.link : product.image,
+
             CategoryId: req.body.CategoryId
           })
             .then(product => {

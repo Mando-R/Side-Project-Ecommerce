@@ -241,22 +241,24 @@
       </div>
 
       <!-- Admin -->
-      <a ng-href="/users/6047a36841d72f000c233691/edit" class="menu-button member-myaccount-button ng-scope"
-        ng-if="isUserLoggedIn" href="/admin">
+      {{!-- #if user.isAdmin --}}
+      <a class="menu-button member-myaccount-button ng-scope" ng-if="isUserLoggedIn" href="/admin">
         <span class="fa fa-user-circle"> </span>
         <span class="menu-words" style="padding-left:6px;">
           Admin
         </span>
       </a>
+      {{!-- /if --}}
 
       <!-- Log-out -->
-      <a ng-href="/users/6047a36841d72f000c233691/edit" class="menu-button member-myaccount-button ng-scope"
-        ng-if="isUserLoggedIn" href="/logout">
+      {{!-- #if user --}}
+      <a class="menu-button member-myaccount-button ng-scope" href="/logout">
         <span class="fa fa-user-circle"> </span>
         <span class="menu-words" style="padding-left:6px;">
           Log out
         </span>
       </a>
+      {{!-- /if --}}
 
       <!-- Account -->
       <a ng-href="/users/6047a36841d72f000c233691/edit"

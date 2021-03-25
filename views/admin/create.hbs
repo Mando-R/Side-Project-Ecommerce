@@ -17,20 +17,21 @@
     2. "Create"：restaurant 變數不存在，value = null。 -->
 
     <!-- Category -->
+    <!-- 注意：CategoryId => <label for>、<select id>、<select name>、<option value> 4者皆相同 -->
     <div class="form-group">
-      <label for="categoryId">Category</label>
+      <label for="CategoryId">Category</label>
 
-      <select class="form-control" id="categoryId" name="categoryId">
+      <select class="form-control" id="CategoryId" name="CategoryId">
 
+        <!-- categories -->
         {{#each categories}}
-        <!-- 注意：if/else 的 helper，放在 <option> 內 -->
+        <!-- #if 篩選 selected 條件：選單自動顯示原 Category 
+             注意：if/else 的 helper，放在 <option> 內 -->
         <!-- 
         1. this.id：表示在 #each categories 裡迭代的分類 id；
-        2. ../restaurant.CategoryId：../ 指回到上一層 categories。直接從 controller 傳入，代表根據網址 :id 取到的餐廳資料。 
+        2. ../product.CategoryId：../ 指回到上一層 categories。直接從 controller 傳入，代表根據網址 :id 取到的餐廳資料。 
         -->
-        <option value="{{this.id}}" {{#ifCond this.id ../restaurant.Category_Id}} selected {{/ifCond}}>
-
-          <!-- >如果忘記加入 ../，由於在 #each categories 的語境下，會以為你在呼叫this.restaurant，會變成去 categories 迭代到的項目裡尋找一個叫做 restaurant 的屬性，結果會找不到東西。 -->
+        <option value="{{this.id}}" {{#ifCond this.id ../product.CategoryId}} selected {{/ifCond}}>
 
           {{this.name}}
 
