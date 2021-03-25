@@ -246,14 +246,35 @@ const adminController = {
           })
       })
   },
-  // Authority 設定(1)：set as user/admin
+
+  // User Authority 設定(1)：set as user/admin
   getUser: (req, res) => {
-
+    User.findAll({
+      raw: true,
+      nest: true
+    })
+      .then(users => {
+        return res.render("admin/users.hbs", { users: users })
+      })
   },
-  // Authority 設定(1)：set as user/admin
-  putUser: (req, res) => {
 
-  }
+  // User Authority 設定(2)：set as user/admin
+  putUser: (req, res) => {
+    User.findByPk(req.params.id)
+      .then(user => {
+        // 不須先轉成 plain object，因最後皆由 adminController.getUser 轉換。
+        // 注意：isAdmin 切換 True/False
+        user.isAdmin = !user.isAdmin
+
+        user.save({ field: "isAdmin" })
+          .then(user => {
+            req.flash('success_messages',
+              `User [ ${user.name} ] was successfully updated!`)
+
+            res.redirect('/admin/users')
+          })
+      })
+  },
 }
 
 

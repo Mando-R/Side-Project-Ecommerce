@@ -53,7 +53,6 @@ const authenticatedAdmin = (req, res, next) => {
 }
 
 
-
 // 前台
 // 1. Homepage 前台：restController ＋ authenticated
 router.get("/", authenticated, (req, res) => {
@@ -93,6 +92,12 @@ router.put("/admin/products/:id", authenticatedAdmin, upload.single("image"), ad
 
 // [Delete] Single Product
 router.delete("/admin/products/:id", authenticatedAdmin, adminController.deleteProduct)
+
+// -------------------- User Authority ---------------------
+
+router.get("/admin/users", authenticatedAdmin, adminController.getUser)
+
+router.put("/admin/users/:id/toggleAdmin", authenticatedAdmin, adminController.putUser)
 
 // -------------------- 登入機制 ---------------------
 
