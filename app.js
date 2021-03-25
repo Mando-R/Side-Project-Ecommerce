@@ -63,7 +63,7 @@ app.use((req, res, next) => {
 
 // (6) multer(image)：設定靜態檔案路徑 /upload
 // 加上 Route："/upload"，因為是靜態檔案，所以不需像其他 Route 路由一樣寫 Controller 邏輯，直接用 express.static 指定路徑即可。
-// app.use("/upload", express.static(__dirname + "/upload"))
+app.use("/upload", express.static(__dirname + "/upload"))
 
 // 1. routes/index.js 用 module.exports 匯出 Route 設定，接著到 app.js 透過 require 引入 function。
 

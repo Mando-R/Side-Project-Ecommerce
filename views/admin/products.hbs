@@ -44,7 +44,12 @@
                     {{#each products}}
                     <tr>
                       <td class="ng-binding text-center">{{this.Category.name}}</td>
-                      <td class="ng-binding text-center">{{this.image}}</td>
+
+                      <td class="ng-binding text-center">
+                        <img class="img-responsive center-block" src="{{this.image}}"
+                          style="width: 120px;margin-bottom: 25px;">
+                      </td>
+
                       <td class="ng-binding text-center">{{this.name}}</td>
                       <!-- adminController.getRestaurants - include: Category -> 取得Category.name -->
                       <td class="ng-binding text-center">{{this.description}}</td>

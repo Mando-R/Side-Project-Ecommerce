@@ -1,10 +1,12 @@
 <!-- Edit/Update：Single Product -->
 <!-- 若有 product，欄位內 value 代入預設值 -->
+<!-- multer：修改 form，加入 enctype="multipart/form-data" -->
 {{#if product}}
 <form action="/admin/products/{{product.id}}?_method=PUT" method="POST" enctype="multipart/form-data">
 
   <!-- Create：Single Product -->
   <!-- 因為無 product，所以才須 Create -->
+  <!-- multer：修改 form，加入 enctype="multipart/form-data" -->
   {{else}}
   <form action="/admin/products" method="POST" enctype="multipart/form-data">
 
@@ -72,6 +74,7 @@
     </div>
 
     <!-- Image：multer 套件 上傳 image -->
+    <!-- multer：修改 form，加入 enctype="multipart/form-data" -->
     <div class="form-group">
       <label for="image">Image</label>
 

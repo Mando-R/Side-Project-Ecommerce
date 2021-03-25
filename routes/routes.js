@@ -17,6 +17,7 @@ const categoryController = require("../controllers/categoryController.js")
 // (1) 分開 上傳[temp 資料夾] vs. 使用[upload 資料夾] 邏輯，成功上傳 -> 才使用。
 // (2) 上傳到 temp 過程可能錯誤，所以「上傳失敗」暫存檔留在 temp 資料夾內，需定時清空，但 upload 資料夾內必是對外使用的檔案。
 // (3) 可順便自定義檔名(基礎的 multer 沒有自定義檔名的功能)
+// 在要上傳檔案的route，加上 multer middleware，upload.single('image')。
 const multer = require("multer")
 const upload = multer({ dest: "temp/" })
 
@@ -77,6 +78,7 @@ router.get("/admin/products", authenticatedAdmin, adminController.getProducts)
 router.get("/admin/products/create", authenticatedAdmin, adminController.createProduct)
 
 // [Create] Single Product (2)
+// upload.single("image")：multer 只要 req 內有圖片檔，就自動複製檔案至 temp 資料夾內。
 router.post("/admin/products", authenticatedAdmin, upload.single("image"), adminController.postProduct)
 
 // [Read/Detail] Single Product：動態路由:id -> req.params.id
