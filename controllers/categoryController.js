@@ -1,10 +1,16 @@
-// const db = require("../models")
-// const { Category } = db
+const db = require("../models")
+const { Category } = db
 
 const categoryController = {
   // [Read]瀏覽 Category
   getCategories: (req, res) => {
-
+    return Category.findAll({
+      raw: true,
+      nest: true
+    })
+      .then(categories => {
+        return res.render("admin/categories.hbs", { categories: categories })
+      })
   },
 
   // [Create]新增 Category

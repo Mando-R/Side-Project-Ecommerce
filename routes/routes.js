@@ -99,6 +99,12 @@ router.get("/admin/users", authenticatedAdmin, adminController.getUser)
 
 router.put("/admin/users/:id/toggleAdmin", authenticatedAdmin, adminController.putUser)
 
+// -------------------- Category ---------------------
+// (1)[Read] Category
+router.get("/admin/categories", authenticatedAdmin, categoryController.getCategories)
+
+
+
 // -------------------- 登入機制 ---------------------
 
 // 3. Sign-up [User 註冊流程]
