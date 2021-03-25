@@ -20,7 +20,6 @@ const adminController = {
         return res.render("admin/products.hbs", { products: products })
       })
     // return res.render("admin/products.hbs")
-
   },
 
   // [Create] Single Product (1)：render -> create 頁面 [顯示頁面，非功能(POST動作)]
