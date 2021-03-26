@@ -47,6 +47,7 @@
               <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-purple rounded shadow-sm">
 
                 <!-- 注意：只有這層<form> 做切換 -->
+                <!-- Edit：此 category 為 route 有 id"req.params.id" -->
                 {{#if category}}
                 <form action="/admin/categories/{{category.id}}?_method=PUT" method="POST">
                   <!-- input 欄位：value 代入 category.name -->
@@ -56,7 +57,7 @@
                   <button type="submit">Update</button>
 
                   <!-- or Create New： -->
-                  <a href="/admin/categories">or Create New</a>
+                  <a href="/admin/categories">or just create a NEW ONE？</a>
 
                 </form>
 
@@ -92,13 +93,13 @@
                       <td>
                         <!-- Edit/Update 按鈕 -->
                         <button type="button" class="btn btn-success">
-                          <a href="/admin/products/{{this.id}}/edit">
+                          <a href="/admin/categories/{{this.id}}">
                             Edit
                           </a>
                         </button>
 
                         <!-- Delete 按鈕 -->
-                        <form action="/admin/products/{{this.id}}?_method=DELETE" method="POST"
+                        <form action="/admin/categories/{{this.id}}?_method=DELETE" method="POST"
                           style="display: inline;">
                           <button type="submit" class="btn btn-danger">
                             Delete

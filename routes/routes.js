@@ -100,13 +100,18 @@ router.get("/admin/users", authenticatedAdmin, adminController.getUser)
 router.put("/admin/users/:id/toggleAdmin", authenticatedAdmin, adminController.putUser)
 
 // -------------------- Category ---------------------
+
 // (1)[Read] Category
 router.get("/admin/categories", authenticatedAdmin, categoryController.getCategories)
 
 // (2)[Create] Category
 router.post("/admin/categories", authenticatedAdmin, categoryController.postCategory)
 
+// (3)[Update] Category
+// 注意：共用 [Read]Controllers 的 getCategories
+router.get("/admin/categories/:id", authenticatedAdmin, categoryController.getCategories)
 
+router.put("/admin/categories/:id", authenticatedAdmin, categoryController.putCategory)
 
 // -------------------- 登入機制 ---------------------
 
