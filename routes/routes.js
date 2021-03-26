@@ -103,6 +103,9 @@ router.put("/admin/users/:id/toggleAdmin", authenticatedAdmin, adminController.p
 // (1)[Read] Category
 router.get("/admin/categories", authenticatedAdmin, categoryController.getCategories)
 
+// (2)[Create] Category
+router.post("/admin/categories", authenticatedAdmin, categoryController.postCategory)
+
 
 
 // -------------------- 登入機制 ---------------------
