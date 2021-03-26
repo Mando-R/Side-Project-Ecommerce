@@ -74,7 +74,17 @@ const categoryController = {
 
   // [Delete]刪除 Category
   deleteCategory: (req, res) => {
+    return Category.findByPk(req.params.id)
+      .then(category => {
+        category.destroy()
 
+          .then(category => {
+
+            req.flash('success_messages', `Category [ ${category.name} ] was successfully deleted`)
+
+            res.redirect("/admin/categories")
+          })
+      })
   }
 }
 

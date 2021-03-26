@@ -113,6 +113,9 @@ router.get("/admin/categories/:id", authenticatedAdmin, categoryController.getCa
 
 router.put("/admin/categories/:id", authenticatedAdmin, categoryController.putCategory)
 
+// (4)[Delete] Category
+router.delete("/admin/categories/:id", authenticatedAdmin, categoryController.deleteCategory)
+
 // -------------------- 登入機制 ---------------------
 
 // 3. Sign-up [User 註冊流程]
