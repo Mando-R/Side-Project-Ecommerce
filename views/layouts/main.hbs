@@ -58,6 +58,41 @@
       <div class="section-header">
         Navigation
       </div>
+
+      <div class=" row">
+        {{#each products}}
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img class="card-img-top" src="{{this.image}}" alt="Card image cap" width="286px" height="180px">
+
+            <div class="card-body">
+              <!-- Name -->
+              <p class="card-text">
+                <a href="/products/{{this.id}}">
+                  {{this.name}}
+                </a>
+              </p>
+
+              <!-- Category -->
+              <span class="badge badge-secondary">{{this.categoryName}}</span>
+              </br>
+              <!-- Cart -->
+              <span>
+                <button type="button" class="btn btn-outline-secondary" href="">
+                  Add to Cart
+                </button>
+              </span>
+
+
+              <!-- Description -->
+              <p class="card-text">{{this.description}}</p>
+
+            </div>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+
       <ul class="categories-mobile-list">
         <li>
           <a href="/pages/aboutus" ng-non-bindable="">食我-About Us</a>
@@ -134,91 +169,8 @@
         </li>
       </ul>
     </div>
-
-    <div class="clear"></div>
-    <div ng-hide="defaultMobileCategoriesRemoved">
-      <div class="visible-sm visible-xs">
-        <div class="section-header">
-          Categories
-        </div>
-        <ul class="categories-mobile-list">
-          <li class=" text-secondary-color">
-            <a href="/categories/chia-yi-shi-ri-%E6%96%B0%E5%93%81%E4%B8%8A%E5%B8%82" ng-non-bindable="">
-              CHIA YI SHI RI / 新品上市
-            </a>
-          </li>
-          <li class=" text-secondary-color">
-            <a href="/categories/chia-yi-shi-ri-%E7%B2%BE%E9%81%B8%E5%95%86%E5%93%81" ng-non-bindable="">
-              CHIA YI SHI RI / 精選商品
-            </a>
-          </li>
-
-        </ul>
-      </div>
-    </div>
-
-    <div class="other-setting-list visible-xs">
-      <div class="section-header">
-        Other Settings
-      </div>
-      <ul>
-        <li>
-          <div class="menu-button message-button" ng-hide="featureService.hasBetaFeature('hide_message')"
-            ng-click="showMessageForm()" ng-class="{'ie-hack':!mainConfig.themeSettings.is_multicurrency_enabled}">
-            <span class="menu-words"><span class="fa fa-comment"></span>MESSAGE</span>
-          </div>
-        </li>
-        <li>
-          <div class="dropdown mobile-language-btn"
-            ng-class="{'ie-hack':!mainConfig.themeSettings.is_multicurrency_enabled}">
-            <div class="menu-button">
-              <span class="menu-words">
-                <svg class="fa fa-v5-globe">
-                  <use xlink:href="#fa-v5-globe"></use>
-                </svg>
-                English</span>
-
-            </div>
-          </div>
-        </li>
-        <li>
-
-        </li>
-      </ul>
-    </div>
   </div>
   <!--left-panel-->
-
-  <div id="cart-panel" style="display:none" class="panel-mobile sidr left">
-    <!-- cart Start -->
-    <div ng-controller="CartsController" class="ng-scope">
-      <div class="cart-header">
-        Shopping Cart
-      </div>
-      <!-- cart items start-->
-      <div class="clear"></div>
-      <div ng-show="currentCart.isCartEmpty()" class="ng-hide">
-        <div style="display:block;padding:15px">
-          Your Shopping Cart is empty.
-        </div>
-      </div>
-      <div ng-hide="currentCart.isCartEmpty()" class="">
-        <div id="" style="" class="cart-items">
-          <!-- ngRepeat: item in currentCart.getItems -->
-          <div class="clear"></div>
-        </div>
-        <!--cart-items-->
-        <!-- cart items end -->
-        <div class="clear"></div>
-        <div class="cart-chkt-btn-cont">
-          <button id="btn-checkout" class="cart-chkt-btn ladda-button" data-style="slide-down"
-            ladda="checkoutButtonLoading" ng-click="onCheckoutClicked($event)">
-            Checkout
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <div class="side-panel-search search-panel-mobile">
     <form ng-controller="ProductsSearchController" ng-submit="search(searchQuery, $event); $event.preventDefault();"
@@ -245,6 +197,14 @@
           style="background-image:url(https://shoplineimg.com/5b4461529a76f081a2000629/5b7d37e6376ed50014514b38/x200.webp?source_format=png)"
           data-size="x200"></a>
       </div>
+
+      <!-- Homepage -->
+      <a class="menu-button member-myaccount-button ng-scope" href="/">
+        <span class="fa fa-user-circle"> </span>
+        <span class="menu-words" style="padding-left:6px;">
+          Home
+        </span>
+      </a>
 
       <!-- Admin -->
       {{!-- #if user.isAdmin --}}
@@ -299,9 +259,6 @@
     <div class="body-content mobile-revamp-navigation">
       <!-- navigation -->
       <nav class="main-navigation">
-
-        <!-- ngIf: showMissingSessionKeyWarning -->
-
         <div class="navbar-wrapper ">
           <div class="navbar hidden-xs" role="navigation">
             <div class="navbar-header-wrapper">
@@ -320,6 +277,8 @@
               <div class="container">
                 <div class="navbar-menu hidden-xs">
                   <ul class="text-primary-color">
+
+                    <!-- 食我-About Us -->
                     <!-- Has dropdown links -->
                     <li class="nav-dropdown" link-highlight="/pages/aboutus">
                       <a class="nav-dropdown-toggle" link-highlight="/pages/aboutus" href="/pages/aboutus" target=""
@@ -347,6 +306,8 @@
                         </li>
                       </ul>
                     </li>
+
+                    <!-- 食麵-Noodles -->
                     <!-- Has dropdown links -->
                     <li class="nav-dropdown" link-highlight="/pages/noodles">
                       <a class="nav-dropdown-toggle" link-highlight="/pages/noodles" href="/pages/noodles" target=""
@@ -362,24 +323,29 @@
                         </li>
                       </ul>
                     </li>
+
+                    <!-- 食事-Event -->
                     <!-- Has dropdown links -->
                     <!-- doesn't have dropdown links -->
                     <li link-highlight="/pages/event">
                       <a link-highlight="/pages/event" href="/pages/event" target="" ng-non-bindable="">食事-Event</a>
                     </li>
-                    <!-- Has dropdown links -->
+
+                    <!-- 食品味-Good -->
                     <!-- doesn't have dropdown links -->
                     <li link-highlight="/pages/goodsense">
                       <a link-highlight="/pages/goodsense" href="/pages/goodsense" target="" ng-non-bindable="">食品味-Good
                         Sense</a>
                     </li>
-                    <!-- Has dropdown links -->
+
+                    <!-- 食影音-Videos -->
                     <!-- doesn't have dropdown links -->
                     <li link-highlight="/pages/videos">
                       <a link-highlight="/pages/videos" href="/pages/videos" target="" ng-non-bindable="">食影音-Videos</a>
                     </li>
 
                   </ul>
+
                 </div>
               </div>
               <!--container-->

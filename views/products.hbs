@@ -1,4 +1,34 @@
-<div class="row">
+<ul class="nav nav-pills">
+  <!-- All Products -->
+  <li class="nav-item">
+    <!-- categoryId 為空字串""，注意""中間不能有空格 -->
+    <a class="nav-link {{#ifCond "" categoryId}}active{{/ifCond}}" href="/products?categoryId=">All Products</a>
+  </li>
+
+  <!-- 迭代 categories -->
+  {{#each categories}}
+  <li class="nav-item">
+    <!-- 注意：Route：
+    1. href="?categoryId='"this.id"'id
+    2. -> 導向 前台 Index：app.get "/products"..."
+    3. -> productController.getRestaurants：
+          Category.findAll"res.render：data(已篩選)、categories＆categoryId 皆已篩選和處理 " -->
+    <!-- 代入 active 屬性：點擊 反藍底；參考 Bootstrap-Navs的Pills-->
+    <a class="nav-link {{#ifCond this.id ../categoryId}}active{{/ifCond}}" href="/products?categoryId={{this.id}}">
+      {{this.name}}
+    </a>
+  </li>
+  {{/each}}
+
+  <li class="nav-item">
+    <!-- 「全部」按鈕的情況，categoryId 會是空字串""，注意""中間不能有空格 -->
+    <a class="nav-link" href="#">About Us</a>
+  </li>
+
+</ul>
+
+
+<div class=" row">
   {{#each products}}
   <div class="col-md-4">
     <div class="card mb-4 shadow-sm">
@@ -31,5 +61,6 @@
   </div>
   {{/each}}
 </div>
+
 <br />
 <br />
