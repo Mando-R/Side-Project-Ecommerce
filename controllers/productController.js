@@ -20,7 +20,19 @@ const productController = {
           products: data
         })
       })
+  },
+
+  getProduct: (req, res) => {
+    return Product.findByPk(req.params.id, {
+      include: [{ model: Category }]
+    })
+      .then(product => {
+        return res.render("product.hbs", {
+          product: product.toJSON()
+        })
+      })
   }
+
 }
 
 

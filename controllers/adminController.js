@@ -127,7 +127,8 @@ const adminController = {
     })
       .then(product => {
         // console.log(restaurant)
-        return res.render("admin/product.hbs", { product: product.toJSON() })
+        return res.render("admin/product.hbs",
+          { product: product.toJSON() })
       })
   },
 

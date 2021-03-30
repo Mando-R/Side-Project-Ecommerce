@@ -62,6 +62,9 @@ router.get("/", authenticated, (req, res) => {
 // [Read]瀏覽 全部 餐廳
 router.get("/products", authenticated, productController.getProducts)
 
+router.get("/products/:id", authenticated, productController.getProduct)
+
+
 // -------------------- admin 後台 ---------------------
 
 // 2. 後台：adminController ＋ authenticatedAdmin
