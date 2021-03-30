@@ -60,41 +60,7 @@ const userController = {
     res.redirect("/signin")
   },
 
-  // isFavorited：
-  // (1) 加入最愛 功能
-  addFavorite: (req, res) => {
 
-  },
-  // (2) 移除最愛 功能
-  removeFavorite: (req, res) => {
-
-  },
-
-  // isLiked：記得修改 restController.
-  // (1) Like
-  addLike: (req, res) => {
-
-  },
-
-  // (2) Unlike
-  removeLike: (req, res) => {
-
-  },
-
-  // Profile
-  // [GET]瀏覽 Profile
-  getUser: (req, res) => {
-
-  },
-  // [GET]瀏覽編輯 Profile 頁面
-  editUser: (req, res) => {
-
-  },
-
-  // [PUT]編輯 Profile：修改自 adminController.putRestaurant
-  putUser: (req, res) => {
-
-  }
 }
 
 

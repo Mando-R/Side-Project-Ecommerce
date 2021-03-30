@@ -53,7 +53,7 @@ const authenticatedAdmin = (req, res, next) => {
 }
 
 
-// 前台
+// -------------------- 前台 ---------------------
 // 1. Homepage 前台：restController ＋ authenticated
 router.get("/", authenticated, (req, res) => {
   res.redirect("/products")

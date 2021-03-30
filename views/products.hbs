@@ -1,3 +1,35 @@
-<div>
-  products
+<div class="row">
+  {{#each products}}
+  <div class="col-md-4">
+    <div class="card mb-4 shadow-sm">
+      <img class="card-img-top" src="{{this.image}}" alt="Card image cap" width="286px" height="180px">
+
+      <div class="card-body">
+        <!-- Name -->
+        <p class="card-text">
+          <a href="/products/{{this.id}}">
+            {{this.name}}
+          </a>
+        </p>
+
+        <!-- Category -->
+        <span class="badge badge-secondary">{{this.categoryName}}</span>
+        </br>
+        <!-- Cart -->
+        <span>
+          <button type="button" class="btn btn-outline-secondary" href="">
+            Add to Cart
+          </button>
+        </span>
+
+
+        <!-- Description -->
+        <p class="card-text">{{this.description}}</p>
+
+      </div>
+    </div>
+  </div>
+  {{/each}}
 </div>
+<br />
+<br />

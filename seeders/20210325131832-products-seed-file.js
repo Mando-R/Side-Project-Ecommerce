@@ -19,6 +19,7 @@ module.exports = {
             description: faker.lorem.text(),
 
             image: `https://loremflickr.com/320/240/electricvehicle?random=${Math.random() * 100}`,
+
             quantity: Math.floor(Math.random() * 11) * 10,
 
             // 對應 Category Seeder

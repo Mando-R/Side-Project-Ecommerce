@@ -1,43 +1,28 @@
-// 引入 Restaurant Model
-// const db = require("../models")
-// const favorite = require("../models/favorite")
-// const { Restaurant, Category, Comment, User, Favorite } = db
+// 引入 Model
+const db = require("../models")
+const { User, Product, Category } = db
 
-// Pagination：避免「magic number」(未命名數字)
-// Pagination：amountPerPage 限制每頁顯示筆數
-const amountPerPage = 10
-
-// 抽取 req 處理程序至 controller 內。
 const productController = {
-  // [Read]瀏覽 全部 餐廳
+  // [Read] products
   getProducts: (req, res) => {
-    return res.render("products.hbs")
+    Product.findAll({
+      include: [{ model: Category }]
+    })
+      .then(results => {
+        // .map() ：建立新 Array
+        const data = results.map(product => ({
+          ...product.dataValues,
+          // 注意：前面不可加 raw: true，否則不能新增新屬性(如categoryName)。
+          categoryName: product.Category.name
+        }))
 
-  },
-
-  // [Read]瀏覽 單一 餐廳
-  getRestaurant: (req, res) => {
-
-  },
-
-  // Dashboard
-  getDashboard: (req, res) => {
-
-  },
-
-  // Top 10 Favorited Restaurants
-  getTopRest: (req, res) => {
-
-  },
-
-  getFeeds: (req, res) => {
-
+        return res.render("products.hbs", {
+          products: data
+        })
+      })
   }
-
 }
 
 
 module.exports = productController
-
-
 
