@@ -27,6 +27,29 @@
 
       <p>{{product.description}}</p>
 
+      <li>
+        <!-- isLiked（1）：移除 Like -->
+        <!-- this.id = productId -->
+        {{#if isLiked}}
+        <form action="/like/{{product.id}}?_method=DELETE" method="POST">
+          <button type="submit" class="btn btn-danger">
+            Remove from Wishlist
+            <i class="fas fa-heart"></i>
+          </button>
+        </form>
+
+        {{else}}
+        <!-- isLiked（2）：加到 Like -->
+        <!-- this.id = productId -->
+        <form action="/like/{{product.id}}" method="POST">
+          <button type="submit" class="btn btn-danger">
+            Add to Wishlist
+            <i class="far fa-heart"></i>
+          </button>
+        </form>
+        {{/if}}
+      </li>
+
     </ul>
   </div>
 

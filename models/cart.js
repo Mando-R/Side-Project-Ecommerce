@@ -8,8 +8,8 @@ module.exports = (sequelize, DataTypes) => {
       // Cart [M] -> [M] Product 
       Cart.belongsToMany(models.Product, {
         through: models.CartItem,
-        foreignKey: "Cart_Id",
-        as: "cartFindProduct"
+        foreignKey: "CartId",
+        as: "cartFindProducts"
       })
     }
   };

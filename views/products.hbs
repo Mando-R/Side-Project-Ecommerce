@@ -8,11 +8,6 @@
   <!-- 迭代 categories -->
   {{#each categories}}
   <li class="nav-item">
-    <!-- 注意：Route：
-    1. href="?categoryId='"this.id"'id
-    2. -> 導向 前台 Index：app.get "/products"..."
-    3. -> productController.getProducts：
-          Category.findAll"res.render：data(已篩選)、categories＆categoryId 皆已篩選和處理 " -->
     <!-- 代入 active 屬性：點擊 反藍底；參考 Bootstrap-Navs的Pills-->
     <a class="nav-link {{#ifCond this.id ../categoryId}}active{{/ifCond}}" href="/products?categoryId={{this.id}}">
       {{this.name}}
@@ -44,11 +39,33 @@
         <!-- Category -->
         <span class="badge badge-secondary">{{this.categoryName}}</span>
         </br>
-        <!-- Cart -->
+
         <span>
+          <!-- Cart -->
           <button type="button" class="btn btn-outline-secondary" href="">
             Add to Cart
           </button>
+
+          <!-- isLiked（1）：移除 Like -->
+          <!-- this.id = productId -->
+          {{#if this.isLiked}}
+          <form action="/like/{{this.id}}?_method=DELETE" method="POST">
+            <button type="submit" class="btn btn-danger">
+              Remove from Wishlist
+              <i class="fas fa-heart"></i>
+            </button>
+          </form>
+
+          {{else}}
+          <!-- isLiked（2）：加到 Like -->
+          <!-- this.id = productId -->
+          <form action="/like/{{this.id}}" method="POST">
+            <button type="submit" class="btn btn-danger">
+              Add to Wishlist
+              <i class="far fa-heart"></i>
+            </button>
+          </form>
+          {{/if}}
         </span>
 
 

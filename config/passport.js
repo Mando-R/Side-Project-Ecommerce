@@ -6,7 +6,7 @@ const passport = require("passport")
 const LocalStrategy = require("passport-local")
 const bcrypt = require("bcryptjs")
 const db = require("../models")
-const { User } = db
+const { User, Product } = db
 
 passport.use(new LocalStrategy({
   // Customize user field (設定客製化選項)
@@ -48,13 +48,11 @@ passport.serializeUser((user, cb) => {
 passport.deserializeUser((id, cb) => {
   // 注意：從 User Model(Database) 取出 user Data。
   User.findByPk(id, {
-    // 注意：passport.js 設定 passport.deserializeUser[Eager Loading] -> req.user：isFavorited、isLiked
+    // 注意：passport.js 設定 passport.deserializeUser[Eager Loading] -> req.user：isLiked
     include: [
-      // // as：標明引入的資料關係，之後使用 "req.user"，一併取得收藏restaurant 的資料！
-      // // isLiked
-      // { model: Product, as: "userLikedProduct" },
-      // { model: User, as: "Followers" },
-      // { model: User, as: "Followings" }
+      // as：之後使用 "req.user"，一併取得 product 資料！
+      // isLiked：User [M] -> [M] Product
+      { model: Product, as: "userFindProducts" },
     ]
   })
     .then(user => {

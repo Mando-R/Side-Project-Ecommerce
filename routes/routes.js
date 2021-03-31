@@ -119,6 +119,13 @@ router.put("/admin/categories/:id", authenticatedAdmin, categoryController.putCa
 // (4)[Delete] Category
 router.delete("/admin/categories/:id", authenticatedAdmin, categoryController.deleteCategory)
 
+// -------------------- Like(Wishlist) ---------------------
+
+// (1) Like
+router.post("/like/:productId", authenticated, userController.addLike)
+// (2) Unlike
+router.delete("/like/:productId", authenticated, userController.removeLike)
+
 // -------------------- 登入機制 ---------------------
 
 // 3. Sign-up [User 註冊流程]

@@ -8,22 +8,22 @@ module.exports = (sequelize, DataTypes) => {
       // Product [M] -> [M] Order
       Product.belongsToMany(models.Order, {
         through: models.OrderItem,
-        foreignKey: "Product_Id",
-        as: "productFindOrder"
+        foreignKey: "ProductId",
+        as: "productFindOrders"
       })
 
       // Product [M] -> [M] Cart
       Product.belongsToMany(models.Cart, {
         through: models.CartItem,
-        foreignKey: "Product_Id",
-        as: "productFindCart"
+        foreignKey: "ProductId",
+        as: "productFindCarts"
       })
 
       // Product [M] -> [M] User
       Product.belongsToMany(models.User, {
         through: models.Like,
-        foreignKey: "Product_Id",
-        as: "productFindUser"
+        foreignKey: "ProductId",
+        as: "productFindUsers"
       })
 
       // Product [M] -> [1] Category

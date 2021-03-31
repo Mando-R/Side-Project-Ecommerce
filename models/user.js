@@ -13,8 +13,8 @@ module.exports = (sequelize, DataTypes) => {
       // 注意：User 相關 Passport 套件，所以 Passport.js 新增{model}設定。
       User.belongsToMany(models.Product, {
         through: models.Like,
-        foreighKey: "User_Id",
-        as: "userFindProduct"
+        foreighKey: "UserId",
+        as: "userFindProducts"
       })
     }
   };

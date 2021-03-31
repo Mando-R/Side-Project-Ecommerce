@@ -2,7 +2,7 @@
 const bcrypt = require("bcryptjs")
 
 const db = require("../models")
-const { User } = db
+const { User, Like } = db
 
 //注意：render 檔案、redirect 路由
 const userController = {
@@ -59,6 +59,34 @@ const userController = {
     req.logout() // passport 套件提供的 func
     res.redirect("/signin")
   },
+
+  // Like
+  addLike: (req, res) => {
+    return Like.create({
+      UserId: req.user.id,
+      ProductId: req.params.productId
+    })
+      .then(product => {
+        return res.redirect("back")
+      })
+  },
+
+  // Unlike
+  removeLike: (req, res) => {
+    return Like.findOne({
+      where: {
+        UserId: req.user.id,
+        ProductId: req.params.productId
+      }
+    })
+      .then(like => {
+        like.destroy()
+          .then(product => {
+            return res.redirect("back")
+          })
+      })
+  },
+
 
 
 }

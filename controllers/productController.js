@@ -31,6 +31,7 @@ const productController = {
     // Product.findAll({
     Product.findAndCountAll({
       include: [{ model: Category }],
+
       // where(Category／categoryId)：where 篩選，須為物件{}。
       where: whereQuery,
 
@@ -55,14 +56,28 @@ const productController = {
         const prevPage = thePage - 1 < 1 ? 1 : thePage - 1
         const nextPage = thePage + 1 > maxPages ? maxPages : thePage + 1
 
+        // console.log("results", results)
+        // console.log("======================")
+        // console.log("results.rows", results.rows)
+        // console.log("======================")
+        // console.log("req.user", req.user)
+        // console.log("======================")
+        // console.log("req.user.userFindProducts", req.user.userFindProducts)
 
         // .map() ：建立新 Array
         // const data = products.map(product => ({
         const data = results.rows.map(product => ({
           ...product.dataValues,
           // 注意：前面不可加 raw: true，否則不能新增新屬性(如categoryName)。
-          categoryName: product.Category.name
+          categoryName: product.Category.name,
+
+          // isLiked 屬性：User [M] -> [M] Product
+          // 注意：passport.js 設定 passport.deserializeUser[Eager Loading] 放入 req.user(isLiked)
+          isLiked: req.user.userFindProducts.map(userFindProduct => userFindProduct.id).includes(product.dataValues.id)
         }))
+
+        // console.log("data", data)
+        // console.log("======================")
 
         // 找出全部 Category
         Category.findAll({
@@ -90,11 +105,21 @@ const productController = {
 
   getProduct: (req, res) => {
     return Product.findByPk(req.params.id, {
-      include: [{ model: Category }]
+      include: [
+        { model: Category },
+        // isLiked：User [M] -> [M] Product
+        { model: User, as: "productFindUsers" }
+      ]
     })
       .then(product => {
+        console.log("product", product)
+        // isLiked
+        // Passport套件的req.user，其內部有一陣列[] userFindProducts，該陣列[]包含多筆 Product資料物件{} (命名為單數 userFindProduct) ，若該陣列[]內每一筆物件userFindProduct的id，includes() 原本 Database內Product Table的id，則 return TRUE，反之為False。
+        const isLiked = product.productFindUsers.map(productFindUser => productFindUser.id).includes(req.user.id)
+
         return res.render("product.hbs", {
-          product: product.toJSON()
+          product: product.toJSON(),
+          isLiked: isLiked
         })
       })
   }
