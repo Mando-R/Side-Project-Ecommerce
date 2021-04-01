@@ -24,7 +24,7 @@
 
 <div class="row">
   {{#each products}}
-  <div class="col-md-4">
+  <div class="col-md-4 mb-2">
     <div class="card mb-4 shadow-sm">
       <img class="card-img-top" src="{{this.image}}" alt="Card image cap" width="286px" height="180px">
 
@@ -32,45 +32,54 @@
         <!-- Name -->
         <p class="card-text">
           <a href="/products/{{this.id}}">
-            {{this.name}}
+            <strong>{{this.name}}</strong>
+          </a>
+        </p>
+
+        <!-- Price -->
+        <p class="card-text">
+          <strong>Price:NT$ {{this.price}} </strong>
           </a>
         </p>
 
         <!-- Category -->
         <span class="badge badge-secondary">{{this.categoryName}}</span>
         </br>
+        </br>
 
-        <span>
-          <!-- Cart -->
-          <button type="button" class="btn btn-outline-secondary" href="">
-            Add to Cart
-          </button>
+        <div class="d-flex justify-content-around">
+          <!-- Add to Cart -->
+          <div class="btn-group">
+            <form action="/cart" method="POST">
+              <input type="hidden" name="productId" value="{{this.id}}">
+              <button type="submit" class="btn btn-primary">Add to Cart</button>
+            </form>
+          </div>
 
-          <!-- isLiked（1）：移除 Like -->
-          <!-- this.id = productId -->
-          {{#if this.isLiked}}
-          <form action="/like/{{this.id}}?_method=DELETE" method="POST">
-            <button type="submit" class="btn btn-danger">
-              Remove from Wishlist
-              <i class="fas fa-heart"></i>
-            </button>
-          </form>
+          <div class="btn-group">
+            <!-- isLiked（1）：移除 Like -->
+            <!-- this.id = productId -->
+            {{#if this.isLiked}}
+            <form action="/like/{{this.id}}?_method=DELETE" method="POST">
+              <button type="submit" class="btn btn-danger">
+                Remove from Wishlist
+                <i class="fas fa-heart"></i>
+              </button>
+            </form>
 
-          {{else}}
-          <!-- isLiked（2）：加到 Like -->
-          <!-- this.id = productId -->
-          <form action="/like/{{this.id}}" method="POST">
-            <button type="submit" class="btn btn-danger">
-              Add to Wishlist
-              <i class="far fa-heart"></i>
-            </button>
-          </form>
-          {{/if}}
-        </span>
+            {{else}}
+            <!-- isLiked（2）：加到 Like -->
+            <!-- this.id = productId -->
+            <form action="/like/{{this.id}}" method="POST">
+              <button type="submit" class="btn btn-danger">
+                Add to Wishlist
+                <i class="far fa-heart"></i>
+              </button>
+            </form>
+            {{/if}}
+          </div>
 
-
-        <!-- Description -->
-        <p class="card-text">{{this.description}}</p>
+        </div>
 
       </div>
     </div>

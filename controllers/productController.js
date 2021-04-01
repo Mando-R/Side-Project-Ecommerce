@@ -1,6 +1,6 @@
 // 引入 Model
 const db = require("../models")
-const { User, Product, Category } = db
+const { User, Product, Category, Cart } = db
 
 // Pagination
 // amountPerPage：限制每頁筆數，避免 magic number(未命名數字)。
@@ -31,10 +31,8 @@ const productController = {
     // Product.findAll({
     Product.findAndCountAll({
       include: [{ model: Category }],
-
       // where(Category／categoryId)：where 篩選，須為物件{}。
       where: whereQuery,
-
       // Pagination
       offset: offset,
       limit: amountPerPage
@@ -44,7 +42,6 @@ const productController = {
         // Pagination
         // 1. 若||左為 false 或 undefined，取||右值(Page 1)。
         const thePage = Number(req.query.page) || 1
-
         // 2. findAndCountAll 撈 Data 後： 
         // (1)maxPages(最大頁數) = Math.ceil 無條件進位(result.count 餐廳總筆數／pageLimit 每頁筆數)
         const maxPages = Math.ceil(results.count / amountPerPage)
@@ -56,13 +53,16 @@ const productController = {
         const prevPage = thePage - 1 < 1 ? 1 : thePage - 1
         const nextPage = thePage + 1 > maxPages ? maxPages : thePage + 1
 
-        // console.log("results", results)
-        // console.log("======================")
-        // console.log("results.rows", results.rows)
-        // console.log("======================")
-        // console.log("req.user", req.user)
-        // console.log("======================")
-        // console.log("req.user.userFindProducts", req.user.userFindProducts)
+        // Cart
+        // Cart.findByPk(req.session.cartId,
+        //   { include: "cartFindProducts" }
+        // )
+        //   .then(cart => {
+        //     cart = cart || { items: [] }
+
+        //     let totalPrice = cart.items.length > 0 ? cart.items.map(d => d.price * d.CartItem.quantity).reduce((a, b) => a + b) : 0
+        //   })
+
 
         // .map() ：建立新 Array
         // const data = products.map(product => ({
@@ -116,6 +116,8 @@ const productController = {
         // isLiked
         // Passport套件的req.user，其內部有一陣列[] userFindProducts，該陣列[]包含多筆 Product資料物件{} (命名為單數 userFindProduct) ，若該陣列[]內每一筆物件userFindProduct的id，includes() 原本 Database內Product Table的id，則 return TRUE，反之為False。
         const isLiked = product.productFindUsers.map(productFindUser => productFindUser.id).includes(req.user.id)
+
+
 
         return res.render("product.hbs", {
           product: product.toJSON(),

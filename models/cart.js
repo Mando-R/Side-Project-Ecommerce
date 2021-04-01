@@ -4,6 +4,7 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Cart extends Model {
+
     static associate(models) {
       // Cart [M] -> [M] Product 
       Cart.belongsToMany(models.Product, {
@@ -11,13 +12,15 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "CartId",
         as: "cartFindProducts"
       })
+
     }
   };
   Cart.init({
-    quantity: DataTypes.INTEGER
-  }, {
-    sequelize,
-    modelName: 'Cart',
-  });
+    // quantity: DataTypes.INTEGER
+  },
+    {
+      sequelize,
+      modelName: 'Cart',
+    });
   return Cart;
 };

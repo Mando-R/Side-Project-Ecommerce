@@ -11,6 +11,7 @@ const productController = require("../controllers/productController.js")
 const adminController = require("../controllers/adminController.js")
 const userController = require("../controllers/userController.js")
 const categoryController = require("../controllers/categoryController.js")
+const cartController = require("../controllers/cartController.js")
 
 // multer 套件(image)：
 // 上傳[temp 資料夾] vs. 使用[upload 資料夾]
@@ -125,6 +126,12 @@ router.delete("/admin/categories/:id", authenticatedAdmin, categoryController.de
 router.post("/like/:productId", authenticated, userController.addLike)
 // (2) Unlike
 router.delete("/like/:productId", authenticated, userController.removeLike)
+
+// -------------------- Shopping Carts ---------------------
+
+router.get("/cart", cartController.getCart)
+
+router.post("/cart", cartController.postCart)
 
 // -------------------- 登入機制 ---------------------
 

@@ -21,6 +21,7 @@ if (process.env.NODE_ENV !== "production") {
 const passport = require("./config/passport.js")
 const session = require("express-session")
 const flash = require("connect-flash")
+const cookieParser = require("cookie-parser")
 
 // Handlebars
 app.engine("hbs", handlebars({
@@ -38,8 +39,19 @@ app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
+// Session & Shopping Cart
+app.use(cookieParser())
+
 // (2) express-session
-app.use(session({ secret: "secret", resave: false, saveUninitialized: false }))
+app.use(session({
+  secret: "secret",
+  resave: false,
+  saveUninitialized: false,
+
+  // Session & Shopping Cart
+  cookie: { maxAge: 80000 },
+  resave: false
+}))
 
 // (4) passport
 // 初始化 Passport
