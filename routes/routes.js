@@ -133,6 +133,14 @@ router.get("/cart", cartController.getCart)
 
 router.post("/cart", cartController.postCart)
 
+// CartItem
+// (1) Plus
+router.post("/cartItem/:id/add", cartController.addCartItem)
+// (2) Minus
+router.post('/cartItem/:id/sub', cartController.subCartItem)
+// (3) Delete
+router.delete("/cartItem/:id", cartController.deleteCartItem)
+
 // -------------------- 登入機制 ---------------------
 
 // 3. Sign-up [User 註冊流程]

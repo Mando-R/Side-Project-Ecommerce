@@ -9,6 +9,13 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   CartItem.init({
+    // 注意：新增 id：之後 cartController 才可取出 CartItem.id。
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+
     quantity: DataTypes.INTEGER,
     CartId: DataTypes.INTEGER,
     ProductId: DataTypes.INTEGER

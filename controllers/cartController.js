@@ -10,10 +10,10 @@ const cartController = {
       include: [{ model: Product, as: "cartFindProducts" }]
     })
       .then(cart => {
-        console.log("req.session", req.session)
-        console.log("===========")
-        console.log("cart", cart)
-        console.log("===========")
+        // console.log("req.session", req.session)
+        // console.log("===========")
+        // console.log("cart", cart)
+        // console.log("===========")
         // console.log("cart.toJSON()", cart.toJSON())
         // console.log("===========")
         // console.log("cart.items", cart.items)
@@ -22,20 +22,23 @@ const cartController = {
         cart = cart || { cartFindProducts: [] }
 
         // 拆除 dataValues
-        // cart.items = cart.items.map(items => ({
-        //   ...items.dataValues,
-        //   // items.toJSON(),
-        //   // 注意：要修改此處
-        //   itemId: items.CartItem.id,
-        //   quantity: items.CartItem.quantity,
-        //   subtotal: items.price * items.CartItem.quantity
-        // }))
+        cart.cartFindProducts = cart.cartFindProducts.map(product => ({
+          ...product.dataValues,
+          // items.toJSON(),
+          // 注意：要修改此處
+          // itemId: items.CartItem.id,
+          // quantity: items.CartItem.quantity,
+          // subtotal: items.price * items.CartItem.quantity
+        }))
 
-        console.log("cart", cart)
-        console.log("===========")
+        // console.log("cart", cart)
+        // console.log("===========")
 
-        console.log("===========")
-        console.log("cart.cartFindProducts", cart.cartFindProducts)
+        // console.log("===========")
+        // console.log("cart.cartFindProducts", cart.cartFindProducts)
+
+        // console.log("===========")
+        // console.log("cart.cartFindProducts[0].CartItem", cart.cartFindProducts[0].CartItem)
 
         //let totalPrice = cart.items.length > 0 ? cart.items.map(d => d.price * d.CartItem.quantity).reduce((a, b) => a + b) : 0
 
@@ -129,6 +132,51 @@ const cartController = {
         //   })
       })
   },
+
+  // CartItem
+  // (1) Plus
+  addCartItem: (req, res) => {
+    CartItem.findByPk(req.params.id)
+      .then(cartItem => {
+        cartItem.update({
+          quantity: cartItem.quantity + 1,
+        })
+          .then(cartItem => {
+            return res.redirect("back")
+          })
+      })
+  },
+
+  // (2) Minus
+  subCartItem: (req, res) => {
+    CartItem.findByPk(req.params.id)
+      .then(cartItem => {
+        cartItem.update({
+          quantity: cartItem.quantity - 1 >= 1 ? cartItem.quantity - 1 : 1,
+        })
+          .then(cartItem => {
+            return res.redirect("back")
+          })
+      })
+  },
+
+  // (3) Delete
+  deleteCartItem: (req, res) => {
+    CartItem.findByPk(req.params.id)
+      .then(cartItem => {
+        // console.log("cartItem", cartItem)
+        // console.log("===========")
+        cartItem.destroy()
+          .then(cartItem => {
+            // console.log("cartItem", cartItem)
+            // console.log("===========")
+            return res.redirect("back")
+          })
+      })
+  },
+
+
+
 }
 
 

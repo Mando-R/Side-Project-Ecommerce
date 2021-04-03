@@ -30,7 +30,7 @@
         <td class="d-flex justify-content-around">
           <div style="display: flex;" class="d-flex justify-content-center">
             <!-- Minus -->
-            <form action="/cartItem/{{this.CartItem.id}}/add" method="POST">
+            <form action="/cartItem/{{this.CartItem.id}}/sub" method="POST">
               <button type="submit" class="btn btn-sm btn-outline-secondary">
                 <i class="fas fa-minus-square"></i>
               </button>
@@ -42,7 +42,7 @@
             </span>
 
             <!-- Plus -->
-            <form action="/cartItem/{{this.CartItem.id}}/sub" method="POST">
+            <form action="/cartItem/{{this.CartItem.id}}/add" method="POST">
               <button type="submit" class="btn btn-sm btn-outline-secondary">
                 <i class="fas fa-plus-square"></i>
               </button>
@@ -63,6 +63,7 @@
         </td>
       </tr>
       {{/each}}
+
       <!-- Total Price -->
       <tr>
         <td></td>
