@@ -1,28 +1,38 @@
 {{#each orders}}
 <div class="row">
-  <div class="col-md-5">
+  <div class="col-md-8">
     <table class="table">
       <thead>
         <tr>
           <th scope="col">Product</th>
-          <th scope="col">quantity</th>
+          <th scope="col">Price</th>
+          <th scope="col">QTY</th>
           <th scope="col">Subtotal</th>
         </tr>
       </thead>
 
       <tbody>
-        {{#each this.items}}
+        {{#each this.orderFindProducts}}
         <tr>
+          <!-- Name -->
           <td>{{this.name}}</td>
-          <td>{{this.OrderItem.quantity}}</td>
+
+          <!-- Price -->
           <td>{{this.price}}</td>
+
+          <!-- QTY -->
+          <td>{{this.OrderItem.quantity}}</td>
+
+          <!-- Subtotal -->
+          <td>{{this.price}} X {{this.OrderItem.quantity}}</td>
         </tr>
         {{/each}}
 
         <tr>
           <td></td>
+          <td></td>
           <td style="text-align: right;">
-            <h4>Total: </h4>
+            <h4>TOTAL: </h4>
           </td>
           <td>
             <h4>{{this.amount}}</h4>
@@ -33,7 +43,7 @@
   </div>
 
   <!-- 右方訂單狀態 -->
-  <div>
+  <div class="col-md-4">
     <ul>
       <li>order Id: {{this.id}}</li>
       <li>name: {{this.name}}</li>
@@ -45,10 +55,10 @@
 
     <div style="display: flex; justify-content: space-around;min-width: 300px;">
       <form action="/order/{{this.id}}/cancel" method="POST">
-        <button type="submit" class="btn btn-primary">取消訂單</button>
+        <button type="submit" class="btn btn-primary">Cancel</button>
       </form>
 
-      <a href="/order/{{this.id}}/payment"><button class="btn btn-primary">立即付款</button></a>
+      <a href="/order/{{this.id}}/payment"><button class="btn btn-success">Place Order</button></a>
     </div>
   </div>
 

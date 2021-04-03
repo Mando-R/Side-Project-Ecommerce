@@ -12,6 +12,7 @@ const adminController = require("../controllers/adminController.js")
 const userController = require("../controllers/userController.js")
 const categoryController = require("../controllers/categoryController.js")
 const cartController = require("../controllers/cartController.js")
+const orderController = require("../controllers/orderController.js")
 
 // multer 套件(image)：
 // 上傳[temp 資料夾] vs. 使用[upload 資料夾]
@@ -53,8 +54,8 @@ const authenticatedAdmin = (req, res, next) => {
   res.redirect("/signin")
 }
 
-
 // -------------------- 前台 ---------------------
+
 // 1. Homepage 前台：restController ＋ authenticated
 router.get("/", authenticated, (req, res) => {
   res.redirect("/products")
@@ -64,7 +65,6 @@ router.get("/", authenticated, (req, res) => {
 router.get("/products", authenticated, productController.getProducts)
 
 router.get("/products/:id", authenticated, productController.getProduct)
-
 
 // -------------------- admin 後台 ---------------------
 
@@ -140,6 +140,15 @@ router.post("/cartItem/:id/add", cartController.addCartItem)
 router.post('/cartItem/:id/sub', cartController.subCartItem)
 // (3) Delete
 router.delete("/cartItem/:id", cartController.deleteCartItem)
+
+// -------------------- Orders ---------------------
+
+// (1) GET
+router.get("/orders", orderController.getOrders)
+// (2) Create
+router.post("/order", orderController.postOrder)
+// (3) Delete
+router.post("/order/:id/cancel", orderController.cancelOrder)
 
 // -------------------- 登入機制 ---------------------
 

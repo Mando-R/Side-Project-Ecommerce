@@ -203,7 +203,7 @@
 
       <!-- Homepage -->
       <a class="menu-button member-myaccount-button ng-scope" href="/">
-        <span class="fa fa-user-circle"> </span>
+        <span class="fas fa-home"></span>
         <span class="menu-words" style="padding-left:6px;">
           Home
         </span>
@@ -211,16 +211,44 @@
 
       <!-- Shopping Cart -->
       <a class="menu-button member-myaccount-button ng-scope" href="/cart">
-        <span class="fa fa-user-circle"> </span>
+        <span class="fas fa-shopping-cart"></span>
         <span class="menu-words" style="padding-left:6px;">
-          Go to Cart
+          Cart
+        </span>
+
+        {{#if cartAmount}}
+        <span>
+          {{cartAmount}}
+        </span>
+
+        {{else}}
+        <span>
+          (0)
+        </span>
+        {{/if}}
+      </a>
+
+      <!-- Order -->
+      <a class="menu-button member-myaccount-button ng-scope" href="/orders">
+        <span class="fas fa-clipboard-list"></span>
+        <span class="menu-words" style="padding-left:6px;">
+          Order
         </span>
       </a>
+
+      <!-- Payment -->
+      <a class="menu-button member-myaccount-button ng-scope" href="/payments">
+        <span class="far fa-credit-card"></span>
+        <span class="menu-words" style="padding-left:6px;">
+          Payment
+        </span>
+      </a>
+
 
       <!-- Admin -->
       {{!-- #if user.isAdmin --}}
       <a class="menu-button member-myaccount-button ng-scope" ng-if="isUserLoggedIn" href="/admin">
-        <span class="fa fa-user-circle"> </span>
+        <span class="fas fa-user-cog"></span>
         <span class="menu-words" style="padding-left:6px;">
           Admin
         </span>
@@ -230,7 +258,7 @@
       <!-- Log-out -->
       {{!-- #if user --}}
       <a class="menu-button member-myaccount-button ng-scope" href="/logout">
-        <span class="fa fa-user-circle"> </span>
+        <span class="fas fa-sign-out-alt"></span>
         <span class="menu-words" style="padding-left:6px;">
           Log out
         </span>
@@ -241,14 +269,14 @@
       <a ng-href="/users/6047a36841d72f000c233691/edit"
         class="menu-button               member-myaccount-button ng-scope" ng-if="isUserLoggedIn"
         href="/users/6047a36841d72f000c233691/edit">
-        <span class="fa fa-user-circle"> </span>
+        <span class="fa fa-user-circle"></span>
         <span class="menu-words" style="padding-left:6px;">
           ACCOUNT
         </span>
       </a>
 
       <a class="cart-panel-button menu-button " id="" href="#cart-panel">
-        <span class="fa fa-shopping-cart"> </span>
+        <span class="fa fa-shopping-cart"></span>
         <span class="menu-words">CART</span>
         <span class="cart-count ng-binding" ng-show="currentCart.getItemCount()>0">
           <span class="hidden-xs">(</span>2<span class="hidden-xs">)</span>

@@ -5,18 +5,18 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class Product extends Model {
     static associate(models) {
-      // Product [M] -> [M] Order
-      Product.belongsToMany(models.Order, {
-        through: models.OrderItem,
-        foreignKey: "ProductId",
-        as: "productFindOrders"
-      })
-
       // Product [M] -> [M] Cart
       Product.belongsToMany(models.Cart, {
         through: models.CartItem,
         foreignKey: "ProductId",
         as: "productFindCarts"
+      })
+
+      // Product [M] -> [M] Order
+      Product.belongsToMany(models.Order, {
+        through: models.OrderItem,
+        foreignKey: "ProductId",
+        as: "productFindOrders"
       })
 
       // Product [M] -> [M] User

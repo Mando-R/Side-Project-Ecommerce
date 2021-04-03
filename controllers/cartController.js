@@ -18,7 +18,6 @@ const cartController = {
         // console.log("===========")
         // console.log("cart.items", cart.items)
 
-        // cart = cart || { items: [] }
         cart = cart || { cartFindProducts: [] }
 
         // 拆除 dataValues
@@ -33,66 +32,23 @@ const cartController = {
 
         // console.log("cart", cart)
         // console.log("===========")
+        // const cartAmount = cart.cartFindProducts.length > 0 ? cart.cartFindProducts.length : 0
+        // console.log("cartAmount", cartAmount)
 
         // console.log("===========")
         // console.log("cart.cartFindProducts", cart.cartFindProducts)
 
         // console.log("===========")
         // console.log("cart.cartFindProducts[0].CartItem", cart.cartFindProducts[0].CartItem)
-
-        //let totalPrice = cart.items.length > 0 ? cart.items.map(d => d.price * d.CartItem.quantity).reduce((a, b) => a + b) : 0
-
         let totalPrice = cart.cartFindProducts.length > 0 ? cart.cartFindProducts.map(cartFindProduct => cartFindProduct.price * cartFindProduct.CartItem.quantity).reduce((a, b) => a + b) : 0
 
-        return res.render("carts.hbs", {
+        res.render("carts.hbs", {
           cart: cart.toJSON(),
           // cart: cart,
-          totalPrice: totalPrice
+          totalPrice: totalPrice,
         })
       })
   },
-
-  // postCart: (req, res) => {
-  //   return Cart.findOrCreate({
-  //     // Client端每筆 req 皆自動帶入 session，並暫存至網頁後端。
-  //     // Cookie 暫存前端 <-> Session 暫存後端。
-  //     where: { id: req.session.cartId || 0 },
-  //   })
-  //     .spread(function (cart, created) {
-  //       console.log("=======================",)
-  //       console.log("req.session", req.session)
-  //       console.log("=======================",)
-  //       console.log("cart", cart)
-  //       // 若未 find(無 cart)：則 create
-  //       return CartItem.findOrCreate({
-  //         where: {
-  //           CartId: cart.id,
-  //           ProductId: req.body.productId
-  //         },
-  //         default: {
-  //           CartId: cart.id,
-  //           ProductId: req.body.productId,
-  //         }
-  //       })
-  //         // 若 find(有 cart)：QTY + 1
-  //         .spread(function (cartItem, created) {
-  //           console.log("=======================",)
-  //           console.log("cartItem", cartItem)
-
-  //           return cartItem.update({
-  //             quantity: (cartItem.quantity || 0) + 1,
-  //           })
-  //             // 傳回 req.session.cartId
-  //             .then((cartItem) => {
-  //               req.session.cartId = cart.id
-
-  //               return req.session.save(() => {
-  //                 return res.redirect('back')
-  //               })
-  //             })
-  //         })
-  //     })
-  // },
 
   postCart: async (req, res) => {
     const [cart, created] = await Cart.findOrCreate({
@@ -174,9 +130,6 @@ const cartController = {
           })
       })
   },
-
-
-
 }
 
 

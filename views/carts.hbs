@@ -83,6 +83,7 @@
 
 <div class="row">
   <div class="col-md-4">
+    <!-- /order -->
     <form action="order" method="POST">
       <div class="form-group">
         <label for="name">Name</label>
@@ -97,6 +98,8 @@
         <input type="text" class="form-control" id="address" placeholder="Enter address" name="address">
       </div>
       <input type="hidden" name="cartId" value="{{cart.id}}">
+
+      <!-- 注意：amount 來自 totalPrice -->
       <input type="hidden" name="amount" value="{{totalPrice}}">
       <input type="hidden" name="shipping_status" value="0">
       <input type="hidden" name="payment_status" value="0">
