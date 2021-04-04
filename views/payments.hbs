@@ -1,31 +1,38 @@
 <h3>準備為訂單編號： {{order.id}} 付款 </h3>
+<br>
 <h4>總價$: {{order.amount}} </h4>
+<br>
 
 <!-- 傳送交易參數：
 1. MerchantID、2. TradeInfo、3. TradeSha、 4. Version -->
 
 <!-- action= tradeInfo.PayGateWay ：要對應的API網址 -->
-<form name='Spgateway' action='{{tradeInfo.PayGateWay}}' method="POST">
+<form name="newebpay" action='{{tradeInfo.PayGateWay}}' method="POST">
   MerchantID:
   <input type="text" name="MerchantID" value="{{tradeInfo.MerchantID}}">
+  <br>
   <br>
 
   TradeInfo:
   <input type="text" name="TradeInfo" value="{{tradeInfo.TradeInfo}}">
   <br>
+  <br>
 
   TradeSha:
   <input type="text" name="TradeSha" value="{{tradeInfo.TradeSha}}">
   <br>
+  <br>
 
   Version:
   <input type="text" name="Version" value="{{tradeInfo.Version}}">
+  <br>
   <br>
 
   <button type="submit" class="btn btn-primary">
     Payment
   </button>
 </form>
+<br>
 
 {{!-- 資料交換方式：API文件 第 30 頁 範例 --}}
 {{!-- <form name='

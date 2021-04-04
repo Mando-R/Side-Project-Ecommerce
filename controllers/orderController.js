@@ -132,7 +132,35 @@ const orderController = {
     })
   },
 
+  // Payment Gateway
+  // (1) Payment 付款頁面：Controller 傳送 交易參數 -> 藍新平台
+  getPayment: (req, res) => {
+    console.log('===== getPayment =====')
+    console.log("req.params.id", req.params.id)
+    console.log('==========')
 
+    Order.findByPk(req.params.id, {})
+      .then(order => {
+        // console.log("orders", orders)
+        return res.render("payments.hbs", { order: order.toJSON() })
+      })
+  },
+
+  // (2) 藍新平台 -> Controller 接收 付款完成資訊
+  newebpayCallback: (req, res) => {
+    console.log("===== newebpayCallback =====")
+    // req.method：HTTP method
+    console.log("req.method", req.method)
+    console.log("==================")
+    // req.query：GET 網頁參數
+    console.log("req.query", req.query)
+    console.log("==================")
+    // req.body：POST 傳送的內容
+    console.log("req.body", req.body)
+    console.log("==================")
+
+    return res.redirect("/orders")
+  },
 }
 
 
