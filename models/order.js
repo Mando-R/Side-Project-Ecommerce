@@ -21,7 +21,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Order.init({
-    serialNumber: DataTypes.INTEGER,
+    // serialNumber: DataTypes.INTEGER,
+    serialNumber: DataTypes.STRING,
+
     amount: DataTypes.INTEGER,
     name: DataTypes.STRING,
     phone: DataTypes.STRING,
