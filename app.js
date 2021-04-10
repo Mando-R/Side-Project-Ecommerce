@@ -32,7 +32,8 @@ app.engine("hbs", handlebars({
 app.set("view engine", "hbs")
 
 // 靜態 Bootstrap、popper.js、jquery
-app.use(express.static('public'))
+// app.use(express.static('public'))
+app.use(express.static("views"))
 
 // app.use
 // (1) bodyParser

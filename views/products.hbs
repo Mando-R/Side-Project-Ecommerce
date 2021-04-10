@@ -19,13 +19,12 @@
     <!-- 「全部」按鈕的情況，categoryId 會是空字串""，注意""中間不能有空格 -->
     <a class="nav-link" href="#">About Us</a>
   </li>
-
 </ul>
 
 <div class="row">
   {{#each products}}
-  <div class="col-md-4 mb-2 shadow p-3 mb-5 bg-white rounded">
-    <div class="card mb-4 shadow-sm">
+  <div class="col-md-4 mb-2 ">
+    <div class="card d-flex justify-content-around mx-auto mb-5 p-3 border bg-light">
       <img class="card-img-top" src="{{this.image}}" alt="Card image cap" width="286px" height="180px">
 
       <div class="card-body">
@@ -43,7 +42,9 @@
         </p>
 
         <!-- Category -->
-        <span class="badge badge-secondary">{{this.categoryName}}</span>
+        <span class="badge badge-warning">
+          {{this.categoryName}}
+        </span>
         </br>
         </br>
 

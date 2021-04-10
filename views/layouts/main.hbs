@@ -5,7 +5,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <link rel="preconnect" href="https://fonts.gstatic.com">
+  {{!--
+  <link rel="preconnect" href="https://fonts.gstatic.com"> --}}
   {{!--
   <link
     href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap"
@@ -31,9 +32,11 @@
   <link rel="stylesheet" media="screen"
     href="https://cdn.shoplineapp.com/assets/themes/rebel.black-9ce4b940a1a375a6e5cd6cda5790dcd25537f643e11807ebd93c658ece0549d5.css">
 
-
-  <!-- Font Awesom -->
+  <!-- Font Awesome -->
   <script src="https://kit.fontawesome.com/b677c2f0a5.js" crossorigin="anonymous"></script>
+
+  <!-- 引入 CSS -->
+  <link rel="stylesheet" href="style.css">
 
 </head>
 
@@ -62,7 +65,7 @@
         Navigation
       </div>
 
-      <div class=" row">
+      {{!-- <div class=" row">
         {{#each products}}
         <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
@@ -94,9 +97,9 @@
           </div>
         </div>
         {{/each}}
-      </div>
+      </div> --}}
 
-      <ul class="categories-mobile-list">
+      {{!-- <ul class="categories-mobile-list">
         <li>
           <a href="/pages/aboutus" ng-non-bindable="">食我-About Us</a>
           <button class="btn btn-clear btn-category-collapse pull-right"
@@ -170,7 +173,7 @@
             </li>
           </ul>
         </li>
-      </ul>
+      </ul> --}}
     </div>
   </div>
   <!--left-panel-->
@@ -195,11 +198,11 @@
       </a>
 
       <!-- mobile logo -->
-      <div class="mobile-logo">
+      {{!-- <div class="mobile-logo">
         <a href="https://www.chiaselect.com/" class="sl-lazy-image"
           style="background-image:url(https://shoplineimg.com/5b4461529a76f081a2000629/5b7d37e6376ed50014514b38/x200.webp?source_format=png)"
           data-size="x200"></a>
-      </div>
+      </div> --}}
 
       <!-- Homepage -->
       <a class="menu-button member-myaccount-button ng-scope" href="/">
@@ -486,7 +489,7 @@
   </div>
 </body>
 
-<div class="Footer-grids">
+{{!-- <div class="Footer-grids">
   <div class="container global-primary  ">
     <div class="container-md-height" style="height: 100%; table-layout: fixed; width: 100%;">
       <!-- height and width must be difined for td to size correctly -->
@@ -692,7 +695,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> --}}
 
 
 <!-- Include Javascript files -->
