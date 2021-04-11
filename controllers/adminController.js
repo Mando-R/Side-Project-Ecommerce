@@ -20,7 +20,6 @@ const adminController = {
       include: [{ model: Category }]
     })
       .then(products => {
-        // console.log(products)
         // adminController.js 和 admin[Folder] 同一層
         return res.render("admin/products.hbs", { products: products })
       })
@@ -126,10 +125,8 @@ const adminController = {
       include: [{ model: Category }]
     })
       .then(product => {
-        // console.log(restaurant)
         return res.render("admin/product.hbs",
-          // { product: product.toJSON() }
-          { product: product }
+          { product: product.toJSON() }
         )
       })
   },
@@ -137,7 +134,6 @@ const adminController = {
   // [Edit/Update] Single Product (1)：
   // 注意：Edit & Create 共用 view，方便維護。
   editProduct: (req, res) => {
-    console.log("req.params.id", req.params.id)
     Category.findAll({
       raw: true,
       nest: true

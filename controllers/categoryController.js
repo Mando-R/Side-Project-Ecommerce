@@ -13,10 +13,19 @@ const categoryController = {
         if (req.params.id) {
           Category.findByPk(req.params.id)
             .then(category => {
+              // console.log("getCategories: req.params", req.params)
+              // console.log("==================")
+              // console.log("getCategories: req.params.id", req.params.id)
+              // console.log("==================")
+              // console.log("getCategories: category", category)
+              // console.log("==================")
+              // console.log("getCategories: categories", categories)
+
               return res.render("admin/categories.hbs", {
                 // 注意：render categories & category
                 categories: categories,
                 category: category.toJSON()
+                //category: category
               })
             })
         }
@@ -50,6 +59,8 @@ const categoryController = {
 
   // [Update]修改 Category
   putCategory: (req, res) => {
+    console.log("req.params.id", req.params.id)
+    console.log("==================")
     // (1) 若欄位 Name 為空白。
     if (!req.body.name) {
       req.flash("error_messages", `Name didn't exist`)
@@ -58,12 +69,24 @@ const categoryController = {
     }
     // (2) 若欄位 Name "非"空白。
     else {
+      // console.log("req.params.id", req.params.id)
+      // console.log("==================")
+
       return Category.findByPk(req.params.id)
         .then(category => {
+          // console.log("req.params.id", req.params.id)
+          // console.log("==================")
+          // console.log("category", category)
+          // console.log("==================")
           // console.log("req.body", req.body)
+          // console.log("==================")
+
           category.update(req.body)
 
             .then(category => {
+              console.log("category", category)
+              console.log("==================")
+
               req.flash('success_messages', `Category [ ${category.name} ] was successfully updated`)
 
               res.redirect("/admin/categories")

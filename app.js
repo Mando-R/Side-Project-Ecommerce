@@ -4,7 +4,7 @@ const db = require("./models")
 const bodyParser = require("body-parser")
 const methodOverride = require("method-override")
 // helper 函式取代 passport 方法
-// const helpers = require("./_helpers")
+const helpers = require("./_helpers")
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -32,8 +32,8 @@ app.engine("hbs", handlebars({
 app.set("view engine", "hbs")
 
 // 靜態 Bootstrap、popper.js、jquery
-// app.use(express.static('public'))
-app.use(express.static("views"))
+// 引入靜態 css 檔案：注意用 __dirname 絕對路徑
+app.use(express.static(__dirname + "/public"))
 
 // app.use
 // (1) bodyParser
@@ -73,7 +73,7 @@ app.use((req, res, next) => {
   res.locals.error_messages = req.flash("error_messages")
 
   // res.locals.user = req.user
-  // res.locals.user = helpers.getUser(req)  // 取代 req.user
+  res.locals.user = helpers.getUser(req)  // 取代 req.user
 
   next()
 })

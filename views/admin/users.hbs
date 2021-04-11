@@ -1,5 +1,5 @@
 <head>
-  <link rel="stylesheet" href="users.css">
+  <link rel="stylesheet" href="/css/users.css">
 </head>
 
 <!-- Left：Sidebar -->
@@ -17,22 +17,22 @@
   <div class="sidebar__menu">
     <!-- Products -->
     <div class="sidebar__menu__link sidebar__menu__link--frame sidebar__menu__link--active">
-      <a class="sidebar__menu__link btn btn-warning btn-block" href="/admin/products" role="button">
-        Products
+      <a class="sidebar__menu__link btn btn-warning btn-block " href="/admin/products" role="button">
+        <i class="fas fa-shopping-bag"></i> All Products
       </a>
     </div>
 
     <!-- Create New Products -->
-    <div class="sidebar__menu__link sidebar__menu__link--folder">
+    <div class="sidebar__menu__link sidebar__menu__link--folder ">
       <a class="sidebar__menu__link btn btn-warning btn-block" href="/admin/products/create" role="button">
-        Create New Products
+        <i class="fas fa-plus-square"></i> Launch Products
       </a>
     </div>
 
     <!-- Category -->
     <div class="sidebar__menu__link sidebar__menu__link--mail">
       <a class="sidebar__menu__link btn btn-success btn-block" href="/admin/categories" role="button">
-        Category
+        <i class="fas fa-shopping-basket"></i> Category
       </a>
     </div>
 
@@ -43,7 +43,7 @@
     <!-- User Authority -->
     <div class="sidebar__menu__link sidebar__menu__link--mail">
       <a class="sidebar__menu__link btn btn-danger btn-block" href="/admin/users" role="button">
-        User Authority
+        <i class="fas fa-user-cog"></i> User Authority
       </a>
     </div>
 
@@ -112,6 +112,7 @@
           <form action="/admin/users/{{this.id}}/toggleAdmin?_method=PUT" method="POST" style="font-size:18px"
             class="text-center d-flex justify-content-start">
             <button type="submit" class="btn btn-link">
+
               {{#if this.isAdmin}}
               <p class="ng-binding text-center">Admin <i class="fas fa-arrow-right"></i> User</p>
 

@@ -112,15 +112,19 @@ const productController = {
       ]
     })
       .then(product => {
-        console.log("product", product)
+        // console.log("req.params.id", req.params.id)
+        // console.log("================")
+        // console.log("product", product)
+        // console.log("================")
+        // console.log("product.productFindUsers", product.productFindUsers)
+
         // isLiked
         // Passport套件的req.user，其內部有一陣列[] userFindProducts，該陣列[]包含多筆 Product資料物件{} (命名為單數 userFindProduct) ，若該陣列[]內每一筆物件userFindProduct的id，includes() 原本 Database內Product Table的id，則 return TRUE，反之為False。
         const isLiked = product.productFindUsers.map(productFindUser => productFindUser.id).includes(req.user.id)
 
-
-
         return res.render("product.hbs", {
           product: product.toJSON(),
+          // product: product,
           isLiked: isLiked
         })
       })
