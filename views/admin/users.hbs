@@ -1,5 +1,5 @@
 <head>
-  <link rel="stylesheet" href="/css/users.css">
+  <link rel="stylesheet" href="/css/admin_users.css">
 </head>
 
 <!-- Left：Sidebar -->
@@ -90,34 +90,47 @@
         <td class="table__cell table__cell--name">{{this.name}}</td>
 
         <!-- Email -->
-        <td class="table__cell table__cell--advertiser">
-          <span class="cell__advertiser__line">{{this.email}}</span>
+        <td class="table__cell table__cell--email">
+          <span class="cell__email__line">{{this.email}}</span>
         </td>
 
         <!-- User Authority -->
-        <td class="table__cell table__cell--description">
+        <td class="table__cell table__cell--authority">
           <!-- Authority：顯示 Admin -->
           {{#if this.isAdmin}}
-          <p class="text-danger">Admin</p>
+          <div class="text-danger">Admin</div>
 
           <!-- Authority：顯示 user -->
           {{else}}
-          <p class="text-success">User</p>
+          <div class="text-success">User</div>
 
           {{/if}}
         </td>
 
         <!-- Switch -->
-        <td class="table__cell table__cell--price">
+        <td class="table__cell table__cell--Switch">
           <form action="/admin/users/{{this.id}}/toggleAdmin?_method=PUT" method="POST" style="font-size:18px"
             class="text-center d-flex justify-content-start">
-            <button type="submit" class="btn btn-link">
+            <button type="submit" class="btn btn-link d-flex justify-content-center">
 
               {{#if this.isAdmin}}
-              <p class="ng-binding text-center">Admin <i class="fas fa-arrow-right"></i> User</p>
+              <div class="table__cell table__cell--switch--button mx-auto">
+                <div class="table__cell table__cell--switch--item text-danger">Admin</div>
+
+                <div class="table__cell table__cell--switch--item fas fa-arrow-right"></div>
+
+                <div class="table__cell table__cell--switch--item text-success"> User
+                </div>
+              </div>
 
               {{else}}
-              <p>User <i class="fas fa-arrow-right"></i> Admin</p>
+              <div class="class=table__cell table__cell--switch--button">
+                <div class="table__cell table__cell--switch--item text-success">User</div>
+
+                <div class="table__cell table__cell--switch--item fas fa-arrow-right"></div>
+
+                <div class="table__cell table__cell--switch--item text-danger">Admin</div>
+              </div>
 
               {{/if}}
             </button>

@@ -1,0 +1,24 @@
+/* @media (min-width: 1200px) {
+  .container.global-primary.d-flex.justify-content-around {
+    width: 1200px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container.global-primary.d-flex.justify-content-around {
+    width: 970px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container.global-primary.d-flex.justify-content-around {
+    width: 750px;
+  }
+} */
+
+/* .container.global-primary.d-flex.justify-content-around {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+} */

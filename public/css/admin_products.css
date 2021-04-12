@@ -97,8 +97,7 @@ body {
 
 .main__table {
   background: var(--table-background-color);
-  font-size: 16px;
-  
+  font-size: 18px;
 }
 /* body End */
 
@@ -121,43 +120,82 @@ body {
 .table__cell--id {
   width: 50px;
 }
+
+/* Category */
+.table__cell--category {
+  width: 100px;
+}
+
+/* Image */
+.table__cell--image {
+  width: 150px;
+  /* display: flex;
+  justify-content: center; */
+}
+
 /* Name */
-/* .table__cell--name {
-  width: 140px;
-} */
-/* Email */
- .table__cell--setting {
-  width: 250px;
-  /* border: 3px solid red; */
-}
-.table__cell--setting--item {
-  height: 50px;
-  display:inline-block; 
-  /* border: 3px solid blue;  */
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly; 
-  align-items: center;
-} 
-
-/* User Authority */
-/* .table__cell--userauthority {
-  width: 140px;
-} */
-/* Switch */
-.table__cell--switch {
-  /* width: 200px; */
-  font-size: 18px;
+.table__cell--name {
+  width: 200px;
+  /* font-size: 18px; */
+  font-weight: bold;
 }
 
-.cell__switch__line {
+/* Price */
+.table__cell--price {
+  width: 100px;
+  color: blue;
+  /* font-size: 18px; */
+  font-weight: bold;
+}
+
+.cell__price__line {
   display: block;
   font-size: 18px;
 }
 
-.cell__switch__line--group {
+.cell__price__line--group {
   color: var(--table-grey-text);
+  color: red;
+  font-size: 14px;
 }
+
+/* QTY */
+.table__cell--QTY {
+  width: 100px;
+  color: blue;
+  /* font-size: 18px; */
+  font-weight: bold;
+}
+
+/* createdAt */
+.table__cell--createdAt {
+  width: 80px;
+}
+
+/* updatedAt */
+.table__cell--updatedAt {
+  width: 80px;
+}
+
+/* setting */
+.table__cell--setting {
+  width: 100px;
+  /* display: flex;
+  align-items: center;
+  justify-content: space-evenly; */
+}
+
+.table__cell--setting--item {
+  /* border: 3px solid blue; */
+  /* width: 100px; */
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  justify-content: space-evenly;
+  margin: 15px 15px 15px 15px;
+}
+
+
 
 .table__cell--starttime {
   width: 140px;
@@ -220,11 +258,6 @@ body {
 /* menu End */
 
 /* sidebar */
-/* .sidebar {
-  height: 300px;
-  overflow-y: scroll;
-} */
-
 /* STORELINE */
 .sidebar__home {
   min-height: 64px;
@@ -257,6 +290,7 @@ body {
   width: 160px;
   height: 40px;
   font-size: 16px;
+  font-weight: bold;
   color: white;
 }
 
@@ -282,4 +316,13 @@ body {
 }
 /* dark mode-1 End */
 
-
+/* 注意：整體佈局
+覆蓋 main.hbs 的 <link rel="stylesheet" media="all"
+    href="https://cdn.shoplineapp.com/assets/common-f47625baea59b7f28766c213f44af5679a3f7198f77cf8bb89041274db97940a.css"> */
+.container.global-primary.d-flex.justify-content-around {
+    /* border:3px solid red; */
+    width: 95%;
+    /* display: flex;
+    align-items: center;
+    justify-content: space-evenly; */
+  }

@@ -3,7 +3,6 @@
 
 <head>
   <meta charset="utf-8">
-  <!-- 兼容 IE版本 -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
   {{!--
@@ -16,15 +15,11 @@
   <link
     href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic&amp;display=swap"
     type="text/css" as="style" onload="this.rel='stylesheet'"> --}}
-
-  <!-- 整體佈局 -->
   <link rel="stylesheet" media="all"
     href="https://cdn.shoplineapp.com/assets/common-f47625baea59b7f28766c213f44af5679a3f7198f77cf8bb89041274db97940a.css">
 
-  <!-- 最上方 navbar：Home, Cart 等 -->
   <link rel="stylesheet" media="all"
     href="https://cdn.shoplineapp.com/assets/application-806a9a60aff1fccd9921cbf4430e51167960be33feb8015bd4b9389801f30529.css">
-
   {{!--
   <link rel="stylesheet" media="screen"
     href="https://cdn.shoplineapp.com/assets/themes/rebel-9fc8975ae39cfbf17a4e7dd5722dd6e151a007bed97f199f13e727169573cf5e.css">
@@ -33,14 +28,13 @@
     :root {}
   </style>
 
-  <!-- 引入CSS：GLOBAL CONTENT FOR HTML HEAD START-->
+  <!-- 引入CSS -->
+  <!-- GLOBAL CONTENT FOR HTML HEAD START-->
   <link rel="stylesheet" media="screen"
     href="https://cdn.shoplineapp.com/assets/themes/rebel.black-9ce4b940a1a375a6e5cd6cda5790dcd25537f643e11807ebd93c658ece0549d5.css">
 
   <!-- Font Awesome -->
   <script src="https://kit.fontawesome.com/b677c2f0a5.js" crossorigin="anonymous"></script>
-
-  <link rel="stylesheet" href="/css/layouts_main.css">
 
 </head>
 
@@ -68,6 +62,116 @@
       <div class="section-header">
         Navigation
       </div>
+
+      {{!-- <div class=" row">
+        {{#each products}}
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <img class="card-img-top" src="{{this.image}}" alt="Card image cap" width="286px" height="180px">
+
+            <div class="card-body">
+              <!-- Name -->
+              <p class="card-text">
+                <a href="/products/{{this.id}}">
+                  {{this.name}}
+                </a>
+              </p>
+
+              <!-- Category -->
+              <span class="badge badge-secondary">{{this.categoryName}}</span>
+              </br>
+              <!-- Cart -->
+              <span>
+                <button type="button" class="btn btn-outline-secondary" href="">
+                  Add to Cart
+                </button>
+              </span>
+
+
+              <!-- Description -->
+              <p class="card-text">{{this.description}}</p>
+
+            </div>
+          </div>
+        </div>
+        {{/each}}
+      </div> --}}
+
+      {{!-- <ul class="categories-mobile-list">
+        <li>
+          <a href="/pages/aboutus" ng-non-bindable="">食我-About Us</a>
+          <button class="btn btn-clear btn-category-collapse pull-right"
+            ng-click="isExpanded['5b7d3b2666b509001797dee9'] = !isExpanded['5b7d3b2666b509001797dee9']">
+            <i class="fa fa-angle-down ng-scope"
+              ng-if="isExpanded['5b7d3b2666b509001797dee9'] ? !defaultMobileCollapse : defaultMobileCollapse"></i>
+
+          </button>
+          <ul class="inner-list collapse"
+            uib-collapse="isExpanded['5b7d3b2666b509001797dee9'] ? !defaultMobileCollapse : defaultMobileCollapse"
+            style="height: 0px;">
+            <li>
+              <a href="/pages/brandstory" ng-non-bindable="">品牌故事Brand Story
+              </a>
+            </li>
+            <li>
+              <a href="/pages/shoppingprocess" ng-non-bindable="">購物流程Shopping Process
+              </a>
+            </li>
+            <li>
+              <a href="/pages/%E6%96%B0%E7%9A%84%E5%88%86%E9%A0%81-13" ng-non-bindable="">Member
+              </a>
+            </li>
+            <li>
+              <a href="/pages/qa" ng-non-bindable="">常見問答Q&amp;A
+              </a>
+            </li>
+            <li>
+              <a href="/pages/conctactus" ng-non-bindable="">聯絡我們Contact Us
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="/pages/noodles" ng-non-bindable="">食麵-Noodles</a>
+          <button class="btn btn-clear btn-category-collapse pull-right"
+            ng-click="isExpanded['5b7d3b40f1337e520357bc98'] = !isExpanded['5b7d3b40f1337e520357bc98']">
+            <i class="fa fa-angle-down ng-scope"
+              ng-if="isExpanded['5b7d3b40f1337e520357bc98'] ? !defaultMobileCollapse : defaultMobileCollapse"></i>
+          </button>
+          <ul class="inner-list collapse"
+            uib-collapse="isExpanded['5b7d3b40f1337e520357bc98'] ? !defaultMobileCollapse : defaultMobileCollapse"
+            style="height: 0px;">
+            <li>
+              <a href="/pages/noodleseries" ng-non-bindable="">Noodle Series
+              </a>
+            </li>
+            <li>
+              <a href="/pages/giftbox" ng-non-bindable="">Gift Box
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="/pages/event" ng-non-bindable="">食事-Event</a>
+        </li>
+        <li>
+          <a href="/pages/goodsense" ng-non-bindable="">食品味-Good Sense</a>
+        </li>
+        <li>
+          <a href="/pages/videos" ng-non-bindable="">食影音-Videos</a>
+        </li>
+        <li>
+          <ul class="inner-list collapse"
+            uib-collapse="isExpanded['5c626565606407000fb1fdef'] ? !defaultMobileCollapse : defaultMobileCollapse"
+            style="height: 0px;">
+
+            <li>
+              <a href="/pages/overseas-shopping-1" ng-non-bindable="">Others
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul> --}}
     </div>
   </div>
   <!--left-panel-->
@@ -92,11 +196,11 @@
       </a>
 
       <!-- mobile logo -->
-      <div class="mobile-logo">
+      {{!-- <div class="mobile-logo">
         <a href="https://www.chiaselect.com/" class="sl-lazy-image"
           style="background-image:url(https://shoplineimg.com/5b4461529a76f081a2000629/5b7d37e6376ed50014514b38/x200.webp?source_format=png)"
           data-size="x200"></a>
-      </div>
+      </div> --}}
 
       <!-- Homepage -->
       <a class="menu-button member-myaccount-button ng-scope" href="/">
@@ -194,7 +298,7 @@
   <div class="body-wrapper">
     <div class="body-content mobile-revamp-navigation">
       <!-- navigation -->
-      <nav class="main-navigation">
+      {{!-- <nav class="main-navigation">
         <div class="navbar-wrapper ">
           <div class="navbar hidden-xs" role="navigation">
             <div class="navbar-header-wrapper">
@@ -209,7 +313,7 @@
               </div>
               <!--container-->
             </div>
-            {{!-- <div class="navbar-menu-wrapper">
+            <div class="navbar-menu-wrapper">
               <div class="container">
                 <div class="navbar-menu hidden-xs">
                   <ul class="text-primary-color">
@@ -285,12 +389,12 @@
                 </div>
               </div>
               <!--container-->
-            </div> --}}
+            </div>
           </div>
           <!--navbar-->
         </div>
         <!--navbar-wrapper-->
-      </nav>
+      </nav> --}}
       <!-- navigation end -->
 
       <!-- main Content -->
@@ -320,7 +424,6 @@
           </div> <!-- End of container-md-height -->
         </div> <!-- End of container -->
 
-        <!-- RWD佈局： -->
         <div class="container global-primary d-flex justify-content-around ">
           <div class="container-md-height" style="height: 100%; table-layout: fixed; width: 100%; margin-bottom: 2%; ">
             <!-- height and width must be difined for td to size correctly -->

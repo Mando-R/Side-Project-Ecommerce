@@ -97,8 +97,7 @@ body {
 
 .main__table {
   background: var(--table-background-color);
-  font-size: 16px;
-  
+  font-size: 18px;
 }
 /* body End */
 
@@ -126,9 +125,20 @@ body {
   width: 140px;
 } */
 /* Email */
-/* .table__cell--email {
-  width: 300px;
-} */
+ .table__cell--setting {
+  width: 250px;
+  /* border: 3px solid red; */
+}
+.table__cell--setting--item {
+  height: 50px;
+  display:inline-block; 
+  /* border: 3px solid blue;  */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly; 
+  align-items: center;
+} 
+
 /* User Authority */
 /* .table__cell--userauthority {
   width: 140px;
@@ -209,6 +219,11 @@ body {
 /* menu End */
 
 /* sidebar */
+/* .sidebar {
+  height: 300px;
+  overflow-y: scroll;
+} */
+
 /* STORELINE */
 .sidebar__home {
   min-height: 64px;
@@ -240,7 +255,7 @@ body {
   cursor: pointer;
   width: 160px;
   height: 40px;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: bold;
   color: white;
 }
@@ -267,4 +282,12 @@ body {
 }
 /* dark mode-1 End */
 
-
+/* 注意：整體佈局
+覆蓋 main.hbs 的 <link rel="stylesheet" media="all"
+    href="https://cdn.shoplineapp.com/assets/common-f47625baea59b7f28766c213f44af5679a3f7198f77cf8bb89041274db97940a.css"> */
+.container.global-primary.d-flex.justify-content-around {
+    width: 60%;
+    /* display: flex;
+    align-items: center;
+    justify-content: space-evenly; */
+  }
