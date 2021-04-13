@@ -36,10 +36,6 @@
       </a>
     </div>
 
-    {{!-- <div class="sidebar__menu__link sidebar__menu__link--mail" href="/admin/create">
-      Category
-    </div> --}}
-
     <!-- User Authority -->
     <div class="sidebar__menu__link sidebar__menu__link--mail">
       <a class="sidebar__menu__link btn btn-danger btn-block" href="/admin/users" role="button">
@@ -53,6 +49,8 @@
 <!-- Right：Main -->
 <main class="main">
   <h1 class="main__title">USER AUTHORITY</h1>
+  <hr>
+
   <table class="main__table col-md-12">
     <thead>
       <tr class="table__header table__row">
@@ -69,7 +67,10 @@
         </th>
 
         <!-- User Authority -->
-        <th class="table__cell table__cell--userauthority">User Authority</th>
+        <th class="table__cell table__cell--userauthority">
+          <i class="fas fa-user-cog"></i>
+          User Authority
+        </th>
 
         <!-- Switch -->
         <th class="table__cell table__cell--switch">

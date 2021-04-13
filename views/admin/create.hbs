@@ -1,92 +1,150 @@
-<!-- Edit/Update：Single Product -->
-<!-- 若有 product，欄位內 value 代入預設值 -->
-<!-- multer：修改 form，加入 enctype="multipart/form-data" -->
-{{#if product}}
-<form action="/admin/products/{{product.id}}?_method=PUT" method="POST" enctype="multipart/form-data">
+<head>
+  <link rel="stylesheet" href="/css/admin_create.css">
+</head>
 
-  <!-- Create：Single Product -->
-  <!-- 因為無 product，所以才須 Create -->
+<!-- Left：Sidebar -->
+<nav class="sidebar col-md-1">
+  <!-- STORELINE ADMIN -->
+  <div class="d-flex justify-content-around">
+    <div class="sidebar__home">
+      STORELINE</br>
+      <div class="sidebar__home__admin">
+        ADMIN
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar__menu">
+    <!-- Products -->
+    <div class="sidebar__menu__link sidebar__menu__link--frame sidebar__menu__link--active">
+      <a class="sidebar__menu__link btn btn-warning btn-block " href="/admin/products" role="button">
+        <i class="fas fa-shopping-bag"></i> Products
+      </a>
+    </div>
+
+    <!-- Create New Products -->
+    <div class="sidebar__menu__link sidebar__menu__link--folder ">
+      <a class="sidebar__menu__link btn btn-warning btn-block" href="/admin/products/create" role="button">
+        <i class="fas fa-plus-square"></i> Launch Products
+      </a>
+    </div>
+
+    <!-- Category -->
+    <div class="sidebar__menu__link sidebar__menu__link--mail">
+      <a class="sidebar__menu__link btn btn-success btn-block" href="/admin/categories" role="button">
+        <i class="fas fa-shopping-basket"></i> Category
+      </a>
+    </div>
+
+    <!-- User Authority -->
+    <div class="sidebar__menu__link sidebar__menu__link--mail">
+      <a class="sidebar__menu__link btn btn-danger btn-block" href="/admin/users" role="button">
+        <i class="fas fa-user-cog"></i> User Authority
+      </a>
+    </div>
+
+  </div>
+</nav>
+
+<!-- Right：Main -->
+<main class="main">
+  <h1 class="main__title">LAUNCH PRODUCTS</h1>
+  <hr>
+
+  <!-- Edit/Update：Single Product -->
+  <!-- 若有 product，欄位內 value 代入預設值 -->
   <!-- multer：修改 form，加入 enctype="multipart/form-data" -->
-  {{else}}
-  <form action="/admin/products" method="POST" enctype="multipart/form-data">
+  {{#if product}}
+  <form action="/admin/products/{{product.id}}?_method=PUT" method="POST" enctype="multipart/form-data">
 
-    {{/if}}
-    <br />
-    <!-- 在每個 <input> 加上 value="{{restaurant.name}}"：若 <input> 寫入 value 屬性，等於指定預設的輸入。
+    <!-- Create：Single Product -->
+    <!-- 因為無 product，所以才須 Create -->
+    <!-- multer：修改 form，加入 enctype="multipart/form-data" -->
+    {{else}}
+    <form action="/admin/products" method="POST" enctype="multipart/form-data">
+
+      {{/if}}
+      <br />
+      <!-- 在每個 <input> 加上 value="{{restaurant.name}}"：若 <input> 寫入 value 屬性，等於指定預設的輸入。
     1. "Update"：restaurant 變數存在，所以取得 value 內容
     2. "Create"：restaurant 變數不存在，value = null。 -->
 
-    <!-- Category -->
-    <!-- 注意：CategoryId => <label for>、<select id>、<select name>、<option value> 4者皆相同 -->
-    <div class="form-group">
-      <label for="CategoryId">Category</label>
+      <!-- Category -->
+      <!-- 注意：CategoryId => <label for>、<select id>、<select name>、<option value> 4者皆相同 -->
+      <div class="form-group">
+        <label for="CategoryId">Category</label>
 
-      <select class="form-control" id="CategoryId" name="CategoryId">
+        <select class="form-control" id="CategoryId" name="CategoryId">
 
-        <!-- categories -->
-        {{#each categories}}
-        <!-- #if 篩選 selected 條件：選單自動顯示原 Category 
+          <!-- categories -->
+          {{#each categories}}
+          <!-- #if 篩選 selected 條件：選單自動顯示原 Category 
              注意：if/else 的 helper，放在 <option> 內 -->
-        <!-- 
+          <!-- 
         1. this.id：表示在 #each categories 裡迭代的分類 id；
         2. ../product.CategoryId：../ 指回到上一層 categories。直接從 controller 傳入，代表根據網址 :id 取到的餐廳資料。 
         -->
-        <option value="{{this.id}}" {{#ifCond this.id ../product.CategoryId}} selected {{/ifCond}}>
+          <option value="{{this.id}}" {{#ifCond this.id ../product.CategoryId}} selected {{/ifCond}}>
 
-          {{this.name}}
+            {{this.name}}
 
-        </option>
-        {{/each}}
+          </option>
+          {{/each}}
 
-      </select>
+        </select>
 
-    </div>
+      </div>
 
-    <!-- Name -->
-    <div class="form-group">
-      <label for="name">Name</label>
+      <!-- Name -->
+      <div class="form-group">
+        <label for="name">Name</label>
 
-      <input type="text" class="form-control" name="name" id="name" placeholder="Enter Name" value="{{product.name}}">
-    </div>
+        <input type="text" class="form-control" name="name" id="name" placeholder="Enter Name" value="{{product.name}}">
+      </div>
 
-    <!-- Description -->
-    <div class="form-group">
-      <label for="description">Description</label>
+      <!-- Description -->
+      <div class="form-group">
+        <label for="description">Description</label>
 
-      <!-- 注意：restaurant.description 位置放中間 -->
-      <textarea class="form-control" id="description" placeholder="Enter Description" name="description"
-        rows="3">{{product.description}}</textarea>
-    </div>
+        <!-- 注意：restaurant.description 位置放中間 -->
+        <textarea class="form-control" id="description" placeholder="Enter Description" name="description"
+          rows="3">{{product.description}}</textarea>
+      </div>
 
-    <!-- Price -->
-    <div class="form-group">
-      <label for="price">Price</label>
+      <!-- Price -->
+      <div class="form-group">
+        <label for="price">Price</label>
 
-      <input type="text" class="form-control" name="price" id="price" placeholder="Enter Price"
-        value="{{product.price}}">
-    </div>
+        <input type="text" class="form-control" name="price" id="price" placeholder="Enter Price"
+          value="{{product.price}}">
+      </div>
 
-    <!-- Quantity -->
-    <div class="form-group">
-      <label for="quantity">QTY</label>
+      <!-- Quantity -->
+      <div class="form-group">
+        <label for="quantity">QTY</label>
 
-      <input type="text" class="form-control" name="quantity" id="quantity" placeholder="Enter Quantity"
-        value="{{product.quantity}}">
-    </div>
+        <input type="text" class="form-control" name="quantity" id="quantity" placeholder="Enter Quantity"
+          value="{{product.quantity}}">
+      </div>
 
-    <!-- Image：multer 套件 上傳 image -->
-    <!-- multer：修改 form，加入 enctype="multipart/form-data" -->
-    <div class="form-group">
-      <label for="image">Image</label>
+      <!-- Image：multer 套件 上傳 image -->
+      <!-- multer：修改 form，加入 enctype="multipart/form-data" -->
+      <div class="form-group">
+        <label for="image">
+          <i class="fas fa-file-image"></i>
+          Image
+        </label>
 
-      <input type="file" class="form-control-file" id="image" name="image">
-    </div>
+        <input type="file" class="form-control-file" id="image" name="image">
+      </div>
 
-    <!-- Submit 按鈕 -->
-    <button type="submit" class="btn btn-primary">
-      Submit
-    </button>
+      <!-- Submit 按鈕 -->
+      <button type="submit" class="btn btn-primary">
+        Submit
+      </button>
+
+    </form>
 
   </form>
 
-</form>
+</main>

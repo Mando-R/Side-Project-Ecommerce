@@ -77,7 +77,8 @@ body {
   display: flex;
   flex-direction: column;
   width: 180px;
-  background: var(--main-dark);
+  /* background: var(--main-dark); */
+  background: #001935;
   padding-top: 30px;
   padding-bottom: 30px;
 }
@@ -251,7 +252,7 @@ body {
 .sidebar__menu__link {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: start;
   cursor: pointer;
   width: 160px;
   height: 40px;

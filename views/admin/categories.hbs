@@ -49,6 +49,7 @@
 <!-- Right：Main -->
 <main class="main">
   <h1 class="main__title">CATEGORY</h1>
+  <hr>
 
   <!-- Create New Category -->
   <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-purple rounded shadow-sm col-md-8">
@@ -113,7 +114,7 @@
         <td class="table__cell table__cell--setting--item ">
           <!-- Edit/Update 按鈕 -->
           <div>
-            <button type="button" class="btn btn-success">
+            <button type="button" class="btn-block btn btn-success">
               <a href="/admin/categories/{{this.id}}">
                 <i class="fas fa-edit"></i>
                 Edit
@@ -124,7 +125,7 @@
           <!-- Delete 按鈕：注意 須用<form> + <button>，不可只用<a> -->
           <div>
             <form action="/admin/categories/{{this.id}}?_method=DELETE" method="POST" style="display: inline;">
-              <button type="submit" class="btn btn-danger">
+              <button type="submit" class="btn-block btn btn-danger">
                 <i class="fas fa-trash"></i>
                 Delete
               </button>

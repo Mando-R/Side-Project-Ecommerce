@@ -1,0 +1,62 @@
+</br>
+<div class="row d-flex justify-content-around">
+  <!-- Pic -->
+  <div class="col-md-1"></div>
+  <div class="col-md-6">
+    <img class="img-responsive center-block" src="{{product.image}}" style="width: 250px;margin-bottom: 25px;">
+  </div>
+
+  <!-- description -->
+  <div class="col-md-4">
+    <ul class="list-unstyled">
+      <h3>
+        <li><strong>{{product.name}}</strong></li>
+      </h3>
+
+      <li><strong>Category: </strong> {{product.Category.name}}</li>
+
+      <h2>
+        <li><strong>Price: </strong> {{product.price}}</li>
+        </br>
+
+        <li><strong>QTY: </strong> {{product.quantity}}</li>
+        </br>
+
+        <li><strong>Description:</strong></li>
+      </h2>
+
+      <p>{{product.description}}</p>
+
+      <li>
+        <!-- isLiked（1）：移除 Like -->
+        <!-- this.id = productId -->
+        {{#if isLiked}}
+        <form action="/like/{{product.id}}?_method=DELETE" method="POST">
+          <button type="submit" class="btn btn-danger">
+            Remove from Wishlist
+            <i class="fas fa-heart"></i>
+          </button>
+        </form>
+
+        {{else}}
+        <!-- isLiked（2）：加到 Like -->
+        <!-- this.id = productId -->
+        <form action="/like/{{product.id}}" method="POST">
+          <button type="submit" class="btn btn-danger">
+            Add to Wishlist
+            <i class="far fa-heart"></i>
+          </button>
+        </form>
+        {{/if}}
+      </li>
+
+    </ul>
+  </div>
+
+  <div class="col-md-1"></div>
+
+</div>
+
+<br />
+<br />
+<a href="javascript:history.back()">Back</a>

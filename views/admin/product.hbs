@@ -1,39 +1,59 @@
-</br>
-<div class="row d-flex justify-content-around">
-  <!-- Pic -->
-  <div class="col-md-1"></div>
-  <div class="col-md-6">
-    <img class="img-responsive center-block" src="{{product.image}}" style="width: 250px;margin-bottom: 25px;">
+<head>
+  <link rel="stylesheet" href="/css/admin_product.css">
+</head>
+
+<div class="wrapper col-md-12">
+  <div class="">
+    <main class="main">
+
+      <!-- Image -->
+      <div class="main__image">
+        <img class="main__image img-responsive center-block"
+          src="https://loremflickr.com/320/240/electricvehicle?random=51" style="width: 350px;">
+      </div>
+
+      <!-- Productinfo -->
+      <div class="productinfo">
+        <!-- 1. Name -->
+        <div class="productinfo__name">
+          {{product.name}}
+        </div>
+
+        <!-- 2. Category -->
+        <div class="productinfo__category">
+          {{product.Category.name}}
+        </div>
+
+        <!-- 3. Price -->
+        <div class="productinfo__price">
+          NT$ {{product.price}}
+        </div>
+
+        <!-- 4. 庫存 Stock (QTY) -->
+        <div class="productinfo__stock">
+          Stock: {{product.quantity}}
+        </div>
+
+      </div>
+
+
+    </main>
+
+    <!-- Description -->
+    <div class="description">
+      <div class="description--title">
+        <hr>
+        DESCRIPTION
+      </div>
+
+      <p class="description--content">{{product.description}}</p>
+
+      <div class="description--back">
+        <a href="/admin/products">Back</a>
+      </div>
+    </div>
   </div>
-
-  <!-- description -->
-  <div class="col-md-4">
-    <ul class="list-unstyled">
-      <h3>
-        <li><strong>{{product.name}}</strong></li>
-      </h3>
-
-      <li><strong>Category: </strong> {{product.Category.name}}</li>
-
-      <h2>
-        <li><strong>Price: </strong> {{product.price}}</li>
-        </br>
-
-        <li><strong>QTY: </strong> {{product.quantity}}</li>
-        </br>
-
-        <li><strong>Description:</strong></li>
-      </h2>
-
-      <p>{{product.description}}</p>
-
-    </ul>
-  </div>
-
-  <div class="col-md-1"></div>
 
 </div>
 
-<br />
-<br />
-<a href="/admin/products">Back</a>
+</div>
