@@ -1,70 +1,124 @@
-<ul class="nav nav-pills">
-  <!-- All Products -->
-  <li class="nav-item">
-    <!-- categoryId 為空字串""，注意""中間不能有空格 -->
-    <a class="nav-link {{#ifCond "" categoryId}}active{{/ifCond}}" href="/products?categoryId=">All Products</a>
-  </li>
+<!--Main Header-->
+<header>
+  <link rel="stylesheet" href="/css/views_products.css">
+  <!-- Brand Name -->
+  {{!-- <a href="/" class="navbar-brand">BRAND NAME</a> --}}
+  <input type="checkbox" class="navbar-toggle" id="navbar-toggle">
 
-  <!-- 迭代 categories -->
-  {{#each categories}}
-  <li class="nav-item">
-    <!-- 代入 active 屬性：點擊 反藍底；參考 Bootstrap-Navs的Pills-->
-    <a class="nav-link {{#ifCond this.id ../categoryId}}active{{/ifCond}}" href="/products?categoryId={{this.id}}">
-      {{this.name}}
-    </a>
-  </li>
-  {{/each}}
+  <nav class="nav">
+    <ul class="nav-list">
+      <!-- Brand Name -->
+      <li class="nav-item">
+        <a href="/" class="navbar-brand">BRAND</a>
+        {{!-- <img src="https://img.shoplineapp.com/media/image_clips/5fe199cfbfa49813cb2a2b4d/original.png?1608620495">
+        --}}
+      </li>
 
-  <li class="nav-item">
-    <!-- 「全部」按鈕的情況，categoryId 會是空字串""，注意""中間不能有空格 -->
-    <a class="nav-link" href="#">About Us</a>
-  </li>
-</ul>
+      <!-- All Products -->
+      <li class="nav-item">
+        <!-- 「全部」按鈕的情況，categoryId 會是空字串""，注意""中間不能有空格 -->
+        <a class="nav-link {{#ifCond "" categoryId}}active{{/ifCond}}" href="/products?categoryId=">All Products</a>
+      </li>
 
-<div class="row">
-  {{#each products}}
-  <div class="col-md-4 mb-2 ">
-    <div class="card d-flex justify-content-around mx-auto mb-5 p-3 border bg-light">
-      <img class="card-img-top" src="{{this.image}}" alt="Card image cap" width="286px" height="180px">
+      <!-- Render categories -->
+      {{#each categories}}
+      <li class="nav-item">
+        <!-- 代入 active 屬性：點擊 反藍底；參考 Bootstrap-Navs的Pills-->
+        <a class="nav-link {{#ifCond this.id ../categoryId}}active{{/ifCond}}" href="/products?categoryId={{this.id}}">
+          {{this.name}}
+        </a>
+      </li>
+      {{/each}}
 
-      <div class="card-body">
-        <!-- Name -->
-        <p class="card-text">
-          <a href="/products/{{this.id}}">
-            <strong>{{this.name}}</strong>
-          </a>
-        </p>
+    </ul>
 
-        <!-- Price -->
-        <p class="card-text">
-          <strong>Price:NT$ {{this.price}} </strong>
-          </a>
-        </p>
+  </nav>
+
+  <!--Checkbox 標籤-->
+  <label class="navbar-toggle-label" for="navbar-toggle">
+    <span class="hamburger"></span>
+  </label>
+</header>
+
+<!-- Banner -->
+<section id="activity" class="activity">
+
+  <div class="container">
+    <div class="banner-wrapper">
+
+      <!-- 放BRAND 照片 -->
+      <div class="main-banner background-image">
+        <h1 class="banner-title">New Arrival</h1>
+        <p class="banner-description"></p>
+      </div>
+
+      <div class="sub-banner sub-banner-left background-image">
+        <h1 class="banner-title">Best<br> Seller</h1>
+      </div>
+
+      <div class="sub-banner sub-banner-right background-image">
+        <h1 class="banner-title">On Sale</h1>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Products -->
+<section id="album">
+
+  <div class="container">
+    <div class="album-wrapper">
+      {{#each products}}
+      <div class="card">
+        <!-- Image -->
+        <img src="{{this.image}}" alt="" class="card-img">
+
+        <!-- 隱藏資訊 -->
+        {{!-- <div class="card-text">
+          <h3 class="card-title">藍哥</h3>
+          <p class="card-description">7 歲</p>
+        </div> --}}
 
         <!-- Category -->
-        <span class="badge badge-warning">
+        <div class="card-category">
           {{this.categoryName}}
-        </span>
-        </br>
-        </br>
+        </div>
 
-        <div class="d-flex justify-content-around">
+        <!-- Name -->
+        <div class="card-name">
+          <a href="/products/{{this.id}}">
+            {{this.name}}
+          </a>
+        </div>
+
+        <!-- Price -->
+        <div class="card-price">
+          NT$ {{this.price}}
+        </div>
+
+        <!-- Cart & Wishlist -->
+        <div class="cartandWishlist">
           <!-- Add to Cart -->
-          <div class="btn-group">
+          <div class="add-to-cart btn-group">
             <form action="/cart" method="POST">
               <input type="hidden" name="productId" value="{{this.id}}">
-              <button type="submit" class="btn btn-primary">Add to Cart</button>
+              <button type="submit" class="add-to-cart-text btn btn-block btn-primary">
+                <i class="fas fa-cart-plus"></i>
+                Add to Cart
+              </button>
             </form>
           </div>
 
-          <div class="btn-group">
+          <!-- Add to Wishlist -->
+          <div class="add-to-wishlist btn-group">
             <!-- isLiked（1）：移除 Like -->
             <!-- this.id = productId -->
             {{#if this.isLiked}}
             <form action="/like/{{this.id}}?_method=DELETE" method="POST">
-              <button type="submit" class="btn btn-danger">
-                Remove from Wishlist
+              <button type="submit" class="add-to-wishlist-text btn btn-danger">
                 <i class="fas fa-heart"></i>
+                {{!-- Remove from Wishlist --}}
               </button>
             </form>
 
@@ -72,9 +126,9 @@
             <!-- isLiked（2）：加到 Like -->
             <!-- this.id = productId -->
             <form action="/like/{{this.id}}" method="POST">
-              <button type="submit" class="btn btn-danger">
-                Add to Wishlist
+              <button type="submit" class="add-to-wishlist-text btn btn-danger">
                 <i class="far fa-heart"></i>
+                {{!-- Add to Wishlist --}}
               </button>
             </form>
             {{/if}}
@@ -83,54 +137,124 @@
         </div>
 
       </div>
+      {{/each}}
+    </div>
+
+    <!-- Pagination -->
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+
+        <!-- 1. prevPage「<<」 -->
+        <li class="page-item">
+          <a class="page-link" href="/products?page={{prevPage}}&categoryId={{categoryId}}" aria-label="Previous">
+            <!-- &laquo：HTML entity 字符實體，顯示圖案「<<」 -->
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+
+        <!-- 3. #each：render totalPage 所有分頁數字按鈕 -->
+        <!-- const totalPage = Array.from'"length:"maxPages"'.map'"item, index" => index + 1"'-->
+        {{#each totalPage}}
+
+        <!-- this：指向 each of totalPage -->
+        <!-- const thePage = Number"req.query.page" || 1 -->
+        {{#ifCond this ../thePage}}
+        <!-- 代入 active 屬性：點擊會 反藍底 -->
+        <li class="page-item active">
+          <a class="page-link" href="#">{{this}}</a>
+        </li>
+
+        <!-- 注意：即使 this ≠ ../thePage，只是無 "active反藍底"，仍照常跑完 each of totalPage -->
+        {{else}}
+        <li class="page-item">
+          <!-- ../categoryId：脫離本層totalPage"this"，往上層 -->
+          <a class="page-link" href="/products?page={{this}}&categoryId={{../categoryId}}">{{this}}</a>
+        </li>
+        {{/ifCond}}
+
+        {{/each}}
+
+        <!-- 2. nextPage「>>」 -->
+        <li class="page-item">
+          <a class="page-link" href="/products?page={{nextPage}}&categoryId={{categoryId}}" aria-label="Next">
+            <!-- &raquo：顯示圖案「>>」，HTML entity 字符實體 -->
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+</section>
+
+<!--Adoption-->
+{{!-- <section id="adoption">
+  <div class="container">
+    <div class="adoption-wrapper">
+      <img
+        src="https://images.unsplash.com/photo-1522276498395-f4f68f7f8454?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=749&q=80"
+        alt="" class="adoption-image">
+      <div class="adoption-info">
+        <h3 class="title">領養毛小孩</h3>
+        <p class="description">用領養帶領購買，帶毛小孩回家一起生活吧</p>
+        <a href="javascript:void(0)" class="action">領養去</a>
+      </div>
     </div>
   </div>
-  {{/each}}
-</div>
+</section> --}}
 
-<br />
-<br />
-
-<!-- Pagination -->
-<nav aria-label="Page navigation example">
-  <ul class=" pagination">
-
-    <!-- 1. prevPage「<<」 -->
-    <li class="page-item">
-      <a class="page-link" href="/products?page={{prevPage}}&categoryId={{categoryId}}" aria-label="Previous">
-        <!-- &laquo：HTML entity 字符實體，顯示圖案「<<」 -->
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>
-
-    <!-- 3. #each：render totalPage 所有分頁數字按鈕 -->
-    <!-- const totalPage = Array.from'"length:"maxPages"'.map'"item, index" => index + 1"'-->
-    {{#each totalPage}}
-
-    <!-- this：指向 each of totalPage -->
-    <!-- const thePage = Number"req.query.page" || 1 -->
-    {{#ifCond this ../thePage}}
-    <!-- 代入 active 屬性：點擊會 反藍底 -->
-    <li class="page-item active">
-      <a class="page-link" href="#">{{this}}</a>
-    </li>
-
-    <!-- 注意：即使 this ≠ ../thePage，只是無 "active反藍底"，仍照常跑完 each of totalPage -->
-    {{else}}
-    <li class="page-item">
-      <!-- ../categoryId：脫離本層totalPage"this"，往上層 -->
-      <a class="page-link" href="/products?page={{this}}&categoryId={{../categoryId}}">{{this}}</a>
-    </li>
-    {{/ifCond}}
-
-    {{/each}}
-
-    <!-- 2. nextPage「>>」 -->
-    <li class="page-item">
-      <a class="page-link" href="/products?page={{nextPage}}&categoryId={{categoryId}}" aria-label="Next">
-        <!-- &raquo：顯示圖案「>>」，HTML entity 字符實體 -->
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
-  </ul>
-</nav>
+<!--Footer-->
+<footer class="footer">
+  <a class="footer-brandimage">
+    <img src="https://cdn.greenvines.com.tw/shopline/images/header-logo.svg" id="logoB" alt="footer-logo">
+  </a>
+  <div class="footer-info-list">
+    <div class="footer-info-part">
+      <h4 class="footer-info-title">CUSTOMER SERVICE</h4>
+      <ul class="footer-item">
+        <li class="footer-item-list"><a href="#" class="footer-item-content">SHOPPING PROCESS</a></li>
+        <li class="footer-item-list"><a href="#" class="footer-item-content">RETURN & EXCHANGE POLICY</a></li>
+        <li class="footer-item-list"><a href="#" class="footer-item-content">PAYMENT METHODS</a></li>
+        <li class="footer-item-list"><a href="#" class="footer-item-content">FAQ</a></li>
+      </ul>
+    </div>
+    <div class="footer-info-part">
+      <h4 class="footer-info-title">ABOUT US</h4>
+      <ul class="footer-item">
+        <li class="footer-item-list"><a href="#" class="footer-item-content">BRAND STORY</a></li>
+        <li class="footer-item-list"><a href="#" class="footer-item-content">CUSTOMER REVIEWS</a></li>
+        <li class="footer-item-list"><a href="#" class="footer-item-content">PRESS KIT</a></li>
+      </ul>
+    </div>
+    <div class="footer-info-part">
+      <h4 class="footer-info-title">PRIVACY POLICY</h4>
+      <ul class="footer-item">
+        <li class="footer-item-list"><a href="#" class="footer-item-content">Cookie</a></li>
+        <li class="footer-item-list"><a href="#" class="footer-item-content">GDPR</a></li>
+      </ul>
+    </div>
+    <div class="footer-info-part">
+      <h4 class="footer-info-title">CONTACT US</h4>
+      <ul class="footer-item">
+        <li class="footer-item-content">Mon - Fri</li>
+        <li class="footer-item-content">09:00 - 12:30｜14:00 - 18:30</li>
+        <li class="footer-item-content">Email: info@enterprise.com.tw</li>
+        <li class="footer-item-content">Consumer Hotline: +886 0800-888-888</li>
+        <li class="footer-icon-wrapper d-flex">
+          <!-- Facebook icon -->
+          <a href="#">
+            <i class="footer-icon footer-icon--fb fab fa-facebook-square"></i>
+          </a>
+          <!-- IG icon -->
+          <a href="#">
+            <i class="footer-icon footer-icon--ig fab fa-instagram"></i>
+          </a>
+          <!-- Line icon -->
+          <a href="#">
+            <i class="footer-icon footer-icon--line fab fa-line"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</footer>

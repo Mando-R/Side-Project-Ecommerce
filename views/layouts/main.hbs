@@ -44,344 +44,217 @@
 
 </head>
 
+{{!--
+
 <body class="home index mobile-revamp-navigation  ng-scope" ng-controller="MainController"
-  data-new-gr-c-s-check-loaded="14.1000.0" data-gr-ext-installed="">
+  data-new-gr-c-s-check-loaded="14.1000.0" data-gr-ext-installed=""> --}}
 
-  <div id="left-panel" style="display:none" class="panel-mobile sidr left">
-    <div class="side-panel-search hidden-xs">
-      <form ng-controller="ProductsSearchController" ng-submit="search(searchQuery, $event)" action="/products"
-        class="ng-pristine ng-valid ng-scope ng-valid-maxlength">
-        <button><span class="fa fa-search"></span></button>
-        <input name="query" ng-model="searchQuery" placeholder="Search Products" maxlength="100"
-          class="ng-pristine ng-untouched ng-valid ng-empty ng-valid-maxlength">
-        <span class="fa fa-times" ng-click="clearSearch()"></span>
-      </form>
-    </div>
+  <body class="" ng-controller="MainController">
 
-    <div class="clear"></div>
-
-    <div class="clear"></div>
-    <div ng-show="!isUserLoggedIn" class="hello ng-hide"></div>
-    <div class="clear"></div>
-
-    <div class="visible-xs">
-      <div class="section-header">
-        Navigation
-      </div>
-    </div>
-  </div>
-  <!--left-panel-->
-
-  <div class="side-panel-search search-panel-mobile">
-    <form ng-controller="ProductsSearchController" ng-submit="search(searchQuery, $event); $event.preventDefault();"
-      action="#/search/" class="ng-pristine ng-valid ng-scope">
-      <button class="mobile-search-btn"><span class="fa fa-search"></span></button>
-      <input type="search" name="searchQuery" ng-model="searchQuery" placeholder="Search Products"
-        class="ng-pristine ng-untouched ng-valid ng-empty">
-      <span class="fa fa-times ng-hide" ng-class="{ 'has-search-query': searchQuery }" ng-show="searchQuery.length > 0"
-        ng-click="clearSearch()"></span>
-    </form>
-    <div class="search-mask"></div>
-  </div>
-
-  <div id="fixed-menu-container" class="mobile-revamp-navigation ">
-    <div class="fixed-menu-wrapper">
-
-      <a class="visible-xs m-search-button menu-button  ">
-        <span class="fa fa-search"></span>
-      </a>
-
-      <!-- mobile logo -->
-      <div class="mobile-logo">
-        <a href="https://www.chiaselect.com/" class="sl-lazy-image"
-          style="background-image:url(https://shoplineimg.com/5b4461529a76f081a2000629/5b7d37e6376ed50014514b38/x200.webp?source_format=png)"
-          data-size="x200"></a>
-      </div>
-
-      <!-- Homepage -->
-      <a class="menu-button member-myaccount-button ng-scope" href="/">
-        <span class="fas fa-home"></span>
-        <span class="menu-words" style="padding-left:6px;">
-          Home
-        </span>
-      </a>
-
-      <!-- Shopping Cart -->
-      <a class="menu-button member-myaccount-button ng-scope" href="/cart">
-        <span class="fas fa-shopping-cart"></span>
-        <span class="menu-words" style="padding-left:6px;">
-          Cart
-        </span>
-
-        {{#if cartAmount}}
-        <span>
-          {{cartAmount}}
-        </span>
-
-        {{else}}
-        <span>
-          (0)
-        </span>
-        {{/if}}
-      </a>
-
-      <!-- Order -->
-      <a class="menu-button member-myaccount-button ng-scope" href="/orders">
-        <span class="fas fa-clipboard-list"></span>
-        <span class="menu-words" style="padding-left:6px;">
-          Order
-        </span>
-      </a>
-
-      <!-- Payment -->
-      <a class="menu-button member-myaccount-button ng-scope" href="/payments">
-        <span class="far fa-credit-card"></span>
-        <span class="menu-words" style="padding-left:6px;">
-          Payment
-        </span>
-      </a>
-
-
-      <!-- Admin -->
-      {{!-- #if user.isAdmin --}}
-      <a class="menu-button member-myaccount-button ng-scope" ng-if="isUserLoggedIn" href="/admin">
-        <span class="fas fa-user-cog"></span>
-        <span class="menu-words" style="padding-left:6px;">
-          Admin
-        </span>
-      </a>
-      {{!-- /if --}}
-
-      <!-- Log-out -->
-      {{!-- #if user --}}
-      <a class="menu-button member-myaccount-button ng-scope" href="/logout">
-        <span class="fas fa-sign-out-alt"></span>
-        <span class="menu-words" style="padding-left:6px;">
-          Log out
-        </span>
-      </a>
-      {{!-- /if --}}
-
-      <!-- Account -->
-      <a ng-href="/users/6047a36841d72f000c233691/edit"
-        class="menu-button               member-myaccount-button ng-scope" ng-if="isUserLoggedIn"
-        href="/users/6047a36841d72f000c233691/edit">
-        <span class="fa fa-user-circle"></span>
-        <span class="menu-words" style="padding-left:6px;">
-          ACCOUNT
-        </span>
-      </a>
-
-      <a class="cart-panel-button menu-button " id="" href="#cart-panel">
-        <span class="fa fa-shopping-cart"></span>
-        <span class="menu-words">CART</span>
-        <span class="cart-count ng-binding" ng-show="currentCart.getItemCount()>0">
-          <span class="hidden-xs">(</span>2<span class="hidden-xs">)</span>
-        </span>
-      </a>
-
-      <div class="menu-button search-button ">
+    <div id="left-panel" style="display:none" class="panel-mobile sidr left">
+      <div class="side-panel-search hidden-xs">
         <form ng-controller="ProductsSearchController" ng-submit="search(searchQuery, $event)" action="/products"
-          style="margin-bottom: 0" class="ng-pristine ng-valid ng-scope ng-valid-maxlength">
+          class="ng-pristine ng-valid ng-scope ng-valid-maxlength">
+          <button><span class="fa fa-search"></span></button>
           <input name="query" ng-model="searchQuery" placeholder="Search Products" maxlength="100"
             class="ng-pristine ng-untouched ng-valid ng-empty ng-valid-maxlength">
-          <button><span class="fa fa-search"></span></button>
+          <span class="fa fa-times" ng-click="clearSearch()"></span>
         </form>
       </div>
-    </div>
-  </div>
 
-  <div class="body-wrapper">
-    <div class="body-content mobile-revamp-navigation">
-      <!-- navigation -->
-      <nav class="main-navigation">
-        <div class="navbar-wrapper ">
-          <div class="navbar hidden-xs" role="navigation">
-            <div class="navbar-header-wrapper">
-              <div class="container">
-                <div class="navbar-header">
-                  <a href="https://www.chiaselect.com/">
-                    <img
-                      src="https://shoplineimg.com/5b4461529a76f081a2000629/5b7d37e6376ed50014514b38/x140.webp?source_format=png"
-                      class="logo-image sl-lazy-image" data-resizing-segment="140">
-                  </a>
-                </div>
-              </div>
-              <!--container-->
-            </div>
-            {{!-- <div class="navbar-menu-wrapper">
-              <div class="container">
-                <div class="navbar-menu hidden-xs">
-                  <ul class="text-primary-color">
+      <div class="clear"></div>
 
-                    <!-- 食我-About Us -->
-                    <!-- Has dropdown links -->
-                    <li class="nav-dropdown" link-highlight="/pages/aboutus">
-                      <a class="nav-dropdown-toggle" link-highlight="/pages/aboutus" href="/pages/aboutus" target=""
-                        ng-non-bindable="">食我-About Us <span class="caret"></span></a>
-                      <ul class="nav-dropdown-menu">
-                        <li link-highlight="/pages/brandstory">
-                          <a link-highlight="/pages/brandstory" href="/pages/brandstory" target=""
-                            ng-non-bindable="">品牌故事Brand Story</a>
-                        </li>
-                        <li link-highlight="/pages/shoppingprocess">
-                          <a link-highlight="/pages/shoppingprocess" href="/pages/shoppingprocess" target=""
-                            ng-non-bindable="">購物流程Shopping Process</a>
-                        </li>
-                        <li link-highlight="/pages/%E6%96%B0%E7%9A%84%E5%88%86%E9%A0%81-13">
-                          <a link-highlight="/pages/%E6%96%B0%E7%9A%84%E5%88%86%E9%A0%81-13"
-                            href="/pages/%E6%96%B0%E7%9A%84%E5%88%86%E9%A0%81-13" target=""
-                            ng-non-bindable="">Member</a>
-                        </li>
-                        <li link-highlight="/pages/qa">
-                          <a link-highlight="/pages/qa" href="/pages/qa" target="" ng-non-bindable="">常見問答Q&amp;A</a>
-                        </li>
-                        <li link-highlight="/pages/conctactus">
-                          <a link-highlight="/pages/conctactus" href="/pages/conctactus" target=""
-                            ng-non-bindable="">聯絡我們Contact Us</a>
-                        </li>
-                      </ul>
-                    </li>
+      <div class="clear"></div>
+      <div ng-show="!isUserLoggedIn" class="hello ng-hide"></div>
+      <div class="clear"></div>
 
-                    <!-- 食麵-Noodles -->
-                    <!-- Has dropdown links -->
-                    <li class="nav-dropdown" link-highlight="/pages/noodles">
-                      <a class="nav-dropdown-toggle" link-highlight="/pages/noodles" href="/pages/noodles" target=""
-                        ng-non-bindable="">食麵-Noodles <span class="caret"></span></a>
-                      <ul class="nav-dropdown-menu">
-                        <li link-highlight="/pages/noodleseries">
-                          <a link-highlight="/pages/noodleseries" href="/pages/noodleseries" target=""
-                            ng-non-bindable="">Noodle Series</a>
-                        </li>
-                        <li link-highlight="/pages/giftbox">
-                          <a link-highlight="/pages/giftbox" href="/pages/giftbox" target="" ng-non-bindable="">Gift
-                            Box</a>
-                        </li>
-                      </ul>
-                    </li>
-
-                    <!-- 食事-Event -->
-                    <!-- Has dropdown links -->
-                    <!-- doesn't have dropdown links -->
-                    <li link-highlight="/pages/event">
-                      <a link-highlight="/pages/event" href="/pages/event" target="" ng-non-bindable="">食事-Event</a>
-                    </li>
-
-                    <!-- 食品味-Good -->
-                    <!-- doesn't have dropdown links -->
-                    <li link-highlight="/pages/goodsense">
-                      <a link-highlight="/pages/goodsense" href="/pages/goodsense" target="" ng-non-bindable="">食品味-Good
-                        Sense</a>
-                    </li>
-
-                    <!-- 食影音-Videos -->
-                    <!-- doesn't have dropdown links -->
-                    <li link-highlight="/pages/videos">
-                      <a link-highlight="/pages/videos" href="/pages/videos" target="" ng-non-bindable="">食影音-Videos</a>
-                    </li>
-
-                  </ul>
-
-                </div>
-              </div>
-              <!--container-->
-            </div> --}}
-          </div>
-          <!--navbar-->
+      <div class="visible-xs">
+        <div class="section-header">
+          Navigation
         </div>
-        <!--navbar-wrapper-->
-      </nav>
-      <!-- navigation end -->
+      </div>
+    </div>
+    <!--left-panel-->
 
-      <!-- main Content -->
-      <div class="yield-wrapper">
-        <div class="custom-page ng-isolate-scope" ga-page-view="">
-          <div class="container global-primary container-full-width padding-v-none">
+    <div class="side-panel-search search-panel-mobile">
+      <form ng-controller="ProductsSearchController" ng-submit="search(searchQuery, $event); $event.preventDefault();"
+        action="#/search/" class="ng-pristine ng-valid ng-scope">
+        <button class="mobile-search-btn"><span class="fa fa-search"></span></button>
+        <input type="search" name="searchQuery" ng-model="searchQuery" placeholder="Search Products"
+          class="ng-pristine ng-untouched ng-valid ng-empty">
+        <span class="fa fa-times ng-hide" ng-class="{ 'has-search-query': searchQuery }"
+          ng-show="searchQuery.length > 0" ng-click="clearSearch()"></span>
+      </form>
+      <div class="search-mask"></div>
+    </div>
+
+    <div id="fixed-menu-container" class="mobile-revamp-navigation ">
+      <div class="fixed-menu-wrapper">
+
+        <a class="visible-xs m-search-button menu-button  ">
+          <span class="fa fa-search"></span>
+        </a>
+
+        <!-- mobile logo -->
+        <div class="mobile-logo">
+          <a href="https://www.chiaselect.com/" class="sl-lazy-image"
+            style="background-image:url(https://shoplineimg.com/5b4461529a76f081a2000629/5b7d37e6376ed50014514b38/x200.webp?source_format=png)"
+            data-size="x200"></a>
+        </div>
+
+        <!-- Homepage -->
+        <a class="menu-button member-myaccount-button ng-scope" href="/">
+          <span class="fas fa-home"></span>
+          <span class="menu-words" style="padding-left:6px;">
+            Home
+          </span>
+        </a>
+
+        <!-- Shopping Cart -->
+        <a class="menu-button member-myaccount-button ng-scope" href="/cart">
+          <span class="fas fa-shopping-cart"></span>
+          <span class="menu-words" style="padding-left:6px;">
+            Cart
+          </span>
+
+          {{#if cartAmount}}
+          <span>
+            {{cartAmount}}
+          </span>
+
+          {{else}}
+          <span>
+            (0)
+          </span>
+          {{/if}}
+        </a>
+
+        <!-- Order -->
+        <a class="menu-button member-myaccount-button ng-scope" href="/orders">
+          <span class="far fa-clipboard-check"></span>
+          <span class="menu-words" style="padding-left:6px;">
+            Order
+          </span>
+        </a>
+
+        <!-- Payment -->
+        <a class="menu-button member-myaccount-button ng-scope" href="/payments">
+          <span class="far fa-credit-card"></span>
+          <span class="menu-words" style="padding-left:6px;">
+            Payment
+          </span>
+        </a>
+
+
+        <!-- Admin -->
+        {{!-- #if user.isAdmin --}}
+        <a class="menu-button member-myaccount-button ng-scope" ng-if="isUserLoggedIn" href="/admin">
+          <span class="fas fa-user-cog"></span>
+          <span class="menu-words" style="padding-left:6px;">
+            Admin
+          </span>
+        </a>
+        {{!-- /if --}}
+
+        <!-- Log-out -->
+        {{!-- #if user --}}
+        <a class="menu-button member-myaccount-button ng-scope" href="/logout">
+          <span class="fas fa-sign-out-alt"></span>
+          <span class="menu-words" style="padding-left:6px;">
+            Log out
+          </span>
+        </a>
+        {{!-- /if --}}
+
+        <!-- Account -->
+        <a ng-href="/users/6047a36841d72f000c233691/edit"
+          class="menu-button               member-myaccount-button ng-scope" ng-if="isUserLoggedIn"
+          href="/users/6047a36841d72f000c233691/edit">
+          <span class="fa fa-user-circle"></span>
+          <span class="menu-words" style="padding-left:6px;">
+            ACCOUNT
+          </span>
+        </a>
+
+        <a class="cart-panel-button menu-button " id="" href="#cart-panel">
+          <span class="fa fa-shopping-cart"></span>
+          <span class="menu-words">CART</span>
+          <span class="cart-count ng-binding" ng-show="currentCart.getItemCount()>0">
+            <span class="hidden-xs">(</span>2<span class="hidden-xs">)</span>
+          </span>
+        </a>
+
+        <div class="menu-button search-button ">
+          <form ng-controller="ProductsSearchController" ng-submit="search(searchQuery, $event)" action="/products"
+            style="margin-bottom: 0" class="ng-pristine ng-valid ng-scope ng-valid-maxlength">
+            <input name="query" ng-model="searchQuery" placeholder="Search Products" maxlength="100"
+              class="ng-pristine ng-untouched ng-valid ng-empty ng-valid-maxlength">
+            <button><span class="fa fa-search"></span></button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="body-wrapper">
+      <div class="body-content mobile-revamp-navigation">
+
+
+        <!-- main Content -->
+        <div class="yield-wrapper">
+          <!-- RWD佈局： -->
+          <div class="container global-primary d-flex justify-content-around ">
             <div class="container-md-height"
               style="height: 100%; table-layout: fixed; width: 100%; margin-bottom: 2%; ">
               <!-- height and width must be difined for td to size correctly -->
-              <div class="row row-md-height" style="height: 100%;">
+              <div class="" style="height: 100%;">
                 <!-- Rendering page grid items -->
-                <div id="page-item-5b6d78449e7fc67e9637f6cf" class="item grid-image-item
-              col-xs-12
-              col-md-12
-              col-md-height
-              padding-h-none" style="vertical-align: top; height: 100%;">
-                  <div style="height: 100%;">
-                    <div class="box-info box-info-width-full" style="padding:0;">
-
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-              <!-- End of rendering page grid items -->
-            </div> <!-- End of row -->
-          </div> <!-- End of container-md-height -->
-        </div> <!-- End of container -->
-
-        <!-- RWD佈局： -->
-        <div class="container global-primary d-flex justify-content-around ">
-          <div class="container-md-height" style="height: 100%; table-layout: fixed; width: 100%; margin-bottom: 2%; ">
-            <!-- height and width must be difined for td to size correctly -->
-            <div class="row row-md-height" style="height: 100%;">
-              <!-- Rendering page grid items -->
-              <div class="item grid-image-item
+                <div class="item grid-image-item
               col-xs-12
               col-md-12
               col-md-height
               " style="vertical-align: top; height: 100%;">
-                <div style="height: 100%;">
-                  <div class="d-flex justify-content-center" style="">
-                    <!-- Flash -->
-                    {{#if success_messages}}
-                    <div class="alert alert-success text-center" role="alert" style="margin: 30px 0px ;">
-                      {{success_messages}}
-                    </div>
-                    {{/if}}
-                    {{#if error_messages}}
-                    <div class="alert alert-danger text-center" role="alert" style="margin: 30px 0px ;">
-                      {{error_messages}}
-                    </div>
-                    {{/if}}
+                  <div style="height: 100%;">
+                    <div class="d-flex justify-content-center" style="">
+                      <!-- Flash -->
+                      {{#if success_messages}}
+                      <div class="alert alert-success text-center" role="alert" style="margin: 10px 0px ;">
+                        {{success_messages}}
+                      </div>
+                      {{/if}}
 
-                    {{{body}}}
-                    <!-- 新品上市 -->
-                    <div class="editor-boxify-image-wrapper boxify-image-wrapper image-container margin-bottomless">
-                      <!-- render -> Handlebars -->
-                      <!-- 1. 前台：restaurants.handlebars -->
-                      <!-- 2. 後台：admin/restaurants.handlebars -->
+                      {{#if error_messages}}
+                      <div class="alert alert-danger text-center" role="alert" style="margin: 10px 0px ;">
+                        {{error_messages}}
+                      </div>
+                      {{/if}}
 
-                      <!-- 新品上市圖片 -->
-                      <img class="sl-lazy-image"
-                        src="https://shoplineimg.com/5b4461529a76f081a2000629/5d67af134bdc78003ec737ea/1200x.webp?source_format=jpg"
-                        alt="" data-size="1200x">
+                      {{{body}}}
+
                     </div>
                   </div>
+
+                  <div class="container global-primary  ">
+                    <div class="container-md-height"
+                      style="height: 100%; table-layout: fixed; width: 100%; margin-bottom: 2%; ">
+                      <!-- height and width must be difined for td to size correctly -->
+                      <div class="row row-md-height" style="height: 100%;">
+
+                      </div>
+
+                    </div>
+                    <!--yield-wrapper-->
+                    <!-- main Content end-->
+                  </div><!-- body-content-->
+                  <!---footer -->
+
+                  <!---footer end-->
                 </div>
-
-                <div class="container global-primary  ">
-                  <div class="container-md-height"
-                    style="height: 100%; table-layout: fixed; width: 100%; margin-bottom: 2%; ">
-                    <!-- height and width must be difined for td to size correctly -->
-                    <div class="row row-md-height" style="height: 100%;">
-
-                    </div>
-
-                  </div>
-                  <!--yield-wrapper-->
-                  <!-- main Content end-->
-                </div><!-- body-content-->
-                <!---footer -->
-
-                <!---footer end-->
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</body>
+  </body>
 
 </html>

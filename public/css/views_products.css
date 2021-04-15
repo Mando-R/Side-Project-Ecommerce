@@ -1,0 +1,734 @@
+/* CSS Reset：各瀏覽器預設還原(Start) */
+
+
+/* 載入字型 */
+
+
+/* @import url("https://fonts.googleapis.com/css?family=Noto+Sans+TC:400,700&display=swap&subset=chinese-traditional"); */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #f6f7f8;
+    font-family: "Noto Sans TC", sans-serif;
+    /* 設定字型 */
+    font-size: 1rem;
+    line-height: 1.4;
+    margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    margin: 0;
+    line-height: 0.9;
+}
+
+p {
+    margin: 0;
+}
+
+ul,
+li {
+    list-style-type: none;
+    /* 拿掉<li>前方小黑點 */
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    /* 拿掉底線 */
+}
+
+
+/* CSS Reset-End */
+
+
+/* ==================== 手機版 ==================== */
+
+
+/* 設定區塊寬度一致並置中 */
+
+.container {
+    width: 85%;
+    margin: 0 auto 3rem auto;
+}
+
+
+/* 共用按鈕樣式 */
+
+.action {
+    color: white;
+    background: #39bae6;
+    border-radius: 0.25rem;
+    display: inline-block;
+    /*   font-size: 1rem; */
+    padding: 0.25rem 1rem;
+    transition: all 0.1s linear;
+}
+
+.action:hover {
+    background: #267c99;
+    /* 陰影效果 */
+    -webkit-box-shadow: 0px 1px 5px 0px rgba(87, 87, 87, 1);
+    -moz-box-shadow: 0px 1px 5px 0px rgba(87, 87, 87, 1);
+    box-shadow: 0px 1px 5px 0px rgba(87, 87, 87, 1);
+}
+
+.background-image {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+
+/* Main Header */
+
+header {
+    position: fixed;
+    /* header 固定置頂*/
+    width: 85%;
+    height: 60px;
+    z-index: 999;
+    /* 定義元素層級：愈大數字愈上層，愈小數字愈下層；視窗位於 0 位置 */
+    text-align: center;
+    background: #ffffff;
+    /* 陰影效果 */
+    -webkit-box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+    opacity: 0.6;
+    /* border: 3px solid red; */
+    color: #C74060;
+}
+
+
+/* 對應"漢堡排" - 打開 */
+
+.nav {
+    position: absolute;
+    /* 絕對定位：對應 父元素 */
+    top: 100%;
+    /* 配置父元素<header>正下方 */
+    background: #ffffff;
+    width: 100%;
+    /* 對應"漢堡排" */
+    transition: transform 0.3s ease-out;
+    /* 轉場效果：指定下方 transform 屬性 */
+    transform-origin: top;
+    /* transform-origin：搭配transition(轉場)，設定效果起始點為 top (從 top 開始縮放效果) */
+    transform: scale(1, 0);
+    /* unchecked：設定<nav> 消失*/
+    font-size: 2rem;
+    font-weight: 700;
+    color: #C74060;
+    /*border: 3px solid green; /* 暫時加上邊框，以利於辨識位置 */
+}
+
+.navbar-toggle {
+    position: absolute;
+    /* hidden：隱藏 checkbox 空格 */
+    visibility: hidden;
+    /* 絕對定位：消除　checkbox　原先佔據的空間，才不影響排版 */
+}
+
+
+/* 漢堡排<input> */
+
+
+/* 對應 .nav 和 HTML <input type="checkbox"> */
+
+.navbar-toggle:checked~.nav {
+    /* ~：選定<input>navbar-toggle 同一階層 sibling 的 <nav> nav */
+    /*   border: 1px solid grey; */
+    transform: scale(1, 1);
+    /* checked：<nav> 顯示出現 */
+}
+
+
+/* 對應 .nav-item */
+
+.navbar-toggle:checked~.nav .nav-item {
+    transition: opacity 0.2s ease-out 0.15s;
+    /* 遞延 0.15s(150毫秒)後，才顯示 */
+    opacity: 1;
+    /* checked(點擊後)：透明度為 1 (出現原始字樣)*/
+}
+
+
+/* 漢堡排圖案 */
+
+.navbar-toggle-label {
+    position: absolute;
+    /* 絕對定位 */
+    top: 0;
+    bottom: 0;
+    right: 50%;
+    display: flex;
+    align-items: center;
+}
+
+
+/* 對應 HTML <span class="hamburger"> */
+
+.hamburger {
+    /* 相對定位：父元素<label class="navbar-toggle-label"> */
+    position: relative;
+}
+
+
+/* 偽元素 ::before 和 ::after：畫 漢堡排 icon */
+
+.hamburger,
+
+/* 第 1 條線 */
+
+.hamburger::before,
+
+/* 第 2 條線 */
+
+.hamburger::after {
+    /* 第 3 條線 */
+    width: 30px;
+    height: 3px;
+    background: #C74060;
+    margin: 0.2rem 0;
+}
+
+.hamburger::before,
+.hamburger::after {
+    position: absolute;
+    content: "";
+    left: 0;
+}
+
+.hamburger::before {
+    top: 8px;
+    /* before 這條線，往上推 8px */
+}
+
+.hamburger::after {
+    bottom: 8px;
+    /* after 這條線，往下推 8px */
+}
+
+
+/* LOGO：BRAND NAME */
+
+.navbar-brand {
+    /* color: #267b98; */
+    font-size: 1.8rem;
+    font-weight: 700;
+    /* 與外層父元素<header>高度相同(60px)，達到垂直置中 */
+    /* line-height: 60px;   */
+    color: #C74060;
+}
+
+
+/* nav-item & nav-link：近期活動、狗兒相片、領養資訊 */
+
+.nav-item {
+    margin: 1.4rem 0;
+    /* 對應"漢堡排" */
+    opacity: 0;
+    /* unchecked(未點擊)：透明度為0(字樣消失)，看不到 */
+    color: #C74060;
+}
+
+.nav-link {
+    color: #C74060;
+}
+
+
+/*Activity*/
+
+.banner-wrapper {
+    padding-top: 92px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 250px);
+    grid-gap: 0.5rem;
+    grid-template-areas: "main main main main" "left left right right";
+}
+
+.banner-title {
+    margin-bottom: 0.4rem;
+}
+
+.banner-description {
+    margin-bottom: 1rem;
+}
+
+.main-banner {
+    grid-area: main;
+    display: flex;
+    padding: 2.5rem;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+    background-image: url("https://shoplineimg.com/585967b6d4e395c22e002ae2/605427751d902a0032cd410c/1400x.webp?source_format=jpg");
+    object-fit: cover;
+    -webkit-box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.08);
+    -moz-box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.08);
+    box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.08);
+}
+
+.main-banner .banner-title {
+    font-size: 2rem;
+    color: #1a5366;
+}
+
+.main-banner .banner-description {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #267b98;
+    color: #C74060;
+}
+
+.sub-banner .action {
+    font-size: 1rem;
+    padding: 0.25rem 1rem;
+}
+
+.sub-banner .banner-title,
+.sub-banner .banner-description {
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+.sub-banner {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    flex-direction: column;
+    padding: 1rem;
+    background-position: right top;
+    -webkit-box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.08);
+    -moz-box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.08);
+    box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.08);
+}
+
+.sub-banner-left {
+    grid-area: left;
+    background-image: url("https://shoplineimg.com/585967b6d4e395c22e002ae2/5f91526f42936d002c8c6004/800x.webp?source_format=jpg");
+    background-position: center;
+}
+
+.sub-banner-right {
+    grid-area: right;
+    background-image: url("https://shoplineimg.com/585967b6d4e395c22e002ae2/5fa217e71b9b4f001a731878/800x.webp?source_format=jpg");
+    background-position: center;
+}
+
+
+/*Album*/
+
+.album-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    width: 100%;
+    grid-gap: 1.5rem;
+}
+
+.card {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    /* background: transparent; */
+    background: #FFFFFF;
+    -webkit-box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.08);
+    -moz-box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.08);
+    box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.08);
+}
+
+
+/* .card::before, */
+
+
+/* .card::after {
+  content: "";
+  position: absolute;
+  top: 1rem;
+  bottom: 1rem;
+  left: 1rem;
+  right: 1rem;
+  transition: transform 0.4s ease-out;
+}
+ */
+
+
+/* .card::before {
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+  transform: scale(0, 1);
+} */
+
+
+/* .card::after {
+  border-left: 1px solid white;
+  border-right: 1px solid white;
+  transform: scale(1, 0);
+}
+ */
+
+
+/* .card:hover::before {
+  transform: scale(1.05, 1);
+}
+ */
+
+
+/* .card:hover::after {
+  transform: scale(1, 1.05);
+} */
+
+.card-img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    display: block;
+    transition: opacity 0.2s ease-out;
+}
+
+.card:hover .card-img {
+    opacity: 0.8;
+}
+
+.card-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+}
+
+.card:hover .card-text {
+    opacity: 1;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    margin-bottom: 0.2em;
+}
+
+.card-description {
+    font-size: 1rem;
+}
+
+
+/*Adoption*/
+
+.adoption-wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 135px;
+    width: 100%;
+    grid-gap: 0;
+    background: #fff;
+    -webkit-box-shadow: 2px 10px 12px 0px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 2px 10px 12px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 10px 12px 0px rgba(0, 0, 0, 0.1);
+}
+
+.adoption-image {
+    width: 100%;
+}
+
+.adoption-info {
+    display: grid;
+    align-content: center;
+    justify-items: center;
+}
+
+.adoption-info .title {
+    font-size: 1.75rem;
+    margin-bottom: 0.4rem;
+    color: #267c99;
+}
+
+.adoption-info .description {
+    font-size: 1rem;
+    margin-bottom: 0.9rem;
+    color: #5e5c5c;
+}
+
+
+/* Footer */
+
+footer {
+    text-align: center;
+    background: #4a4a4a;
+    padding: 1rem;
+    color: white;
+    letter-spacing: 2px;
+}
+
+
+/* 桌機板 */
+
+@media screen and (min-width: 768px) {
+    .action {
+        font-size: 1.2rem;
+        padding: 0.75rem 2rem;
+    }
+    /*Main header*/
+    header {
+        width: 96%;
+        display: grid;
+        grid-template-columns: 1fr auto minmax(600px, 3fr) 1fr;
+        /*     grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); */
+        font-size: 16px;
+        font-weight: 700;
+        color: #C74060;
+    }
+    .navbar-toggle-label {
+        display: none;
+    }
+    .navbar-brand {
+        grid-column: 2 / 3;
+    }
+    .nav {
+        all: unset;
+        grid-column: 3 / 4;
+    }
+    .nav-list {
+        height: 100%;
+        display: grid;
+        grid-auto-flow: column;
+        justify-content: end;
+        align-items: center;
+        grid-gap: 2rem;
+    }
+    .nav-item {
+        margin: 0;
+        opacity: 1;
+    }
+    /*Activity*/
+    .banner-wrapper {
+        grid-gap: 1.5rem;
+        grid-template-areas: "main main main left" "main main main right";
+    }
+    .main-banner {
+        align-items: flex-start;
+        justify-content: center;
+    }
+    .main-banner .banner-title {
+        font-size: 4rem;
+    }
+    .main-banner .banner-description {
+        font-size: 2rem;
+    }
+    .sub-banner .banner-title {
+        font-size: 3rem;
+        color: #C74060;
+    }
+    .sub-banner .action {
+        font-size: 1.2rem;
+    }
+    /*Adoption*/
+    .adoption-wrapper {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto;
+        grid-gap: 2rem;
+    }
+    .adoption-info {
+        justify-items: start;
+    }
+    .adoption-info .title {
+        font-size: 3rem;
+    }
+    .adoption-info .description {
+        font-size: 1.875rem;
+    }
+}
+
+.card-name {
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 5px 0px 0px 0px;
+    color: #0B090A;
+}
+
+.card-category {
+    display: flex;
+    justify-content: center;
+    font-size: 1.4rem;
+    font-weight: 600;
+    padding: 5px 0px 5px 0px;
+    color: #ADB5BD;
+}
+
+.card-price {
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 2rem;
+    margin: 10px 0px 0px 0px;
+    color: #BA181B;
+}
+
+.cartandWishlist {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 15px 0px 15px 0px;
+    background-color: transparent;
+}
+
+.add-to-cart-text {
+    /*   width: 100%; */
+    font-size: 1.6rem;
+    background-color: #0B090A;
+    border: #0B090A;
+    /*   border-radius: ; */
+}
+
+.add-to-wishlist-text {
+    font-size: 1.6rem;
+    background-color: #C74060;
+    border: #C74060;
+}
+
+
+/* Pagination */
+
+.pagination {
+    /* border: 3px solid red; */
+    margin: 20px 0px 20px 0px;
+    padding: 30px 0px 30px 0px;
+    display: flex;
+    justify-content: center;
+    font-size: 1.8rem;
+}
+
+
+/* footer */
+
+.footer {
+    all: unset;
+    /*   border: 3px solid red; */
+    flex-shrink: 0;
+    height: 284px;
+    padding: 0 1rem;
+    width: 100%;
+    /*     background-color: gray; */
+    background-image: url("https://images.unsplash.com/photo-1566041510394-cf7c8fe21800?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=634&q=80");
+    display: grid;
+    grid-template-columns: auto 1fr;
+    /* 陰影效果 */
+    -webkit-box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.2);
+}
+
+.footer-brandimage {
+    /*   border: 3px solid blue; */
+    grid-column: 1/2;
+    align-self: center;
+    width: 350px;
+    /* img {
+        width: 175.49px;
+        height: 31px;
+        margin: 0 auto;
+      } */
+}
+
+.footer-info-list {
+    /*   border: 3px solid green; */
+    grid-column: 2/3;
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.footer-info-title {
+    /*   border: 3px solid orange; */
+    display: flex;
+    justify-content: flex-start;
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: #606C38;
+    margin-bottom: 1rem;
+}
+
+
+/* .footer-item {
+  margin: ;
+  font-size: 1.4rem;
+  color: #283618;
+} */
+
+.footer-item-list {
+    margin: 15px 0px 0px 0px;
+}
+
+.footer-item-content {
+    margin: 10px 0px 0px 0px;
+    font-size: 2rem;
+    color: #283618;
+}
+
+.footer-icon-wrapper>a>img {
+    border: 3px solid red;
+    width: 30px;
+    height: 30px;
+    margin-right: 2rem;
+}
+
+.footer-icon-wrapper {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.footer-icon {
+    /*   border: 3px solid blue; */
+    font-size: 3rem;
+    margin: 15px 30px 0px 0px;
+}
+
+.footer-icon--fb {
+    color: #3B5998;
+}
+
+.footer-icon--ig {
+    color: #FF0054;
+}
+
+.footer-icon--line {
+    color: #00c300;
+}
+
+
+/* 注意：整體佈局
+覆蓋 main.hbs 的 <link rel="stylesheet" media="all"
+    href="https://cdn.shoplineapp.com/assets/common-f47625baea59b7f28766c213f44af5679a3f7198f77cf8bb89041274db97940a.css"> */
+
+.container.global-primary.d-flex.justify-content-around {
+    width: 100%;
+    /* display: flex;
+    align-items: center;
+    justify-content: space-evenly; */
+}
