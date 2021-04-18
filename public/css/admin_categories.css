@@ -1,4 +1,5 @@
 /* global */
+
 :root {
   --main-dark: #03396a;
   --grey-1: #e4e4e4;
@@ -15,14 +16,17 @@
   --logo-url: url("https://raw.githubusercontent.com/ALPHACamp/WFE-data-table/0f97f3113bff18353154b8644eb0b31fff2a3bef/icons/logo.svg");
   --darkmode-toggle-url: url("https://raw.githubusercontent.com/ALPHACamp/WFE-data-table/0f97f3113bff18353154b8644eb0b31fff2a3bef/icons/darkmode-on.svg");
 }
+
 html {
   font-size: 14px;
   height: 100%;
   color: var(--main-text-color);
 }
+
 /* global End */
 
 /* dark mode-2 */
+
 :root {
   --main-dark: #03396a;
   --grey-1: #e4e4e4;
@@ -58,14 +62,17 @@ html {
   --logo-url: url("https://raw.githubusercontent.com/WendellLiu/alphacamp-frontend-course/master/data-table/static/icons/logo-dark.svg");
   --darkmode-toggle-url: url("https://raw.githubusercontent.com/WendellLiu/alphacamp-frontend-course/master/data-table/static/icons/darkmode-off.svg");
 }
+
 html {
   font-size: 14px;
   height: 100%;
   color: var(--main-text-color);
 }
+
 /* dark mode-2 End */
 
 /* body */
+
 body {
   display: flex;
   height: 100%;
@@ -74,9 +81,11 @@ body {
 }
 
 .sidebar {
+  position: fixed;
   display: flex;
   flex-direction: column;
   width: 180px;
+  height: 1200px;
   /* background: var(--main-dark); */
   background: #001935;
   padding-top: 30px;
@@ -85,14 +94,16 @@ body {
 
 .main {
   flex: 1;
+  margin: 0px 0px 0px 200px;
   padding: 10px 50px 60px 50px;
   max-height: 100vh;
   overflow-y: auto;
 }
 
 /* USER AUTHORITY */
+
 .main__title {
-  margin-bottom: 20px;
+  margin: 20px 0px 20px 0px;
   font-size: 26px;
 }
 
@@ -100,9 +111,11 @@ body {
   background: var(--table-background-color);
   font-size: 18px;
 }
+
 /* body End */
 
 /* table */
+
 .table__header {
   background: var(--header-color);
   color: var(--header-text-color);
@@ -118,33 +131,42 @@ body {
 }
 
 /* ID */
+
 .table__cell--id {
   width: 50px;
 }
+
 /* Name */
+
 /* .table__cell--name {
   width: 140px;
 } */
+
 /* Email */
- .table__cell--setting {
+
+.table__cell--setting {
   width: 250px;
   /* border: 3px solid red; */
 }
+
 .table__cell--setting--item {
   height: 50px;
-  display:inline-block; 
+  display: inline-block;
   /* border: 3px solid blue;  */
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly; 
+  justify-content: space-evenly;
   align-items: center;
-} 
+}
 
 /* User Authority */
+
 /* .table__cell--userauthority {
   width: 140px;
 } */
+
 /* Switch */
+
 .table__cell--switch {
   /* width: 200px; */
   font-size: 18px;
@@ -186,10 +208,13 @@ body {
   position: absolute;
   right: 0;
 }
+
 /* table End */
 
 /* menu */
+
 /* 注意：錨點 position: relative，設在.table__cell--action內 */
+
 .action__menu {
   z-index: 1;
   position: absolute;
@@ -200,32 +225,39 @@ body {
   background: var(--white);
   border: 1px solid var(--border-color);
 }
+
 .hidden {
   display: none;
 }
+
 .menu__body {
   display: flex;
   flex-direction: column;
   padding-left: 12px;
 }
+
 .menu__item {
   display: flex;
   align-items: center;
   cursor: pointer;
   height: 40px;
 }
+
 .menu__item__icon {
   margin-right: 14px;
 }
+
 /* menu End */
 
 /* sidebar */
+
 /* .sidebar {
   height: 300px;
   overflow-y: scroll;
 } */
 
 /* STORELINE */
+
 .sidebar__home {
   min-height: 64px;
   background-size: 100% 100%;
@@ -236,12 +268,12 @@ body {
 }
 
 /* STORELINE-ADMIN */
+
 .sidebar__home__admin {
   cursor: pointer;
   font-size: 16px;
   color: #d9d9d9;
 }
-
 
 .sidebar__menu {
   display: flex;
@@ -265,12 +297,14 @@ body {
   background: var(--white);
 } */
 
-.sidebar__menu > div:not(:last-child) {
+.sidebar__menu>div:not(:last-child) {
   margin-bottom: 30px;
 }
+
 /* sidebar End */
 
 /* dark mode-1 */
+
 .sidebar__darkmode__label {
   background: var(--darkmode-toggle-url);
   background-size: 100% 100%;
@@ -278,17 +312,20 @@ body {
   height: 100%;
   width: 100%;
 }
+
 .sidebar__darkmode__input {
   display: none;
 }
+
 /* dark mode-1 End */
 
 /* 注意：整體佈局
 覆蓋 main.hbs 的 <link rel="stylesheet" media="all"
     href="https://cdn.shoplineapp.com/assets/common-f47625baea59b7f28766c213f44af5679a3f7198f77cf8bb89041274db97940a.css"> */
+
 .container.global-primary.d-flex.justify-content-around {
-    width: 60%;
-    /* display: flex;
+  width: 100%;
+  /* display: flex;
     align-items: center;
     justify-content: space-evenly; */
-  }
+}

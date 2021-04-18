@@ -1,0 +1,148 @@
+<h1>SHOPPING CART</h1>
+
+<div>
+  <table class="table">
+    <thead>Shopping Cart ({{itemAmount}} items)</thead>
+    <thead>
+      <tr class="cart-head">
+        <th scope="col" class="cart-head__title">Product Information</th>
+        <th scope="col" class="cart-head__title">Unit Price</th>
+        <th scope="col" class="cart-head__title">QTY</th>
+        <th scope="col" class="cart-head__title">Subtotal</th>
+        <th scope="col" class="cart-head__title">Delete</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {{#each cart}}
+      <tr calss="cart-body">
+        <td>
+          <div style="display: flow-root;">
+
+            <img src="{{this.image}}" class="cart-body__image" alt="..." style="height: 100px;width: auto;">
+
+            <span>{{this.name}}</span>
+          </div>
+        </td>
+        <!-- Price -->
+        <td>
+          <p class="cart-body__price">NT$ {{this.price}}</p>
+        </td>
+
+        <!-- 注意：Minus、Plus、Delete => cartItemId 和 quantity 重新整理並置入 cart 陣列中每個 product 物件 -->
+        <td class="">
+          <div style="display: flex;" class="d-flex justify-content-center">
+            <!-- Minus -->
+            <form action="/cartItem/{{this.cartItemId}}/sub" method="POST">
+              <button type="submit" class="btn btn-sm btn-outline-secondary">
+                {{!-- <i class="fas fa-minus-square"></i> --}}
+                -
+              </button>
+            </form>
+
+            <!-- QTY -->
+            <span style="margin: 0 20px;">
+              {{this.quantity}}
+            </span>
+
+            <!-- Plus -->
+            <form action="/cartItem/{{this.cartItemId}}/add" method="POST">
+              <button type="submit" class="btn btn-sm btn-outline-secondary">
+                {{!-- <i class="fas fa-plus-square"></i> --}}
+                +
+              </button>
+            </form>
+          </div>
+        </td>
+
+        <!-- Subtotal -->
+        <td class="text-center">NT$ {{this.price}} X {{this.quantity}} = {{this.subTotalPrice}}</td>
+
+        <!-- Delete -->
+        <td class="text-center">
+          <form action="/cartItem/{{this.cartItemId}}?_method=DELETE" method="POST">
+            <button type="submit" class="btn btn-link">
+              <i class="fas fa-trash"></i>
+            </button>
+          </form>
+        </td>
+      </tr>
+      {{/each}}
+
+
+
+    </tbody>
+
+    <!-- Order Summary -->
+    <thead>Order Summary</thead>
+
+    <tbody>
+      <!-- Item Subtotal -->
+      <tr calss="">
+        <td>
+          <p class="cart-body__price">Item Subtotal:</p>
+        </td>
+
+        <td>
+          <p class="cart-body__price">NT$ {{this.price}}</p>
+        </td>
+      </tr>
+
+      <!-- Delivery Fee -->
+      <tr calss="">
+        <td>
+          <p class="cart-body__price">Delivery Fee:</p>
+        </td>
+
+        <td>
+          <p class="cart-body__price">NT$ 0</p>
+        </td>
+      </tr>
+
+      <!-- Total -->
+      <tr calss="">
+        <td>
+          <p class="cart-body__price">Total:</p>
+        </td>
+
+        <td>
+          <p class="cart-body__price">{{totalPrice}}</p>
+        </td>
+      </tr>
+
+      <!-- Button：Proceed to Checkout -->
+      <a class="btn btn-success" href="#" role="button">
+        Proceed to Checkout
+      </a>
+
+    </tbody>
+
+  </table>
+</div>
+
+<div class="row">
+  <div class="col-md-4">
+    <!-- /order -->
+    <form action="order" method="POST">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter name" name="name">
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone</label>
+        <input type="text" class="form-control" id="phone" placeholder="Enter phone" name="phone">
+      </div>
+      <div class="form-group">
+        <label for="address">Address</label>
+        <input type="text" class="form-control" id="address" placeholder="Enter address" name="address">
+      </div>
+      <input type="hidden" name="cartId" value="{{cart.id}}">
+
+      <!-- 注意：amount 來自 totalPrice -->
+      <input type="hidden" name="amount" value="{{totalPrice}}">
+      <input type="hidden" name="shipping_status" value="0">
+      <input type="hidden" name="payment_status" value="0">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>

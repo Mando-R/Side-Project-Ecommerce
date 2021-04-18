@@ -4,16 +4,18 @@ const { Product, Cart, CartItem } = db
 
 const cartController = {
   getCart: (req, res) => {
-    return Cart.findByPk(req.session.cartId, {
+    const cartId = req.session.cartId
+    return Cart.findByPk(cartId, {
+      // return Cart.findByPk(req.session.cartId, {
       // raw: true,
       // nest: true,
       include: [{ model: Product, as: "cartFindProducts" }]
     })
       .then(cart => {
-        // console.log("req.session", req.session)
-        // console.log("===========")
-        // console.log("cart", cart)
-        // console.log("===========")
+        console.log("req.session", req.session)
+        console.log("===========")
+        console.log("cart", cart)
+        console.log("===========")
         // console.log("cart.toJSON()", cart.toJSON())
         // console.log("===========")
         // console.log("cart.items", cart.items)
@@ -21,13 +23,14 @@ const cartController = {
         cart = cart || { cartFindProducts: [] }
 
         // 拆除 dataValues
-        cart.cartFindProducts = cart.cartFindProducts.map(product => ({
+        cart = cart.cartFindProducts.map(product => ({
           ...product.dataValues,
-          // items.toJSON(),
-          // 注意：要修改此處
-          // itemId: items.CartItem.id,
-          // quantity: items.CartItem.quantity,
-          // subtotal: items.price * items.CartItem.quantity
+          // cartId: cart.id,
+          // 注意：Handlebars: Access has been denied to resolve the property "id" and "quantity" because it is not an "own property" of its parent.
+          cartItemId: product.CartItem.id,
+          quantity: product.CartItem.quantity,
+
+          subTotalPrice: product.price * product.CartItem.quantity
         }))
 
         // console.log("cart", cart)
@@ -36,16 +39,39 @@ const cartController = {
         // console.log("cartAmount", cartAmount)
 
         // console.log("===========")
-        // console.log("cart.cartFindProducts", cart.cartFindProducts)
+        // console.log("cart[0]", cart[0])
+
+        // console.log("===========")
+        // console.log("cart[0].CartItem", cart[0].CartItem)
+
+        // console.log("===========")
+        // console.log("cart[0].CartItem.quantity", cart[0].CartItem.quantity)
+
+        // console.log("===========")
+        // console.log("cart.cartFindProducts[0].subTotalPrice", cart.cartFindProducts[0].subTotalPrice)
 
         // console.log("===========")
         // console.log("cart.cartFindProducts[0].CartItem", cart.cartFindProducts[0].CartItem)
-        let totalPrice = cart.cartFindProducts.length > 0 ? cart.cartFindProducts.map(cartFindProduct => cartFindProduct.price * cartFindProduct.CartItem.quantity).reduce((a, b) => a + b) : 0
+
+        let totalPrice = cart.length > 0 ? cart.map(product => product.price * product.quantity).reduce((a, b) => a + b) : 0
+
+        let itemAmount = cart.length > 0 ? cart.length : 0
+
+        console.log("cart", cart)
+        console.log("===========")
+        // console.log("===========")
+        // console.log("totalPrice", totalPrice)
+
+        // res.render("main.hbs", {
+        //   itemAmount: itemAmount,
+        // })
 
         res.render("carts.hbs", {
-          cart: cart.toJSON(),
-          // cart: cart,
+          // cart: cart.toJSON(),
+          cart: cart,
           totalPrice: totalPrice,
+          itemAmount: itemAmount,
+          cartId: cartId
         })
       })
   },
@@ -74,18 +100,20 @@ const cartController = {
       .then(cartItem => {
         req.session.cartId = cart.id
 
-        return req.session.save(() => {
-          return res.redirect("back")
-        })
+        // return req.session.save(() => {
+        //   return res.redirect("back")
+        // })
 
-        // //出有多少cart中的有幾個items，並存在session裡：
-        // Cart.findByPk(cart.id, { include: "cartFindProducts" })
-        //   .then(cart => {
-        //     req.session.cartItemCount = cart.items.length
-        //     return req.session.save(() => {
-        //       return res.redirect('back')
-        //     })
-        //   })
+        // 計算 cart 的 itemAmount，並存入 session：
+        Cart.findByPk(cart.id, { include: "cartFindProducts" })
+          .then(cart => {
+            req.session.itemAmount = cart.length
+
+            req.session.save(() => {
+              // res.render("main.hbs")
+              return res.redirect("back")
+            })
+          })
       })
   },
 

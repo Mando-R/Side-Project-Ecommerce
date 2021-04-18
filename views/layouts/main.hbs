@@ -62,11 +62,11 @@
         </form>
       </div>
 
-      <div class="clear"></div>
+      {{!-- <div class="clear"></div>
 
       <div class="clear"></div>
       <div ng-show="!isUserLoggedIn" class="hello ng-hide"></div>
-      <div class="clear"></div>
+      <div class="clear"></div> --}}
 
       <div class="visible-xs">
         <div class="section-header">
@@ -117,9 +117,9 @@
             Cart
           </span>
 
-          {{#if cartAmount}}
+          {{#if itemAmount}}
           <span>
-            {{cartAmount}}
+            ({{itemAmount}})
           </span>
 
           {{else}}
@@ -211,7 +211,7 @@
                 <div class="item grid-image-item
               col-xs-12
               col-md-12
-              col-md-height
+              col-md-12
               " style="vertical-align: top; height: 100%;">
                   <div style="height: 100%;">
                     <div class="d-flex justify-content-center" style="">
@@ -233,18 +233,6 @@
                     </div>
                   </div>
 
-                  <div class="container global-primary  ">
-                    <div class="container-md-height"
-                      style="height: 100%; table-layout: fixed; width: 100%; margin-bottom: 2%; ">
-                      <!-- height and width must be difined for td to size correctly -->
-                      <div class="row row-md-height" style="height: 100%;">
-
-                      </div>
-
-                    </div>
-                    <!--yield-wrapper-->
-                    <!-- main Content end-->
-                  </div><!-- body-content-->
                   <!---footer -->
 
                   <!---footer end-->

@@ -169,8 +169,9 @@ const orderController = {
           // ...order.dataValues
           order.toJSON()
         )
-        // console.log("orders", orders)
-        // console.log("===============")
+        console.log("orders", orders)
+        console.log("===============")
+
         return res.render("orders.hbs", {
           // orders: orders.toJSON()
           orders: orders
@@ -183,14 +184,20 @@ const orderController = {
       { include: [{ model: Product, as: "cartFindProducts" }] }
     )
       .then(cart => {
-        cart.cartFindProducts = cart.cartFindProducts.map(product => ({
+        console.log("req.body", req.body)
+        console.log("===============")
+        console.log("req.body.cartId", req.body.cartId)
+        console.log("===============")
+
+        console.log("cart", cart)
+        console.log("===============")
+
+        cart = cart.cartFindProducts.map(product => ({
           ...product.dataValues,
         }))
 
-        // console.log("cart", cart)
-        // console.log("===============")
-        // console.log("cart.cartFindProducts", cart.cartFindProducts)
-        // console.log("===============")
+        console.log("cart", cart)
+        console.log("===============")
 
         // 寫入 Order
         return Order.create({
@@ -204,16 +211,16 @@ const orderController = {
           .then(order => {
             let results = []
 
-            for (let i = 0; i < cart.cartFindProducts.length; i++) {
+            for (let i = 0; i < cart.length; i++) {
               // console.log(`order.id: ${order.id} ||`, `cart.cartFindProducts[i].id: ${cart.cartFindProducts[i].id}`)
 
               // 寫入 OrderItem
               results.push(
                 OrderItem.create({
                   OrderId: order.id,
-                  ProductId: cart.cartFindProducts[i].id,
-                  price: cart.cartFindProducts[i].price,
-                  quantity: cart.cartFindProducts[i].CartItem.quantity,
+                  ProductId: cart[i].id,
+                  price: cart[i].price,
+                  quantity: cart[i].CartItem.quantity,
                 })
               )
             }

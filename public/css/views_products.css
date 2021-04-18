@@ -1,19 +1,14 @@
 /* CSS Reset：各瀏覽器預設還原(Start) */
 
-
 /* 載入字型 */
-
 
 /* @import url("https://fonts.googleapis.com/css?family=Noto+Sans+TC:400,700&display=swap&subset=chinese-traditional"); */
 
-*,
-*::before,
-*::after {
+*, *::before, *::after {
     box-sizing: border-box;
 }
 
-html,
-body {
+html, body {
     width: 100%;
     height: 100%;
 }
@@ -31,11 +26,7 @@ body {
     margin: 0;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5 {
+h1, h2, h3, h4, h5 {
     margin: 0;
     line-height: 0.9;
 }
@@ -44,8 +35,7 @@ p {
     margin: 0;
 }
 
-ul,
-li {
+ul, li {
     list-style-type: none;
     /* 拿掉<li>前方小黑點 */
     margin: 0;
@@ -57,12 +47,9 @@ a {
     /* 拿掉底線 */
 }
 
-
 /* CSS Reset-End */
 
-
 /* ==================== 手機版 ==================== */
-
 
 /* 設定區塊寬度一致並置中 */
 
@@ -70,7 +57,6 @@ a {
     width: 85%;
     margin: 0 auto 3rem auto;
 }
-
 
 /* 共用按鈕樣式 */
 
@@ -98,12 +84,11 @@ a {
     background-repeat: no-repeat;
 }
 
-
 /* Main Header */
 
 header {
-    position: fixed;
     /* header 固定置頂*/
+    position: fixed;
     width: 85%;
     height: 60px;
     z-index: 999;
@@ -117,9 +102,7 @@ header {
     margin-top: 30px;
     opacity: 0.6;
     /* border: 3px solid red; */
-    color: #C74060;
 }
-
 
 /* 對應"漢堡排" - 打開 */
 
@@ -150,9 +133,7 @@ header {
     /* 絕對定位：消除　checkbox　原先佔據的空間，才不影響排版 */
 }
 
-
 /* 漢堡排<input> */
-
 
 /* 對應 .nav 和 HTML <input type="checkbox"> */
 
@@ -163,7 +144,6 @@ header {
     /* checked：<nav> 顯示出現 */
 }
 
-
 /* 對應 .nav-item */
 
 .navbar-toggle:checked~.nav .nav-item {
@@ -172,7 +152,6 @@ header {
     opacity: 1;
     /* checked(點擊後)：透明度為 1 (出現原始字樣)*/
 }
-
 
 /* 漢堡排圖案 */
 
@@ -186,7 +165,6 @@ header {
     align-items: center;
 }
 
-
 /* 對應 HTML <span class="hamburger"> */
 
 .hamburger {
@@ -194,15 +172,12 @@ header {
     position: relative;
 }
 
-
 /* 偽元素 ::before 和 ::after：畫 漢堡排 icon */
 
 .hamburger,
-
 /* 第 1 條線 */
 
 .hamburger::before,
-
 /* 第 2 條線 */
 
 .hamburger::after {
@@ -213,8 +188,7 @@ header {
     margin: 0.2rem 0;
 }
 
-.hamburger::before,
-.hamburger::after {
+.hamburger::before, .hamburger::after {
     position: absolute;
     content: "";
     left: 0;
@@ -230,7 +204,6 @@ header {
     /* after 這條線，往下推 8px */
 }
 
-
 /* LOGO：BRAND NAME */
 
 .navbar-brand {
@@ -241,7 +214,6 @@ header {
     /* line-height: 60px;   */
     color: #C74060;
 }
-
 
 /* nav-item & nav-link：近期活動、狗兒相片、領養資訊 */
 
@@ -256,7 +228,6 @@ header {
 .nav-link {
     color: #C74060;
 }
-
 
 /*Activity*/
 
@@ -308,8 +279,7 @@ header {
     padding: 0.25rem 1rem;
 }
 
-.sub-banner .banner-title,
-.sub-banner .banner-description {
+.sub-banner .banner-title, .sub-banner .banner-description {
     color: #fff;
     font-size: 1.2rem;
     font-weight: 400;
@@ -340,7 +310,6 @@ header {
     background-position: center;
 }
 
-
 /*Album*/
 
 .album-wrapper {
@@ -362,9 +331,7 @@ header {
     box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.08);
 }
 
-
 /* .card::before, */
-
 
 /* .card::after {
   content: "";
@@ -377,13 +344,11 @@ header {
 }
  */
 
-
 /* .card::before {
   border-top: 1px solid white;
   border-bottom: 1px solid white;
   transform: scale(0, 1);
 } */
-
 
 /* .card::after {
   border-left: 1px solid white;
@@ -392,12 +357,10 @@ header {
 }
  */
 
-
 /* .card:hover::before {
   transform: scale(1.05, 1);
 }
  */
-
 
 /* .card:hover::after {
   transform: scale(1, 1.05);
@@ -438,7 +401,6 @@ header {
     font-size: 1rem;
 }
 
-
 /*Adoption*/
 
 .adoption-wrapper {
@@ -475,7 +437,6 @@ header {
     color: #5e5c5c;
 }
 
-
 /* Footer */
 
 footer {
@@ -485,7 +446,6 @@ footer {
     color: white;
     letter-spacing: 2px;
 }
-
 
 /* 桌機板 */
 
@@ -521,6 +481,7 @@ footer {
         justify-content: end;
         align-items: center;
         grid-gap: 2rem;
+        font-size: 1.6rem;
     }
     .nav-item {
         margin: 0;
@@ -612,7 +573,6 @@ footer {
     border: #C74060;
 }
 
-
 /* Pagination */
 
 .pagination {
@@ -623,7 +583,6 @@ footer {
     justify-content: center;
     font-size: 1.8rem;
 }
-
 
 /* footer */
 
@@ -674,7 +633,6 @@ footer {
     margin-bottom: 1rem;
 }
 
-
 /* .footer-item {
   margin: ;
   font-size: 1.4rem;
@@ -720,7 +678,6 @@ footer {
 .footer-icon--line {
     color: #00c300;
 }
-
 
 /* 注意：整體佈局
 覆蓋 main.hbs 的 <link rel="stylesheet" media="all"
