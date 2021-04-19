@@ -25,13 +25,13 @@ const PayGateWay = "https://ccore.newebpay.com/MPG/mpg_gateway"
 // const ClientBackURL = URL + "/orders"
 
 // 6. NotifyURL(step 6)：藍新告知賣方後端
-const NotifyURL = "https://dc1b0fc16555.ngrok.io/newebpay/callback?from=NotifyURL"
+const NotifyURL = "https://41049532fd70.ngrok.io/newebpay/callback?from=NotifyURL"
 
 // 7. ReturnURL(step 7-1)：藍新頁面顯示交易結果
-const ReturnURL = "https://dc1b0fc16555.ngrok.io/newebpay/callback?from=ReturnURL"
+const ReturnURL = "https://41049532fd70.ngrok.io/newebpay/callback?from=ReturnURL"
 
 // 8. ClientBackURL(step 7-2)：頁面導回商店網頁(/orders)
-const ClientBackURL = "https://dc1b0fc16555.ngrok.io/orders"
+const ClientBackURL = "https://41049532fd70.ngrok.io/orders"
 
 // ---------- Arrange & Deliver TradeInfo ----------
 
@@ -161,15 +161,31 @@ const orderController = {
     Order.findAll({
       // raw: true,
       // nest: true,
+      where: { UserId: req.user.id },
       include: [{ model: Product, as: "orderFindProducts" }],
-      order: [["createdAt", "ASC"]]
+      order: [["createdAt", "DESC"]]
     })
       .then(orders => {
+        console.log("orders-before", orders)
+        console.log("===============")
+        console.log("orders[0].orderFindProducts", orders[0].orderFindProducts)
+        console.log("===============")
+
+        // 注意：此處.map 只有一層()，沒有({...})
         orders = orders.map(order =>
           // ...order.dataValues
           order.toJSON()
         )
-        console.log("orders", orders)
+
+        // orders = orders.map(order => ({
+        //   ...order.dataValues
+        //   // order.toJSON()
+        // })
+        // )
+
+        console.log("orders-after", orders)
+        console.log("===============")
+        console.log("orders[0].orderFindProducts", orders[0].orderFindProducts)
         console.log("===============")
 
         return res.render("orders.hbs", {
@@ -178,6 +194,31 @@ const orderController = {
         })
       })
   },
+
+  // getOrder: (req, res) => {
+  //   Order.findByPk(req.params.id, {
+  //     include: [{ model: Product, as: "orderFindProducts" }]
+  //   })
+  //     .then(order => {
+
+  //       let paymentMethod = newebpay_helpers.getPayParam(order.dataValues.payment_method)
+
+  //       let orderSn = order.sn
+
+  //       const tradeInfo = newebpay_helpers.getTradeInfo(order.amount, '產品名稱', req.user.email, paymentMethod, orderSn)
+
+  //       let orderItems = order.orderFindProducts.map(orderFindProduct => ({
+  //         ...orderFindProduct.dataValues,
+  //         price: orderFindProduct.OrderItem.price,
+  //         quantity: orderFindProduct.OrderItem.quantity,
+  //         subtotal: orderFindProduct.OrderItem.price * orderFindProduct.OrderItem.quantity
+  //       }))
+
+  //       return res.render("orderDetails", {
+  //         order: order, orderItems: orderItems, tradeInfo: tradeInfo
+  //       })
+  //     })
+  // },
 
   postOrder: (req, res) => {
     return Cart.findByPk(req.body.cartId,
@@ -207,6 +248,8 @@ const orderController = {
           shipping_status: req.body.shipping_status,
           payment_status: req.body.payment_status,
           amount: req.body.amount,
+          // 注意：寫入 UserId，才可findAll{where}
+          UserId: req.user.id
         })
           .then(order => {
             let results = []
@@ -253,6 +296,8 @@ const orderController = {
           })
       })
   },
+
+
 
   cancelOrder: (req, res) => {
     return Order.findByPk(req.params.id, {})

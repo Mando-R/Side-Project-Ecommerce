@@ -95,7 +95,8 @@
         <div class="customerInfo__main col-md-12">
           <!-- form-content -->
           <div class="form-content col-md-6">
-            <!-- customerInfo -->
+
+            <!-- Customer Info -->
             <div class="customerInfo__content">
               <!-- Title -->
               <div class="customerInfo__content--title">
@@ -115,6 +116,7 @@
               </div>
             </div>
 
+            <!-- Delivery Detail -->
             <div class="customerInfo__delivery">
               <!-- Title -->
               <div class="customerInfo__delivery--title">
@@ -132,8 +134,25 @@
               </div>
             </div>
 
+            <!-- Payment Method -->
+            <div class="customerInfo__payment">
+              <!-- Title -->
+              <div class="customerInfo__payment--title">
+                Payment Method
+              </div>
 
-            <!-- 消費者不須知道"views不須顯示"，所以用 hidden 隱藏  -->
+              <div class="customerInfo__payment--newebpay">
+                <a class="" href="https://www.newebpay.com/">
+                  <img class="customerInfo__payment--image" src="https://www.newebpay.com/ud/img/logo_sm2.png"
+                    alt="Card image cap">
+                  {{!-- Neweb Pay 藍新金流 --}}
+                </a>
+              </div>
+
+            </div>
+
+
+            <!-- 消費者不須知道" views不須顯示"，所以用 hidden 隱藏 -->
             <!-- <input type="hidden" name="cartId" value="{{cart.id}}"> -->
             <input type="hidden" name="cartId" value="{{cartId}}">
 
@@ -153,7 +172,7 @@
             <div class="">
               <!-- Subtotal -->
               <div class="orderSummary__item">
-                <p class="orderSummary__subtotalPrice--title">Item Subtotal:</p>
+                <p class="orderSummary__subtotalPrice--title">Subtotal:</p>
                 <p class="orderSummary__subtotalPrice--text">NT$ {{totalPrice}}</p>
               </div>
 

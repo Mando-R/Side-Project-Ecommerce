@@ -150,7 +150,7 @@ a {
   font-size: 1.7rem;
 }
 
-.customerInfo__content--title, .customerInfo__delivery--title {
+.customerInfo__content--title, .customerInfo__delivery--title, .customerInfo__payment--title {
   background-color: #F6F6F6;
   border-bottom: 1px solid #E9ECEF;
   padding: 10px 20px;
@@ -162,15 +162,22 @@ a {
   font-size: 1.7rem;
 }
 
-.customerInfo__content--name, .customerInfo__content--phone, .customerInfo__delivery--address {
+.customerInfo__content--name, .customerInfo__content--phone, .customerInfo__delivery--address, .customerInfo__payment--newebpay {
   padding: 10px 20px;
   font-size: 1.7rem;
 }
 
-.customerInfo__delivery {
+.customerInfo__delivery, .customerInfo__payment {
   border: 1px solid #E9ECEF;
   margin-top: 30px;
   font-size: 1.7rem;
+}
+
+.customerInfo__payment--image {
+  /* border: 1px solid red; */
+  width: 180px;
+  padding: 0px;
+  margin: 10px 0px;
 }
 
 /* customerInfo & Delivery Detail -End */
@@ -217,7 +224,7 @@ a {
 .chackoutButton {
   /* 水平置中 */
   margin: 0 auto;
-  margin-top: 180px;
+  margin-top: 300px;
   width: 92%;
   /* display: flex;
   justify-content: space-evenly; */

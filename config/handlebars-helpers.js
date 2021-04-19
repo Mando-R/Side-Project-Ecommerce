@@ -25,5 +25,23 @@ module.exports = {
     return moment(a).fromNow()
   },
 
+  getPayStatus(payment_status_number) {
+    switch (payment_status_number) {
+      case "0": return "Unpaid"
+      case "1": return "Paid"
+      case "-1": return "Order Canceled"
+    }
+  },
+
+  // Bootstrap text-color
+  colorPayStatus(payment_status_number) {
+    switch (payment_status_number) {
+      case "0": return "alert alert-warning"
+      case "1": return "alert alert-success"
+      case "-1": return "alert alert-danger"
+    }
+  },
+
+
 }
 
