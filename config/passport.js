@@ -1,13 +1,21 @@
 // 引入 .env
 require('dotenv').config()
 
+// passport 第三方登入套件
 // 注意：req.user 取得 Passport 套件 包裝後的資料。
 const passport = require("passport")
+// const LocalStrategy = require("passport-local").Strategy???
 const LocalStrategy = require("passport-local")
+const FacebookStrategy = require("passport-facebook").Strategy
+
+// Hash 雜湊
 const bcrypt = require("bcryptjs")
+
+// Model
 const db = require("../models")
 const { User, Product } = db
 
+// ---------- 1. passport－LocalStrategy ----------
 passport.use(new LocalStrategy({
   // Customize user field (設定客製化選項)
   usernameField: "email",
@@ -38,7 +46,60 @@ passport.use(new LocalStrategy({
   }
 ))
 
-// Serialize & Deserialize：轉換資料過程，可節省空間。
+// ---------- 2. passport－FacebookStrategy ----------
+passport.use(new FacebookStrategy({
+  // 1. FacebookStrategy 透過：(1)clientID、(2)clientSecret、(3)callbackURL、(4) profileFields(User授權資料欄位)
+  // 2. 向[官方Facebook]取得：(1)User授權、(2)User授權資料：email & displayName(姓名)，
+  // 3. 並將 User授權資料放入 profile 內。
+  clientID: "290368289424910",
+  clientSecret: "ba7c479043897666414a9065211eb57c",
+  callbackURL: "http://localhost:3000/auth/facebook/callback",
+  profileFields: ["email", "displayName"]
+},
+  // cb(callback) 改成 done
+  (accessToken, refreshToken, profile, done) => {
+    // 印出觀察 profile，實際使用 profile 的 JSON 物件：profile._json。
+    console.log(profile)
+    // 變數 取出 profile._json.name 和 profile._json.email
+    const { name, email } = profile._json
+
+    User.findOne({
+      where: { email: email }
+    })
+      .then(user => {
+        if (user) {
+          return done(null, user)
+        }
+        // 注意：password 設定必填，因此須幫使用 Facebook 註冊的User 另製作一組密碼。
+        // .toString(36)：26字母(A~Z) + 10數字(0~9)
+        // slice(-8)：只取後面8位
+        const randomPassword = Math.random().toString(36).slice(-8)
+
+        // bcrypt 雜湊：FB驗證登入
+        return bcrypt
+          // (1) 產生 Salt(複雜度係數為 10)
+          .genSalt(10)
+          // (2) hash 雜湊值 = randomPassword + Salt
+          .then(salt => bcrypt.hash(randomPassword, salt))
+          // (3) hash 雜湊值 -> 取代原本 User password。
+          .then(hash => User.create({
+            name: name,
+            email: email,
+            password: hash
+          }))
+
+          // 結束 上方 passport.use(new FacebookStrategy(...)的 middleware。
+          .then(user => done(null, user))
+
+          // 若 error，回傳 false。
+          .catch(error => done(error, false))
+      })
+  }))
+
+
+
+
+// ---------- Serialize & Deserialize：轉換資料過程，節省空間。 ----------
 // 1. Serialize user：只存 user id，不存整個 user。
 passport.serializeUser((user, cb) => {
   cb(null, user.id)
@@ -61,5 +122,5 @@ passport.deserializeUser((id, cb) => {
     })
 })
 
-
+// ---------- 匯出 passport ----------
 module.exports = passport

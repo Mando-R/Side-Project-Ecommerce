@@ -367,7 +367,9 @@ header {
 } */
 
 .card-img {
+    /* width: 100%; 和父元素同寬 */
     width: 100%;
+    /* height: 300px; 若圖片本身高度>300px，寬高比例難平衡 */
     height: 300px;
     object-fit: cover;
     display: block;

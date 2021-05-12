@@ -98,8 +98,8 @@ app.listen(port, () => {
 // require("./routes")(app, passport) // 把 passport 傳入 routes
 
 // 注意：現在因為分了兩層，所以 index.js 不需要用到 passport 了，請把 app.js 單純改成傳入 app 就好
-// require("./routes")(app, passport)改成require("./routes")(app)，在routes.js變成const passport = require("../confi/passport")，引入passport。
-// app：Express 專案本體
+// require("./routes")(app, passport)改成require("./routes")(app)，在routes.js變成const passport = require("../config/passport")，引入passport。
+// app：Express 專案本體 express()套件
 // passport：User 認證相關功能
 require("./routes")(app)
 
