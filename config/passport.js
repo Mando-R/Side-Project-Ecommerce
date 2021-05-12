@@ -97,8 +97,6 @@ passport.use(new FacebookStrategy({
   }))
 
 
-
-
 // ---------- Serialize & Deserialize：轉換資料過程，節省空間。 ----------
 // 1. Serialize user：只存 user id，不存整個 user。
 passport.serializeUser((user, cb) => {
