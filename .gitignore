@@ -15,3 +15,6 @@ node_modules
 
 temp/
 upload/
+
+#env：environment variable (環境變數)，抽換並隱藏敏感資訊。
+.env

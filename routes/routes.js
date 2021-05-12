@@ -61,7 +61,7 @@ router.get("/", authenticated, (req, res) => {
   res.redirect("/products")
 })
 
-// [Read]瀏覽 全部 餐廳
+// [Read]瀏覽 全部 商品
 router.get("/products", authenticated, productController.getProducts)
 
 router.get("/products/:id", authenticated, productController.getProduct)
@@ -105,19 +105,20 @@ router.put("/admin/users/:id/toggleAdmin", authenticatedAdmin, adminController.p
 
 // -------------------- Category ---------------------
 
-// (1)[Read] Category
+// 1. [Read] Category
 router.get("/admin/categories", authenticatedAdmin, categoryController.getCategories)
 
-// (2)[Create] Category
+// 2. [Create] Category
 router.post("/admin/categories", authenticatedAdmin, categoryController.postCategory)
 
-// (3)[Update] Category
+// 3. [Update] Category (1)
 // 注意：共用 [Read]Controllers 的 getCategories
 router.get("/admin/categories/:id", authenticatedAdmin, categoryController.getCategories)
 
+// [Update] Category (2)
 router.put("/admin/categories/:id", authenticatedAdmin, categoryController.putCategory)
 
-// (4)[Delete] Category
+// 4. [Delete] Category
 router.delete("/admin/categories/:id", authenticatedAdmin, categoryController.deleteCategory)
 
 // -------------------- Like(Wishlist) ---------------------
@@ -158,7 +159,7 @@ router.get("/order/:id/payment", orderController.getPayment)
 // (2) 藍新平台 -> Controller 接收 付款完成資訊
 router.post("/newebpay/callback", orderController.newebpayCallback)
 
-// -------------------- 登入機制 ---------------------
+// -------------------- 登入／登出 機制 ---------------------
 
 // 3. Sign-up [User 註冊流程]
 router.get("/signup", userController.signUpPage)

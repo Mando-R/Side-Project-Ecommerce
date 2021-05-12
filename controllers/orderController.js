@@ -25,13 +25,13 @@ const PayGateWay = "https://ccore.newebpay.com/MPG/mpg_gateway"
 // const ClientBackURL = URL + "/orders"
 
 // 6. NotifyURL(step 6)：藍新告知賣方後端
-const NotifyURL = "https://2889f04172ca.ngrok.io/newebpay/callback?from=NotifyURL"
+const NotifyURL = "https://ac14b15857ad.ngrok.io/newebpay/callback?from=NotifyURL"
 
 // 7. ReturnURL(step 7-1)：藍新頁面顯示交易結果
-const ReturnURL = "https://2889f04172ca.ngrok.io/newebpay/callback?from=ReturnURL"
+const ReturnURL = "https://ac14b15857ad.ngrok.io/newebpay/callback?from=ReturnURL"
 
 // 8. ClientBackURL(step 7-2)：頁面導回商店網頁(/orders)
-const ClientBackURL = "https://2889f04172ca.ngrok.io/orders"
+const ClientBackURL = "https://ac14b15857ad.ngrok.io/orders"
 
 // ---------- Arrange & Deliver TradeInfo ----------
 
