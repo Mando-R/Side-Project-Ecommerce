@@ -53,17 +53,6 @@ const productController = {
         const prevPage = thePage - 1 < 1 ? 1 : thePage - 1
         const nextPage = thePage + 1 > maxPages ? maxPages : thePage + 1
 
-        // Cart
-        // Cart.findByPk(req.session.cartId,
-        //   { include: "cartFindProducts" }
-        // )
-        //   .then(cart => {
-        //     cart = cart || { items: [] }
-
-        //     let totalPrice = cart.items.length > 0 ? cart.items.map(d => d.price * d.CartItem.quantity).reduce((a, b) => a + b) : 0
-        //   })
-
-
         // .map() ：建立新 Array
         // const data = products.map(product => ({
         const data = results.rows.map(product => ({
@@ -128,7 +117,7 @@ const productController = {
           isLiked: isLiked
         })
       })
-  }
+  },
 
 }
 

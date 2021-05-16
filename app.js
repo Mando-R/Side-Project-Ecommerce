@@ -36,7 +36,7 @@ app.set("view engine", "hbs")
 app.use(express.static(__dirname + "/public"))
 
 // app.use
-// (1) bodyParser
+// (1) bodyParser：202105改版
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 

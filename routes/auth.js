@@ -1,4 +1,4 @@
-// 引用 Express 和 Express 路由器
+// 引入 Express 和 Express 路由器
 const express = require("express")
 const router = express.Router()
 
@@ -13,6 +13,7 @@ router.get("/facebook",
   })
 )
 
+// ---------- Route 2：GET/facebook/callback ----------
 // Facebook官方 呼叫 route
 router.get("/facebook/callback",
   passport.authenticate("facebook", {

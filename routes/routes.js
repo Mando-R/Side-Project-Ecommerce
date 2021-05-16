@@ -60,11 +60,18 @@ const authenticatedAdmin = (req, res, next) => {
 router.get("/", authenticated, (req, res) => {
   res.redirect("/products")
 })
+// router.get("/", (req, res) => {
+//   res.redirect("/products")
+// })
 
 // [Read]瀏覽 全部 商品
 router.get("/products", authenticated, productController.getProducts)
+// router.get("/products", productController.getProducts)
 
 router.get("/products/:id", authenticated, productController.getProduct)
+// router.get("/products/:id", productController.getProduct)
+
+router.get("/search", authenticated, productController.searchProducts)
 
 // -------------------- admin 後台 ---------------------
 

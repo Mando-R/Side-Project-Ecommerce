@@ -184,12 +184,16 @@
           </span>
         </a> --}}
 
+        <!-- search bar -->
         <div class="menu-button search-button ">
-          <form ng-controller="ProductsSearchController" ng-submit="search(searchQuery, $event)" action="/products"
+          <form ng-controller="ProductsSearchController" ng-submit="search(searchQuery, $event)" action="/search"
             style="margin-bottom: 0" class="ng-pristine ng-valid ng-scope ng-valid-maxlength">
-            <input name="query" ng-model="searchQuery" placeholder="Search Products" maxlength="100"
+            <input type="text" name="keyword" value="{{keyword}}" ng-model="searchQuery"
+              placeholder="Searching Products" maxlength="100"
               class="ng-pristine ng-untouched ng-valid ng-empty ng-valid-maxlength">
-            <button><span class="fa fa-search"></span></button>
+            <button>
+              <span class="fa fa-search"></span>
+            </button>
           </form>
         </div>
       </div>
@@ -215,7 +219,7 @@
               " style="vertical-align: top; height: 100%;">
                   <div style="height: 100%;">
                     <div class="d-flex justify-content-center" style="">
-                      <!-- Flash -->
+                      <!-- Flash  Message -->
                       {{#if success_messages}}
                       <div class="alert alert-success text-center" role="alert" style="margin: 10px 0px ;">
                         {{success_messages}}
