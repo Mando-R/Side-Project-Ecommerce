@@ -186,11 +186,14 @@
 
         <!-- search bar -->
         <div class="menu-button search-button ">
+          <!-- action 路由：/search -->
           <form ng-controller="ProductsSearchController" ng-submit="search(searchQuery, $event)" action="/search"
             style="margin-bottom: 0" class="ng-pristine ng-valid ng-scope ng-valid-maxlength">
-            <input type="text" name="keyword" value="{{keyword}}" ng-model="searchQuery"
-              placeholder="Searching Products" maxlength="100"
-              class="ng-pristine ng-untouched ng-valid ng-empty ng-valid-maxlength">
+
+            <!-- 新增 type="text"、name="keyword"、value="{{keyword}}" -->
+            <!-- 其中 value="{{keyword}}"：將keyword"req.query.keyword" 代回search bar欄位，保留當下搜尋紀錄 -->
+            <input type="text" name="keyword" value="{{keyword}}" ng-model="searchQuery" placeholder="Search Products"
+              maxlength="100" class="ng-pristine ng-untouched ng-valid ng-empty ng-valid-maxlength">
             <button>
               <span class="fa fa-search"></span>
             </button>

@@ -2,6 +2,16 @@
 const db = require("../models")
 const { User, Product, Category, Cart } = db
 
+// Sequelize＋Op＋operatorAliases：建立 Sequelize Finder 的 where 邏輯
+const Sequelize = require("sequelize")
+const { Op } = Sequelize
+// const operatorAliases = {
+//   $like: Op.like,
+//   $not: Op.not,
+//   $equal: Op.eq,
+//   $or: Op.or
+// }
+
 // Pagination
 // amountPerPage：限制每頁筆數，避免 magic number(未命名數字)。
 const amountPerPage = 20
@@ -119,6 +129,82 @@ const productController = {
       })
   },
 
+  // searchProducts vs. getProducts：關鍵差異為 Finder 的 where 條件邏輯。
+  searchProducts: (req, res) => {
+    // Pagination
+    // offset：每次開始計算新一頁時，偏移(換頁)的數量
+    let offset = 0
+    if (req.query.page) {
+      offset = (req.query.page - 1) * amountPerPage
+    }
+
+    // 取得 search bar 表單內容
+    const keyword = req.query.keyword
+
+    // Product.findAll({
+    Product.findAndCountAll({
+      include: [{ model: Category }],
+      // Sequelize＋Op＋operatorAliases：建立 Sequelize Finder 的 where 邏輯
+      where: { name: { [Op.like]: `%${keyword}%` } },
+      // where: { name: { $like: `%${keyword}%` } },
+
+      // Pagination
+      offset: offset,
+      limit: amountPerPage
+    })
+      // results = 篩選後的 products
+      .then(results => {
+        // Pagination
+        // 1. 若||左為 false 或 undefined，取||右值(Page 1)。
+        const thePage = Number(req.query.page) || 1
+        // 2. findAndCountAll 撈 Data 後： 
+        // (1)maxPages(最大頁數) = Math.ceil 無條件進位(result.count 餐廳總筆數／pageLimit 每頁筆數)
+        const maxPages = Math.ceil(results.count / amountPerPage)
+
+        // (2)totalPage(總頁數)：Array.from({length：maxPages最大頁數})產生符合長度的Array，map 代入真正數字(index＋1)，index 從 0 開始計算，所以+1。
+        const totalPage = Array.from({ length: maxPages }).map((item, index) => index + 1)
+
+        //(3)？(三元條件運算子)：前列條件式？True執行式：False執行式
+        const prevPage = thePage - 1 < 1 ? 1 : thePage - 1
+        const nextPage = thePage + 1 > maxPages ? maxPages : thePage + 1
+
+        // .map() ：建立新 Array
+        // const data = products.map(product => ({
+        const data = results.rows.map(product => ({
+          ...product.dataValues,
+          // 注意：前面不可加 raw: true，否則不能新增新屬性(如categoryName)。
+          categoryName: product.Category.name,
+
+          // isLiked 屬性：User [M] -> [M] Product
+          // 注意：passport.js 設定 passport.deserializeUser[Eager Loading] 放入 req.user(isLiked)
+          isLiked: req.user.userFindProducts.map(userFindProduct => userFindProduct.id).includes(product.dataValues.id)
+        }))
+
+        // 找出全部 Category：render navbar
+        Category.findAll({
+          raw: true,
+          nest: true
+        })
+          .then(categories => {
+            // console.log("categories", categories)
+            // console.log("======================")
+            return res.render("products.hbs", {
+              products: data,
+              categories: categories,
+              // categoryId = Number(req.query.categoryId) 回傳 views
+              // categoryId: categoryId,
+
+              // Pagination
+              keyword: keyword,
+              thePage: thePage,
+              totalPage: totalPage,
+              prevPage: prevPage,
+              nextPage: nextPage
+            })
+          })
+      })
+
+  }
 }
 
 
