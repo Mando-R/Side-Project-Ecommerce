@@ -1,5 +1,6 @@
 const express = require("express")
 const handlebars = require("express-handlebars")
+const cors = require("cors")
 const db = require("./models")
 const bodyParser = require("body-parser")
 const methodOverride = require("method-override")
@@ -36,6 +37,7 @@ app.set("view engine", "hbs")
 app.use(express.static(__dirname + "/public"))
 
 // app.use
+app.use(cors())
 // (1) bodyParser：202105改版
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())

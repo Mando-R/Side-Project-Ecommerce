@@ -1,0 +1,147 @@
+<head>
+  <link rel="stylesheet" href="/css/admin_dataAnalysis.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/data.js"></script>
+  <script src="https://code.highcharts.com/modules/drilldown.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/modules/export-data.js"></script>
+  <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+</head>
+
+<!-- Left：Sidebar -->
+<nav class="sidebar col-md-1">
+  <!-- STORELINE ADMIN -->
+  <div class="d-flex justify-content-around">
+    <div class="sidebar__home">
+      STORELINE</br>
+      <div class="sidebar__home__admin">
+        ADMIN
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar__menu">
+    <!-- Products -->
+    <div class="sidebar__menu__link sidebar__menu__link--frame sidebar__menu__link--active">
+      <a class="sidebar__menu__link btn btn-warning btn-block " href="/admin/products" role="button">
+        <i class="fas fa-shopping-bag"></i> All Products
+      </a>
+    </div>
+
+    <!-- Create New Products -->
+    <div class="sidebar__menu__link sidebar__menu__link--folder ">
+      <a class="sidebar__menu__link btn btn-warning btn-block" href="/admin/products/create" role="button">
+        <i class="fas fa-plus-square"></i> Launch Products
+      </a>
+    </div>
+
+    <!-- Category -->
+    <div class="sidebar__menu__link sidebar__menu__link--mail">
+      <a class="sidebar__menu__link btn btn-success btn-block" href="/admin/categories" role="button">
+        <i class="fas fa-shopping-basket"></i> Category
+      </a>
+    </div>
+
+    <!-- User Authority -->
+    <div class="sidebar__menu__link sidebar__menu__link--mail">
+      <a class="sidebar__menu__link btn btn-danger btn-block" href="/admin/users" role="button">
+        <i class="fas fa-user-cog"></i> User Authority
+      </a>
+    </div>
+
+    <!-- Data Analysis -->
+    <div class="sidebar__menu__link sidebar__menu__link--mail">
+      <a class="sidebar__menu__link btn btn-info btn-block" href="/admin/data" role="button">
+        <i class="fas fa-chart-bar"></i> Data Analysis
+      </a>
+    </div>
+
+  </div>
+</nav>
+
+<!-- Right：Main -->
+<main class="main">
+  <h1 class="main__title">DATA ANALYSIS</h1>
+  <hr>
+
+  <figure class="highcharts-figure">
+    <div id="container1"></div>
+    <!-- 圖表說明 -->
+    <p class="highcharts-description">
+      Chart showing browser market shares. Clicking on individual columns
+      brings up more detailed data. This chart makes use of the drilldown
+      feature in Highcharts to easily switch between datasets.
+    </p>
+  </figure>
+
+  <!-- 1. 外層包 <script> -->
+  <!-- 2. Highcharts.chart "container1"：連結 HTML結構 <figure>內<div id="container1"></div> -->
+
+  <script type="text/javascript">
+    const CategoryData = {{ CategoryData }}
+    console.log("categoryName", CategoryData)
+
+    Highcharts.chart("container1", {
+      chart: {
+        type: 'column'
+      },
+
+      title: {
+        text: 'Browser market shares. January, 2018'
+      },
+
+      subtitle: {
+        text: 'Click the columns to view versions. Source: <a href="http://statcounter.com" target="_blank">statcounter.com</a>'
+      },
+
+      accessibility: {
+        announceNewData: {
+          enabled: true
+        }
+      },
+
+      xAxis: {
+        type: 'category'
+      },
+
+      yAxis: {
+        title: {
+          text: 'Total percent market share'
+        }
+      },
+
+      legend: {
+        enabled: false
+      },
+
+      plotOptions: {
+        series: {
+          borderWidth: 0,
+          dataLabels: {
+            enabled: true,
+            format: '{point.y:.1f}%'
+          }
+        }
+      },
+
+      tooltip: {
+        headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+        pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br />'
+      },
+
+      series: [
+        {
+          name: "Browsers",
+          colorByPoint: true,
+
+          data: categoryName
+        }
+      ],
+
+    })
+
+  </script>
+
+</main>

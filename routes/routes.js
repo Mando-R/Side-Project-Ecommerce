@@ -13,6 +13,7 @@ const userController = require("../controllers/userController.js")
 const categoryController = require("../controllers/categoryController.js")
 const cartController = require("../controllers/cartController.js")
 const orderController = require("../controllers/orderController.js")
+const dataController = require("../controllers/dataController.js")
 
 // multer 套件(image)：
 // 上傳[temp 資料夾] vs. 使用[upload 資料夾]
@@ -75,6 +76,7 @@ router.get("/search", authenticated, productController.searchProducts)
 
 // -------------------- admin 後台 ---------------------
 
+// -------------------- admin/Products ---------------------
 // 2. 後台：adminController ＋ authenticatedAdmin
 router.get("/admin", authenticatedAdmin, (req, res) => {
   res.redirect("/admin/products")
@@ -83,6 +85,7 @@ router.get("/admin", authenticatedAdmin, (req, res) => {
 // [Read] Products
 router.get("/admin/products", authenticatedAdmin, adminController.getProducts)
 
+// -------------------- admin/Products/Create ---------------------
 // [Create] Single Product (1)：注意 route 順序在 "/admin/products/:id" 前面
 // upload.single("image")：multer 只要碰到 req 內有圖片檔，就自動複製檔案至 temp 資料夾內。
 router.get("/admin/products/create", authenticatedAdmin, adminController.createProduct)
@@ -104,13 +107,13 @@ router.put("/admin/products/:id", authenticatedAdmin, upload.single("image"), ad
 // [Delete] Single Product
 router.delete("/admin/products/:id", authenticatedAdmin, adminController.deleteProduct)
 
-// -------------------- User Authority ---------------------
+// -------------------- admin/User Authority ---------------------
 
 router.get("/admin/users", authenticatedAdmin, adminController.getUser)
 
 router.put("/admin/users/:id/toggleAdmin", authenticatedAdmin, adminController.putUser)
 
-// -------------------- Category ---------------------
+// -------------------- admin/Category ---------------------
 
 // 1. [Read] Category
 router.get("/admin/categories", authenticatedAdmin, categoryController.getCategories)
@@ -127,6 +130,11 @@ router.put("/admin/categories/:id", authenticatedAdmin, categoryController.putCa
 
 // 4. [Delete] Category
 router.delete("/admin/categories/:id", authenticatedAdmin, categoryController.deleteCategory)
+
+// -------------------- admin/Data Analysis ---------------------
+router.get("/admin/data", authenticatedAdmin, dataController.getCategoryShare)
+
+
 
 // -------------------- Like(Wishlist) ---------------------
 

@@ -22,5 +22,5 @@ router.get("/facebook/callback",
   })
 )
 
-// 匯出Route模組
+// 匯出 Route 模組
 module.exports = router
