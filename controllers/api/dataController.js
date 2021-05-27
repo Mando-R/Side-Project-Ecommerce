@@ -101,6 +101,7 @@ const dataController = {
         let subTotalArray = []
         let itemQuantityArray = []
         let priceAveArray = []
+        let productQTYArray = []
 
         for (let i = 0; i < categoryIdArray.length; i++) {
           Product.findAll({
@@ -125,34 +126,51 @@ const dataController = {
 
               // 2. item quantity
               const itemQuantity = products.length
-              console.log("itemQuantity", itemQuantity)
-              console.log("=================================")
+              // console.log("itemQuantity", itemQuantity)
+              // console.log("=================================")
               itemQuantityArray.push(itemQuantity)
-              console.log("itemQuantityArray", itemQuantityArray)
-              console.log("=================================")
+              // console.log("itemQuantityArray", itemQuantityArray)
+              // console.log("=================================")
 
               // 3. Average selling price
-              console.log("categoryIdArray[i]", categoryIdArray[i])
-              console.log("=================================")
-
               const priceArray = products.map((item, i, products) => {
                 return item.price
               })
-              console.log("priceArray", priceArray)
-              console.log("=================================")
+              // console.log("priceArray", priceArray)
+              // console.log("=================================")
               const priceSum = priceArray.reduce(function (prev, next) {
                 return prev + next
               })
-              console.log("priceSum", priceSum)
-              console.log("=================================")
+              // console.log("priceSum", priceSum)
+              // console.log("=================================")
               const priceAve = priceSum / itemQuantity
 
-              console.log("priceAve", priceAve)
-              console.log("=================================")
+              // console.log("priceAve", priceAve)
+              // console.log("=================================")
 
               priceAveArray.push(Math.round(priceAve))
 
-              console.log("avePriceArray", priceAveArray)
+              // console.log("avePriceArray", priceAveArray)
+              // console.log("=================================")
+
+              // 4. SubTotal Product Quantity
+              const quantityArray = products.map((item, i, products) => {
+                return item.quantity
+              })
+
+              console.log("quantityArray", quantityArray)
+              console.log("=================================")
+
+              const productQTYSum = quantityArray.reduce(function (prev, next) {
+                return prev + next
+              })
+
+              console.log("productQTYSum", productQTYSum)
+              console.log("=================================")
+
+              productQTYArray.push(productQTYSum)
+
+              console.log("productQTYArray", productQTYArray)
               console.log("=================================")
             })
         }
@@ -189,19 +207,24 @@ const dataController = {
             categories[i].price_ave = priceAveArray[i]
           }
 
+          for (let i = 0; i < categories.length; i++) {
+            categories[i].subTotal_product_quantity = productQTYArray[i]
+          }
+
           // 6. Constructor(物件導向 建構式函式)：建立 資料格式 & 資料 Title。
-          function CategoryData(CategoryId, category_name, subTotal_amount, price_ave, item) {
+          function CategoryData(CategoryId, category_name, subTotal_amount, price_ave, item, subTotal_product_quantity) {
             this.CategoryId = CategoryId
             this.category_name = category_name
             this.subTotal_amount = subTotal_amount
             this.price_ave = price_ave
             this.item = item
+            this.subTotal_product_quantity = subTotal_product_quantity
           }
 
           // 7. Constructor + .map()：以 Contstructor & .map()，建立 Instance，並產生新陣列[]。
           const data = categories.map((item, i, categories) => {
             // console.log("categories", categories)
-            return new CategoryData(`${item.id}`, `${item.name}`, `${item.subTotal_amount}`, `${item.price_ave}`, `${item.item_quantity}`)
+            return new CategoryData(`${item.id}`, `${item.name}`, `${item.subTotal_amount}`, `${item.price_ave}`, `${item.item_quantity}`, `${item.subTotal_product_quantity}`)
           })
 
           // console.log("data", data)
