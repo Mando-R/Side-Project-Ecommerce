@@ -95,10 +95,13 @@ const dataController = {
         console.log("categoryIdArray", categoryIdArray)
         console.log("=================================")
 
-        // 2. subTotalArray：
+        // 2. subTotal_amount：
         // (1) 建立空陣列[]：subTotalArray、(2) Product.findAll＋where條件(注意：for loop)、
         // (3) .length：計算product quantity、(4) for loop＋.push 依序推入 空陣列[] subTotalArray。
         let subTotalArray = []
+        let itemQuantityArray = []
+        let priceAveArray = []
+
         for (let i = 0; i < categoryIdArray.length; i++) {
           Product.findAll({
             raw: true,
@@ -106,22 +109,51 @@ const dataController = {
             where: [{ CategoryId: `${categoryIdArray[i]}` }]
           })
             .then(products => {
+              // 1. subTotal amount
               // console.log("products", products)
               const priceXQuantity = products.map((item, i, products) => {
                 return item.price * item.quantity
               })
-
               //console.log("priceXQuantity", priceXQuantity)
-
-              const subTotal = priceXQuantity.reduceRight(function (prev, next) {
+              const subTotal = priceXQuantity.reduce(function (prev, next) {
                 return prev + next;
               })
-
               //console.log("subTotal", subTotal)
-
               subTotalArray.push(subTotal)
+              // console.log("subTotalArray", subTotalArray)
+              // console.log("=================================")
 
-              console.log("subTotalArray", subTotalArray)
+              // 2. item quantity
+              const itemQuantity = products.length
+              console.log("itemQuantity", itemQuantity)
+              console.log("=================================")
+              itemQuantityArray.push(itemQuantity)
+              console.log("itemQuantityArray", itemQuantityArray)
+              console.log("=================================")
+
+              // 3. Average selling price
+              console.log("categoryIdArray[i]", categoryIdArray[i])
+              console.log("=================================")
+
+              const priceArray = products.map((item, i, products) => {
+                return item.price
+              })
+              console.log("priceArray", priceArray)
+              console.log("=================================")
+              const priceSum = priceArray.reduce(function (prev, next) {
+                return prev + next
+              })
+              console.log("priceSum", priceSum)
+              console.log("=================================")
+              const priceAve = priceSum / itemQuantity
+
+              console.log("priceAve", priceAve)
+              console.log("=================================")
+
+              priceAveArray.push(Math.round(priceAve))
+
+              console.log("avePriceArray", priceAveArray)
+              console.log("=================================")
             })
         }
 
@@ -149,17 +181,27 @@ const dataController = {
           // console.log("categories", categories)
           // console.log("=================================")
 
+          for (let i = 0; i < categories.length; i++) {
+            categories[i].item_quantity = itemQuantityArray[i]
+          }
+
+          for (let i = 0; i < categories.length; i++) {
+            categories[i].price_ave = priceAveArray[i]
+          }
+
           // 6. Constructor(物件導向 建構式函式)：建立 資料格式 & 資料 Title。
-          function CategoryData(CategoryId, name, subTotal_amount) {
+          function CategoryData(CategoryId, category_name, subTotal_amount, price_ave, item) {
             this.CategoryId = CategoryId
-            this.name = name
+            this.category_name = category_name
             this.subTotal_amount = subTotal_amount
+            this.price_ave = price_ave
+            this.item = item
           }
 
           // 7. Constructor + .map()：以 Contstructor & .map()，建立 Instance，並產生新陣列[]。
           const data = categories.map((item, i, categories) => {
             // console.log("categories", categories)
-            return new CategoryData(`${item.id}`, `${item.name}`, `${item.subTotal_amount}`)
+            return new CategoryData(`${item.id}`, `${item.name}`, `${item.subTotal_amount}`, `${item.price_ave}`, `${item.item_quantity}`)
           })
 
           // console.log("data", data)
