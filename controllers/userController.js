@@ -1,8 +1,15 @@
 // [signup.handlebars] POST -> [userController.js]
 const bcrypt = require("bcryptjs")
 
+// Model
 const db = require("../models")
 const { User, Like } = db
+
+// JSON Web Token
+const jwt = require('jsonwebtoken')
+const passportJWT = require('passport-jwt')
+const ExtractJwt = passportJWT.ExtractJwt
+const JwtStrategy = passportJWT.Strategy
 
 //注意：render 檔案、redirect 路由
 const userController = {
@@ -47,7 +54,7 @@ const userController = {
   signInPage: (req, res) => {
     return res.render("signin.hbs")
   },
-  // signIn 動作無任何邏輯，直接轉 route，因已使用 Passport 的 middleware 處理，所以不必自己實作。
+  // // signIn 動作無任何邏輯，直接轉 route，因已使用 Passport 的 middleware 處理，所以不必自己實作。
   signIn: (req, res) => {
     req.flash("success_messages", `成功登入!`)
     res.redirect("/products")

@@ -231,7 +231,7 @@ const dataController = {
           // console.log("=================================")
 
           // 8. res.json：回傳 JSON 格式的 API 資料。
-          return res.json({ PriceData: data })
+          return res.json({ Data: data })
         }, 200)
       })
   }
