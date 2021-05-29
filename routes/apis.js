@@ -40,10 +40,10 @@ router.get("/admin/data/v1", authenticated, authenticatedAdmin, dataController.g
 
 router.get("/admin/data/v1/categories", authenticated, authenticatedAdmin, dataController.getCategoryData)
 
-// JSON Web Token (JWT) Signin
+// JSON Web Token (JWT) SignIn & SignUp
 router.post("/signin", userController.signIn)
 
-
+router.post("/signup", userController.signUp)
 
 // 匯出 Route 模組
 module.exports = router

@@ -11,9 +11,9 @@ const passportJWT = require("passport-jwt")
 const ExtractJwt = passportJWT.ExtractJwt
 const JwtStrategy = passportJWT.Strategy
 
-
 const userController = {
   // 收到 [註冊 req]，[註冊 req]內攜帶 表單 Data。
+  // signUp 直接修改自 userController.js
   signUp: (req, res) => {
     // 1. Confirm password
     if (req.body.confirmPassword !== req.body.password) {
@@ -30,7 +30,7 @@ const userController = {
           if (user) {
             return res.json({
               status: "error",
-              message: "信箱重複！"
+              message: "email 重複！"
             })
           } else {
             User.create({
@@ -43,7 +43,7 @@ const userController = {
               .then(user => {
                 return res.json({
                   status: "success",
-                  message: "成功註冊帳號！"
+                  message: "You have successfully registered！"
                 })
               })
           }
