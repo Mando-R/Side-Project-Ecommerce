@@ -15,6 +15,7 @@ const bcrypt = require("bcryptjs")
 const db = require("../models")
 const { User, Product } = db
 
+
 // ---------- 1. passport－LocalStrategy ----------
 passport.use(new LocalStrategy({
   // Customize user field (設定客製化選項)
@@ -96,7 +97,6 @@ passport.use(new FacebookStrategy({
       })
   }))
 
-
 // ---------- Serialize & Deserialize：轉換資料過程，節省空間。 ----------
 // 1. Serialize user：只存 user id，不存整個 user。
 passport.serializeUser((user, cb) => {
@@ -119,6 +119,37 @@ passport.deserializeUser((id, cb) => {
       return cb(null, user)
     })
 })
+
+// --------------- 3. passport－JWT ---------------
+const jwt = require("jsonwebtoken")
+const passportJWT = require("passport-jwt")
+const ExtractJwt = passportJWT.ExtractJwt
+const JwtStrategy = passportJWT.Strategy
+
+// jwtOptions：根據 jwtOptions 內資訊，可成功解開 token，之後運用裡面資訊查找 user。
+let jwtOptions = {}
+
+// jwtOptions.jwtFromRequest：設定尋找 token 的位置，指定 authorization "header" 內的 Bearer 項目。
+jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken()
+
+// jwtOptions.secretOrKey：使用"密鑰"檢查 token 是否經纂改，即放入 process.env.JWT_SECRET 的字串，此密鑰只有 Server 知道。
+jwtOptions.secretOrKey = process.env.JWT_SECRET
+
+let strategy = new JwtStrategy(jwtOptions, function (jwt_payload, next) {
+  User.findByPk(jwt_payload.id, {
+    include: [
+      { model: Product, as: "userFindProducts" }
+    ]
+  })
+    .then(user => {
+      if (!user) {
+        return next(null, false)
+      }
+      return next(null, user)
+    })
+})
+
+passport.use(strategy)
 
 // ---------- 匯出 passport ----------
 module.exports = passport
