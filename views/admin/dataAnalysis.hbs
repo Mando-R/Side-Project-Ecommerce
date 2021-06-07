@@ -70,9 +70,7 @@
     <div id="container1"></div>
     <!-- 圖表說明 -->
     <p class="highcharts-description">
-      Chart showing browser market shares. Clicking on individual columns
-      brings up more detailed data. This chart makes use of the drilldown
-      feature in Highcharts to easily switch between datasets.
+      Highcharts 圖表功能研究中
     </p>
   </figure>
 
@@ -80,8 +78,8 @@
   <!-- 2. Highcharts.chart "container1"：連結 HTML結構 <figure>內<div id="container1"></div> -->
 
   <script type="text/javascript">
-    const CategoryData = {{ CategoryData }}
-    console.log("categoryName", CategoryData)
+    //const CategoryData = {{ CategoryData }}
+    //console.log("categoryName", CategoryData)
 
     Highcharts.chart("container1", {
       chart: {
@@ -89,7 +87,7 @@
       },
 
       title: {
-        text: 'Browser market shares. January, 2018'
+        text: 'Highcharts 圖表功能研究中, 2021'
       },
 
       subtitle: {
@@ -135,8 +133,36 @@
         {
           name: "Browsers",
           colorByPoint: true,
-
-          data: categoryName
+          data: [
+            {
+              name: "C1",
+              y: 30,
+            },
+            {
+              name: "C2",
+              y: 10,
+            },
+            {
+              name: "C3",
+              y: 10,
+            },
+            {
+              name: "C4",
+              y: 40,
+            },
+            {
+              name: "C5",
+              y: 5,
+            },
+            {
+              name: "C6",
+              y: 50,
+            },
+            {
+              name: "C7",
+              y: 50,
+            },
+          ]
         }
       ],
 

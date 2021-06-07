@@ -106,7 +106,7 @@ function getTradeInfo(Amt, Desc, email) {
     // (6) 智付通會員
     "LoginType": 0,
     // (7) 商店備註
-    "OrderComment": "OrderComment",
+    "OrderComment": "RShop",
 
     // (8) 訂單金額
     "Amt": Amt,
@@ -325,6 +325,7 @@ const orderController = {
     return Order.findByPk(req.params.id, {})
       .then(order => {
         // order.amount(Amt 商品訂單價格)、"Product Desc"(商品敘述)、"v123582@gmail.com"(User email)
+        // getTradeInfo：return tradeInfo
         const tradeInfo = getTradeInfo(order.amount, "Product Desc", "v123582@gmail.com")
 
         // console.log("order", order)
@@ -378,6 +379,7 @@ const orderController = {
     return Order.findAll({
       // raw: true,
       // nest: true,
+      // Result 陣列內的 MerchantOrderNo
       where: { serialNumber: data["Result"]["MerchantOrderNo"] }
     })
       .then(orders => {
