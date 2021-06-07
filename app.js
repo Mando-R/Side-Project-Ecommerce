@@ -24,6 +24,7 @@ const session = require("express-session")
 const flash = require("connect-flash")
 const cookieParser = require("cookie-parser")
 
+
 // Handlebars
 app.engine("hbs", handlebars({
   extname: ".hbs",

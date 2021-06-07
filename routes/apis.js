@@ -38,8 +38,6 @@ const authenticatedAdmin = (req, res, next) => {
 // 3. 仍注意URL前面都有"/"，例如：/admin/data
 router.get("/admin/data/v1", authenticated, authenticatedAdmin, dataController.getPriceData)
 
-router.get("/admin/data/v1/categories", authenticated, authenticatedAdmin, dataController.getCategoryData)
-
 // JSON Web Token (JWT) SignIn & SignUp
 router.post("/signin", userController.signIn)
 

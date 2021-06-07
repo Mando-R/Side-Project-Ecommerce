@@ -160,11 +160,11 @@ router.delete("/cartItem/:id", cartController.deleteCartItem)
 // -------------------- Orders ---------------------
 
 // (1) GET
-router.get("/orders", orderController.getOrders)
+router.get("/orders", authenticated, orderController.getOrders)
 // (2) Create
-router.post("/order", orderController.postOrder)
+router.post("/order", authenticated, orderController.postOrder)
 // (3) Delete
-router.post("/order/:id/cancel", orderController.cancelOrder)
+router.post("/order/:id/cancel", authenticated, orderController.cancelOrder)
 
 // -------------------- Payment Gateway ---------------------
 

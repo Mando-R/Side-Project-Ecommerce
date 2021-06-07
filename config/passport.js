@@ -1,5 +1,5 @@
 // 引入 .env
-require('dotenv').config()
+require("dotenv").config()
 
 // passport 第三方登入套件
 // 注意：req.user 取得 Passport 套件 包裝後的資料。
