@@ -5,8 +5,9 @@ const { Product, Order, OrderItem, Cart } = db
 
 // 1. ngrok(測試用臨時網址) || Heroke 網址
 // const URL = process.env.URL
-// const URL = "https://998a26d372be.ngrok.io"
-const URL = "https://side-project-ecommerce.herokuapp.com"
+const URL = "https://fd7b740b36a6.ngrok.io"
+// const URL = "https://side-project-ecommerce.herokuapp.com"
+
 
 // 2. MerchantID(商店代號)
 const MerchantID = process.env.MERCHANT_ID
@@ -28,13 +29,16 @@ const PayGateWay = "https://ccore.newebpay.com/MPG/mpg_gateway"
 // const ClientBackURL = URL + "/orders"
 
 // 6. NotifyURL(step 6)：藍新告知賣方後端
-const NotifyURL = "https://side-project-ecommerce.herokuapp.com/newebpay/callback?from=NotifyURL"
+// const NotifyURL = "https://side-project-ecommerce.herokuapp.com/newebpay/callback?from=NotifyURL"
+const NotifyURL = "https://fd7b740b36a6.ngrok.io/newebpay/callback?from=NotifyURL"
 
 // 7. ReturnURL(step 7-1)：藍新頁面顯示交易結果
-const ReturnURL = "https://side-project-ecommerce.herokuapp.com/newebpay/callback?from=ReturnURL"
+// const ReturnURL = "https://side-project-ecommerce.herokuapp.com/newebpay/callback?from=ReturnURL"
+const ReturnURL = "https://fd7b740b36a6.ngrok.io/newebpay/callback?from=ReturnURL"
 
 // 8. ClientBackURL(step 7-2)：頁面導回商店網頁(/orders)
-const ClientBackURL = "https://side-project-ecommerce.herokuapp.com/orders"
+// const ClientBackURL = "https://side-project-ecommerce.herokuapp.com/orders"
+const ClientBackURL = "https://fd7b740b36a6.ngrok.io/orders"
 
 // ---------- Arrange & Deliver TradeInfo ----------
 
@@ -384,14 +388,17 @@ const orderController = {
       where: { serialNumber: data["Result"]["MerchantOrderNo"] }
     })
       .then(orders => {
-        // console.log("orders", orders)
-        // console.log("orders[0]", orders[0])
+        console.log("orders", orders)
+        console.log("==============")
+        console.log("orders[0]", orders[0])
+        console.log("==============")
 
         orders[0].update({
           ...req.body,
           payment_status: 1,
         })
           .then(order => {
+            console.log("order", order)
             return res.redirect("/orders")
             // return res.redirect(`${URL}/orders`)
           })
