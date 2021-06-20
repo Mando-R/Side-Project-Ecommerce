@@ -132,9 +132,9 @@ router.put("/admin/categories/:id", authenticatedAdmin, categoryController.putCa
 router.delete("/admin/categories/:id", authenticatedAdmin, categoryController.deleteCategory)
 
 // -------------------- admin/Data Analysis ---------------------
-router.get("/admin/data", authenticatedAdmin, dataController.getCategoryShare)
+router.get("/admin/data", authenticatedAdmin, dataController.getPriceData)
 
-
+// router.get("/admin/data", authenticatedAdmin, dataController.getTestChart)
 
 // -------------------- Like(Wishlist) ---------------------
 

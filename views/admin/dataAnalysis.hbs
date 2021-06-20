@@ -70,28 +70,38 @@
     <div id="container1"></div>
     <!-- 圖表說明 -->
     <p class="highcharts-description">
-      Highcharts 圖表功能研究中
+      ※ Caluculating subtotal amount of selling price sorted by categories.
     </p>
   </figure>
 
-  <!-- 1. 外層包 <script> -->
-  <!-- 2. Highcharts.chart "container1"：連結 HTML結構 <figure>內<div id="container1"></div> -->
+  <!-- Highcharts：關鍵在於傳輸過程  -->
+  <!-- 1. 整理 data 陣列資料 -->
+  <!-- Controllers 整理完 data 陣列後，用 res.render 傳入 Views，但  -->
+  <script>
+    // I. 觀察從 Controllers 回傳 Views 的 data。
+    let resultObjectStr = `${{ data }}`
+    // II. replace：替換字串。
+    resultObjectStr = resultObjectStr.replace("$", "")
+    // III. g：To perform a global search and replace, include the g switch in the regular expression.
+    resultObjectStr = resultObjectStr.replace(/&quot;/g, '"')
+    // IV. JSON.parse：將 JSON 字串轉成 JavaScript 數值或物件。因為 Controller 的 data 是 JSON 格式，要轉成 JavaScript，Highcharts 才能解析。
+    let resultObject = JSON.parse(resultObjectStr)
+  </script>
 
-  <script type="text/javascript">
-    //const CategoryData = {{ CategoryData }}
-    //console.log("categoryName", CategoryData)
-
+  <!-- 2. Highcharts：主要圖表 Code。 -->
+  <!-- <script type="text/javascript"></script> -->
+  <script>
     Highcharts.chart("container1", {
       chart: {
         type: 'column'
       },
 
       title: {
-        text: 'Highcharts 圖表功能研究中, 2021'
+        text: '[ Subtotal Amount ] sorted by categories'
       },
 
       subtitle: {
-        text: 'Click the columns to view versions. Source: <a href="http://statcounter.com" target="_blank">statcounter.com</a>'
+        text: '單位：NT$／元'
       },
 
       accessibility: {
@@ -106,7 +116,7 @@
 
       yAxis: {
         title: {
-          text: 'Total percent market share'
+          text: ''
         }
       },
 
@@ -119,53 +129,23 @@
           borderWidth: 0,
           dataLabels: {
             enabled: true,
-            format: '{point.y:.1f}%'
+            format: '{point.y:.0f}'
           }
         }
       },
 
       tooltip: {
         headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-        pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br />'
+        pointFormat: '<span style="color:{point.color}">{point.name}</span>: NT$ <b>{point.y:.0f}</b>'
       },
 
       series: [
         {
           name: "Browsers",
           colorByPoint: true,
-          data: [
-            {
-              name: "C1",
-              y: 30,
-            },
-            {
-              name: "C2",
-              y: 10,
-            },
-            {
-              name: "C3",
-              y: 10,
-            },
-            {
-              name: "C4",
-              y: 40,
-            },
-            {
-              name: "C5",
-              y: 5,
-            },
-            {
-              name: "C6",
-              y: 50,
-            },
-            {
-              name: "C7",
-              y: 50,
-            },
-          ]
+          data: resultObject
         }
       ],
-
     })
 
   </script>
