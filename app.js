@@ -92,7 +92,7 @@ app.use("/upload", express.static(__dirname + "/upload"))
 // 3. 最後合併，變成 express.get(...)，即「Express 拿到這個畫面...」。
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}!`)
+  console.log(`App listening on port ${port}!`)
 })
 
 // 4. 注意：require('./routes')(app) 需放在 app.js 最後一行，因按照由上而下順序，當 app.js 把 app(即 express()) 傳入 Route 時，程式中間(routes/index.js)做的 Handlebars 設定、Server 設定，也一併透過 app 變數傳入。
